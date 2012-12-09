@@ -59,9 +59,7 @@ set lcs=tab:>-,trail:#,eol:$
 "   pressing <Leader>zz again turns this off
 nnoremap <Leader>zz :let &scrolloff=999-&scrolloff<CR>
 
-" the following two allow you to move to the "next line" even when the text is wrapped
-nnoremap j gj
-nnoremap k gk
+" to move to a "display" motion, prefix with 'g'
 
 " the following 4 allow you go use (for example) Ctrl-h instead of Ctrl-w+h to move between buffers
 map <C-h> <C-w>h
