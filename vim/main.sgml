@@ -1,0 +1,23 @@
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook V4.1//EN" [
+    <!ENTITY filename   SYSTEM "file.sgml">
+    <!ENTITY text       "<tag>text</tag>">
+]>
+
+<book id="index">
+    <bookinfo>
+        <title></title>
+        <date></date>
+        <author><firstname>Trevor</firstname><surname>Woerner</surname></author>
+        <copyright>
+            <year></year>
+            <holder>Mark IV Industries</holder>
+        </copyright>
+        <revhistory>
+            <revision>
+                <revnumber>0.1</revnumber>
+                <date></date>
+                <authorinitials>tw</authorinitials>
+                <revremark>Document start.</revremark>
+            </revision>
+        </revhistory>
+    </bookinfo>

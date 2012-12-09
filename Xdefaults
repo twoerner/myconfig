@@ -1,0 +1,139 @@
+! Parts (C) 1996 By Greg J. Badros <gjb@cs.duke.edu>
+! You may use this file as specified under the GNU General Public License
+
+#define WHITE_ON_BLACK 1
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! emacs, xemacs
+
+emacs*Background: DarkSlateGray
+emacs*Foreground: Wheat
+emacs*pointerColor: Orchid
+emacs*cursorColor: Orchid
+emacs*bitmapIcon: on
+emacs.geometry: 80x25
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! xterm (and friends)
+
+XTerm*font:		6x10
+XTerm:boldFont:		6x10bold
+
+#ifdef WHITE_ON_BLACK
+XTerm*background:	black
+XTerm*foreground:	gray95
+XTerm*cursorColor:	orange
+XTerm*colorMode:	on
+XTerm*boldColors:	on
+XTerm*colorBDMode:	on
+XTerm*colorULMode:	on
+XTerm*colorBLMode:	on
+*VT100*colorBD:		magenta
+*VT100*colorUL:		yellow
+*VT100*colorBL:		cyan
+*VT102*colorBD:		magenta
+*VT102*colorUL:		yellow
+*VT102*colorBL:		cyan
+XTerm*colorBD:		magenta
+XTerm*colorUL:		yellow
+XTerm*colorBL:		cyan
+XTerm*locale:		UTF-8
+#else
+XTerm*background:	gray45
+XTerm*foreground:	gray95
+!XTerm*allowSentEvents:	true
+*VT100*colorBD: 	DarkGreen
+*VT100*colorUL: 	blue
+#endif
+
+!nxterm*SimpleMenu.background:	gray75
+!nxterm*SimpleMenu.foreground:	black
+XTerm*SimpleMenu.background:	gray50
+XTerm*SimpleMenu.foreground:	black
+
+! This resource specifies whether or not to ignore the 'alternate screen'
+! of applications such as vi.  When it is on, these applications will restore
+! the contents of the screen when they are exited to what they were before
+! they were started.  When it is off, the contents of vi will remain on the
+! screen after the program is quit.
+XTerm.VT100.titeInhibit:  true
+
+! Uncomment this to turn off color mode in your xterms
+XTerm.VT100*dynamicColors:  on
+
+! scroll bar stuff
+XTerm*saveLines:	3000
+XTerm*rightScrollBar:	true
+
+xterm*reverseWrap:	true
+
+*visualBell:		true
+*scrollKey:		True
+Scrollbar.JumpCursor:	False
+*multiScroll:	True
+*numeric:		C
+*displayLang:		C
+*basicLocale:		C
+*timeFormat:		C
+*inputLang:		C
+
+
+! Please email <gjb@cs.duke.edu> if you have a better
+! way of introducing a newline into a macro expansion
+! I get the NL by including an extra argument to the macro for which
+! I always use a literal newline as the argument
+#define FontAndLabel(cFont,sz,NL,lbl) \
+XTerm*VT100*font/**/cFont/**/: sz/**/NL \
+XTerm*fontMenu*font/**/cFont/**/*Label: lbl (/**/sz/**/)NL
+
+#ifndef SMALL_SCREEN
+
+*SimpleMenu*font: *helvetica*r*normal*12*
+XDvi*font: *helvetica*r*normal*12*
+FontAndLabel(1,5x7,
+,Micro)
+FontAndLabel(2,5x8,
+,Tiny)
+FontAndLabel(3,6x10,
+,Small)
+FontAndLabel(4,fixed,
+,Medium)
+FontAndLabel(5,9x15,
+,Large)
+FontAndLabel(6,10x20,
+,Very Large)
+FontAndLabel(7,12x24,
+,Huge)
+
+#else
+
+*SimpleMenu*font: *helvetica*r*normal*10*
+XDvi*font: *helvetica*r*normal*10*
+FontAndLabel(1,5x7,
+,Micro)
+FontAndLabel(2,5x8,
+,Tiny)
+FontAndLabel(3,6x9,
+,Small)
+FontAndLabel(4,7x13,
+,Medium)
+FontAndLabel(5,9x15,
+,Large)
+FontAndLabel(6,10x20,
+,Huge)
+FontAndLabel(7,8x16,
+,Alternate Large)
+
+#endif
+
+*eightBitInput: 		true
+remotexterm*eightBitInput:	false
+
+xterm*VT100.Translations: #override\n\
+	<KeyPress>Prior : scroll-back(1,page)\n\
+	<KeyPress>Next : scroll-forw(1,page)
+
+! xclock stuff
+xclock.Clock.analog: false
+xclock.Clock.update: 1
+xclock.Clock.twentyfour: false

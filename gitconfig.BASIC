@@ -1,0 +1,38 @@
+[user]
+	name = Trevor Woerner
+	email = <email>
+[color]
+	status = auto
+	branch = auto
+	diff = auto
+	pager = true
+[core]
+	pager = less -RU -x8
+[merge]
+	conflictstyle = diff3
+	tool = myvimdiff
+[mergetool "myvimdiff"]
+	cmd = vimdiff -c \"wincmd J\" \"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
+[mergetool]
+	prompt = false
+
+[sendemail]
+	from = "Trevor Woerner <email>"
+	smtpserver = smtp.gmail.com
+	smtpuser = <email>
+	smtpencryption = ssl
+	confirm = always
+
+[sendemail.xorg]
+	to = xorg-devel@lists.x.org
+	chainreplyto = true
+
+[sendemail.linux]
+	to = linux-kernel@vger.kernel.org
+	cccmd = scripts/get_maintainer.pl
+
+[sendemail.yocto]
+	to = yocto@yoctoproject.org
+
+[push]
+	default = simple

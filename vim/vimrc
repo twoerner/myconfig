@@ -1,0 +1,166 @@
+""""""""""""""""""""""""""""""""""""""
+""  NOTES
+""""""""""""""""""""""""""""""""""""""
+" to follow a tag: Ctrl-]
+" to follow a tag into another buffer: Ctrl-W + ]
+""""""""""""""""""""""""""""""""""""""
+
+set nocompatible
+
+" colour
+set background=dark
+syntax on
+highlight DiffAdd cterm=none ctermfg=Black ctermbg=Green gui=none guifg=bg guibg=Green
+highlight DiffDelete cterm=none ctermfg=Black ctermbg=Red gui=none guifg=bg guibg=Red
+highlight DiffChange cterm=none ctermfg=Black ctermbg=Yellow gui=none guifg=bg guibg=Yellow
+highlight DiffText cterm=none ctermfg=Black ctermbg=Magenta gui=none guifg=bg guibg=Magenta
+highlight LineNr term=NONE cterm=NONE ctermfg=DarkGrey ctermbg=Black gui=NONE guifg=DarkGrey guibg=NONE
+
+" keyboard hacks for backspace etc
+set visualbell t_vb=
+set t_kb=
+fixdel
+set bs=2
+
+set ai			" autoindent
+set copyindent		" copy the previous indentation on autoindenting
+"set expandtab
+
+set ruler		" let the last line indicate information (filename, mode, position)
+set number		" show line numbers
+"set numberwidth=5
+
+set noincsearch
+set nohlsearch
+set noshowmatch
+set smartcase		" ignore case if search string is all lowercase, don't ignore case otherwise
+set scrolloff=5		" always show at least <n> lines at top and bottom
+set hidden		" allow switch to new buffer even if current is not saved (i.e. when using tags)
+set pastetoggle=<F2>	" hit <F2> before and after pasting to temporarily turn off autoindent (etc)
+set mouse=a		" enables the scroll wheel to work
+let loaded_matchparen = 1
+
+" to enable/disable spell checking
+":setlocal spell spelllang=en_ca
+":setlocal nospell
+:setlocal spelllang=en_ca
+
+set nobackup
+set viminfo=""
+set tags=tags,./tags,../tags,../../tags,../../../tags,../../../../tags,../../../../../tags
+
+" use ":set list" and ":set nolist" to display or remove
+set lcs=tab:>-,trail:#,eol:$
+
+" key remapping
+" NOTE: <Leader> = '\' by default
+" the following toggles the following behaviour:
+"   if you press <Leader>zz (e.g. \zz) then the cursor remains in the middle of the screen
+"   pressing <Leader>zz again turns this off
+nnoremap <Leader>zz :let &scrolloff=999-&scrolloff<CR>
+
+" the following two allow you to move to the "next line" even when the text is wrapped
+nnoremap j gj
+nnoremap k gk
+
+" the following 4 allow you go use (for example) Ctrl-h instead of Ctrl-w+h to move between buffers
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
+
+if has("autocmd")
+ " general autocmd stuff
+  augroup cprog
+  " Remove all cprog autocommands
+  au!
+
+  " When starting to edit a file:
+  "   For C and C++ files set formatting of comments and set C-indenting on.
+  "   For other files switch it off.
+  "   Don't change the order, it's important that the line with * comes first.
+  autocmd FileType *      set formatoptions=tcql nocindent comments&
+  autocmd FileType c,cpp,cc  set formatoptions=coql cindent comments=sr:/*,mb:*,el:*/,://
+ augroup END
+
+ " some specific autocmd stuff for all files
+ autocmd BufNewFile *.c,*.cpp,*.cc,*.h,*.hh,*.hpp,*.css,*.s call NewFileC()
+ autocmd BufNewFile configure.ac call NewConfigureIn()
+ autocmd BufNewFile Makefile.am call NewMakefileAm()
+ autocmd BufNewFile Doxyfile.in call NewDoxyfileIn()
+ autocmd BufNewFile CheckLog.xsl call NewCheckLogXSL()
+ autocmd BufNewFile *.pc.in call NewPackageIn()
+ autocmd BufNewFile stylesheet.dsl call NewStylesheet()
+ autocmd BufNewFile *.sgml,*.html,*.shtml call NewFileSGML()
+ autocmd BufNewFile *.latex call NewFileLaTeX()
+ autocmd BufNewFile *.asm call NewFileAsm()
+ autocmd BufNewFile *.py call NewFilePython()
+ autocmd BufNewFile Imakefile call NewImakefile()
+ autocmd BufNewFile getgcov.sh call NewGetGcov()
+
+ fun NewConfigureIn()
+    0r $HOME/Data/myconfig/vim/template.configure.ac
+    call InsertArgs()
+ endfun
+
+ fun NewMakefileAm()
+    0r $HOME/Data/myconfig/vim/template.Makefile.am
+    call InsertArgs()
+ endfun
+
+ fun NewDoxyfileIn()
+    0r $HOME/Data/myconfig/vim/template.Doxyfile.in
+ endfun
+
+ fun NewCheckLogXSL()
+    0r $HOME/Data/myconfig/vim/template.CheckLog.xsl
+ endfun
+
+ fun NewPackageIn()
+    0r $HOME/Data/myconfig/vim/template.pc.in
+ endfun
+
+ fun NewStylesheet()
+    0r $HOME/Data/myconfig/vim/template.stylesheet.dsl
+ endfun
+
+ fun NewImakefile()
+    0r $HOME/Data/myconfig/vim/template.Imakefile
+    call InsertArgs()
+ endfun
+
+ fun NewFileC()
+    0r $HOME/Data/myconfig/vim/template.c
+    call InsertArgs()
+ endfun
+
+ fun NewFileLaTeX()
+    0r $HOME/Data/myconfig/vim/template.latex
+    call InsertArgs()
+ endfun
+
+ fun NewFileAsm()
+    0r $HOME/Data/myconfig/vim/template.asm
+    call InsertArgs()
+ endfun
+
+ fun NewFilePython()
+    0r $HOME/Data/myconfig/vim/template.python
+    call InsertArgs()
+ endfun
+
+ fun NewFileSGML()
+    0r $HOME/Data/myconfig/vim/template.sgml
+    call InsertArgs()
+ endfun
+
+ fun NewGetGcov()
+    0r $HOME/Data/myconfig/vim/template.getgcov.sh
+ endfun
+
+ fun InsertArgs()
+    exe "1,2g/CopyrightYear/s/CopyrightYear/" . strftime("%Y") . "/g"
+    exe "1,2g/CopyrightHolder/s/CopyrightHolder/" . $COPYRIGHTHOLDER . "/g"
+ endfun
+
+endif "autocmd

@@ -1,0 +1,10 @@
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+includedir=@includedir@
+
+Name: proj
+Description: Generic proj package
+Version: @VERSION@
+Libs: -L${libdir} -lproj
+CFlags: -I${includedir}/libproj

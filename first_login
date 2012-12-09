@@ -1,0 +1,47 @@
+#!/bin/sh
+
+WINTER=0
+FALL=0
+
+BIGXTERM="xterm -g 208x92+0+0 -fn 6x10"
+BINDIR="/home/trevor/local/bin"
+XSNOW=`which xsnow 2> /dev/null`
+XSNOW_OPTIONS="-nosanta -notrees -nokeepsnow"
+XLEAVES=`which xleaves 2> /dev/null`
+XLEAVES_OPTIONS="-leavesflakes 20 -nokeepleaves"
+
+xsetroot -solid "rgb:60/40/60"
+#xsetbg /home/trevor/Data/myconfig/pics/suse11-4.png
+
+if [ "$WINTER" -eq "1" ]; then
+	if [ -n "$XSNOW" ]; then
+		$XSNOW $XSNOW_OPTIONS -snowflakes 500 &
+		sleep 3
+		$XSNOW $XSNOW_OPTIONS -sc lightblue &
+	fi
+fi
+
+if [ $FALL -eq 1 ]; then
+	if [ -n "$XLEAVES" ]; then
+		$XLEAVES $XLEAVES_OPTIONS &
+		sleep 3
+		$XLEAVES $XLEAVES_OPTIONS -windtimer 10 &
+	fi
+fi
+
+SCREEN=`echo $DISPLAY | cut -d'.' -f2`
+#if [ "$SCREEN" = "0" ]; then
+#	xscreensaver -nosplash &
+#	$BIGXTERM -xrm "*Page:10 0 0" -e sudo ${BINDIR}/log.mail &
+#	$BIGXTERM -xrm "*Page:10 1 0" -e sudo ${BINDIR}/messages &
+#	$BIGXTERM -xrm "*Page:10 0 1" -e sudo ${BINDIR}/log.http_com &
+#	$BIGXTERM -xrm "*Page:10 1 1" -e sudo ${BINDIR}/log.http_err &
+#fi
+#xgamma -gamma .76
+
+xset s off
+xset dpms 0 0 0
+xset -dpms
+xset r rate 660 35
+
+numlockx off

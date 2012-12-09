@@ -1,0 +1,168 @@
+dnl Copyright (C) CopyrightYear  CopyrightHolder
+
+dnl AC_PREREQ(2.57)
+AC_INIT([Project Name], version, email, tarballname)
+AC_CONFIG_SRCDIR(src/main.c)
+AC_CONFIG_AUX_DIR(cfg)
+AM_INIT_AUTOMAKE([foreign no-dist-gzip dist-bzip2 1.9])
+AM_CONFIG_HEADER(cfg/config.h)
+
+SUBDIRS="lib src doc"
+
+dnl **********************************
+dnl checks for programs
+dnl **********************************
+dnl AC_PROG_CC
+dnl AC_PROG_CPP
+
+dnl AC_PROG_CXX
+dnl AC_PROG_CXXCPP
+
+dnl AC_PROG_MAKE_SET
+
+dnl AC_PROG_INSTALL
+dnl AC_PROG_LN_S
+dnl AC_PROG_LIBTOOL
+
+dnl AC_CHECK_PROG(strip, strip, strip, :)
+dnl AC_CHECK_PROG(doc_html, docbook2html, docbook2html, [true],)
+dnl AC_CHECK_PROG(doc_pdf,  docbook2pdf,  docbook2pdf,  [true],)
+dnl AC_CHECK_PROG(doc_txt,  docbook2txt,  docbook2txt,  [true],)
+
+dnl m4_ifdef([AM_PATH_CHECK],[
+dnl AM_PATH_CHECK(0.8.2, [HAVE_CHECK=true], [HAVE_CHECK=false])
+dnl ])
+dnl AM_CONDITIONAL(COND_HAVE_CHECK, test x$HAVE_CHECK = xtrue)
+dnl AC_SUBST(HAVE_CHECK)
+
+dnl AC_CHECK_PROGS(XSLTPROC, xsltproc, false)
+dnl AC_CHECK_PROGS(GCOV, gcov, false)
+dnl AC_CHECK_PROGS(GCOV2HTML, gcov2html, false)
+dnl HTML_CHECK_RESULT=false
+dnl if test x$HAVE_CHECK = xtrue; then
+dnl 	if test x$XSLTPROC != xfalse; then
+dnl		if test x$GCOV != xfalse; then
+dnl 			HTML_CHECK_RESULT=true
+dnl		fi
+dnl 	fi
+dnl fi
+dnl AC_SUBST(HTML_CHECK_RESULT)
+
+dnl AC_CHECK_PROGS(DOXYGEN, doxygen, [false])
+dnl if test x$DOXYGEN != xfalse; then
+dnl 	AC_CHECK_PROG(DOT, dot, [YES], [NO])
+dnl	AC_CHECK_PROGS(LATEX, latex, [false])
+dnl fi
+
+dnl AC_MSG_CHECKING([whether or not to build module documentation])
+dnl AC_ARG_ENABLE(docs,
+dnl 	AS_HELP_STRING([--enable-docs],
+dnl 		[build module documentation (default NO)]),
+dnl 	[case "${enableval}" in
+dnl 	   yes) docs=true  ;;
+dnl 	   no)  docs=false ;;
+dnl 	   *) AC_MSG_ERROR(bad value ${enableval} for --enable-docs) ;;
+dnl 	esac],[docs=false])
+dnl AM_CONDITIONAL(BUILDDOCS, test x$docs = xtrue)
+dnl AC_MSG_RESULT([$docs])
+
+dnl PKG_CHECK_MODULES(LIBPROJ,libproj)
+
+dnl **********************************
+dnl checks for user features
+dnl **********************************
+dnl AC_MSG_CHECKING([whether or not to build module documentation])
+dnl AC_ARG_ENABLE(docs,
+dnl         AS_HELP_STRING([--enable-docs],
+dnl                       [build module documentation (default NO)]),
+dnl         [case "${enableval}" in
+dnl              yes) docs=true  ;;
+dnl              no)  docs=false ;;
+dnl              *)   AC_MSG_ERROR(bad value ${enableval} for --enable-docs) ;;
+dnl         esac], [docs=false])
+dnl AM_CONDITIONAL(BUILDDOCS, test x$docs = xtrue)
+dnl AC_MSG_RESULT([$docs])
+dnl
+dnl AC_MSG_CHECKING(--enable-build-tests argument)
+dnl AC_ARG_ENABLE(build-tests,
+dnl    [  --enable-build-tests   build test routines], ,
+dnl    [enable_build_tests="no"])
+dnl AC_MSG_RESULT($enable_build_tests)
+dnl if test "$enable_build_tests" = "yes"; then
+dnl     SUBDIRS="$SUBDIRS tests"
+dnl fi
+dnl
+dnl AC_MSG_CHECKING(--with-file provided)
+dnl AC_ARG_WITH(file,
+dnl     [  --with-file             specify a file to use],
+dnl     [AC_DEFINE_UNQUOTED(SERVICE_FILE, "$with_file", [specifies the file to use])],
+dnl     [AC_DEFINE(SERVICE_FILE, "/etc/file", [specifies the file to use])])
+dnl AC_MSG_RESULT($with_file)
+dnl
+dnl AC_MSG_CHECKING(whether we want debugging)
+dnl AC_ARG_WITH(debug,
+dnl AS_HELP_STRING([--with-debug],[add debugging output]),
+dnl [ac_cv_use_debug="true"],
+dnl [ac_cv_use_debug="false"])
+dnl if test $ac_cv_use_debug = "true"; then
+dnl 	AC_SUBST(AM_CFLAGS,[-DDEBUG])
+dnl 	AC_MSG_RESULT(yes)
+dnl else
+dnl 	AC_MSG_RESULT(no)
+dnl fi
+
+dnl **********************************
+dnl checks for libraries
+dnl **********************************
+dnl AC_PATH_XTRA
+dnl AC_CHECK_LIB(pthread, pthread_create, ,AC_MSG_ERROR([Can't find pthread]) ,)
+dnl AC_CHECK_LIB(X11, XOpenDisplay, ,AC_MSG_ERROR([Can't find X11]) ,[-L${ac_x_libraries}])
+
+dnl **********************************
+dnl checks for header files
+dnl **********************************
+dnl AC_HEADER_STDC
+dnl AC_CHECK_HEADERS(sys/types.h sys/stat.h sys/select.h sys/time.h)
+dnl AC_CHECK_HEADERS(stdio.h unistd.h fcntl.h errno.h)
+
+dnl **********************************
+dnl checks for typedefs, structs, and
+dnl compiler characteristics
+dnl **********************************
+dnl AC_TYPE_SIZE_T
+
+dnl **********************************
+dnl checks for library functions
+dnl **********************************
+dnl AC_CHECK_FUNCS(select)
+
+dnl **********************************
+dnl checks for system services
+dnl **********************************
+
+dnl **********************************
+dnl checks for unix variants
+dnl **********************************
+
+dnl **********************************
+dnl other stuff
+dnl **********************************
+DOCBASEDIR="\$(DESTDIR)\$(datadir)/doc/\$(PACKAGE)-\$(VERSION)"
+AC_SUBST(DOCBASEDIR)
+
+if test x$HAVE_CHECK = xtrue; then
+	SUBDIRS="$SUBDIRS tests"
+fi
+AC_SUBST(SUBDIRS)
+
+dnl **********************************
+dnl output
+dnl **********************************
+AC_OUTPUT(Makefile
+libproj.pc
+Doxyfile
+cfg/Makefile
+lib/Makefile
+doc/Makefile
+src/Makefile
+tests/Makefile)

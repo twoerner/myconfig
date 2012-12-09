@@ -1,0 +1,77 @@
+XCOMM Copyright (C) CopyrightYear  CopyrightHolder
+
+/*
+XCOMM stuff for threads
+#define LocalThreadsDefines
+#include <Threads.tmpl>
+*/
+
+/*
+ * stuff for subdirs
+ * remember to use "make Makefiles" after xmkmf
+ */
+/*
+XCOMM subdirectory stuff
+#define IHaveSubdirs
+#define PassCDebugFlags 'CDEBUGFLAGS=$(CDEBUGFLAGS)'
+SUBDIRS = subdir
+MakeSubdirs($(SUBDIRS))
+DependSubdirs($(SUBDIRS))
+*/
+/*
+ * for subdir stuff you might want to create a "World" target
+ */
+/*
+World:
+	$(MAKE) $(MFLAGS) Makefile
+	$(MAKE) $(MFLAGS) Makefiles
+	$(MAKE) $(MFLAGS) clean
+	$(MAKE) $(MFLAGS) depend
+	$(MAKE) $(MFLAGS)
+*/
+
+/*
+XCOMM includes and defines
+DEFINES  = word
+INCLUDES = -I$(TOP)/subdir
+*/
+
+/*
+XCOMM if you want to create a version for gdb
+XCOMM this is for C
+CDEBUGFLAGS = -g3
+XCOMM this is for C++
+CXXDEBUGFLAGS = -g3
+*/
+
+/*
+XCOMM the "all" target
+AllTarget(pname)
+*/
+
+/*
+XCOMM the "depend" target
+SRCS = file.c
+DependTarget()
+*/
+
+/*
+ * Make sure not to un-C comment this
+ * Some sys libs:
+ *  c and c++    : (for basics leave empty, add additional as required)
+ *  Xlib         : $(XLIB)
+ *  OpenGL (glX) : $(XMULIB) $(MESAGLX)
+ *  OpenGL (glut): $(MESAGLUT)
+ *  GCJ          : (for basics leave empty, add additional as required)
+ */
+/*
+ * some program targets:
+ * NormalProgramTarget(pname,objfiles,deplibs,locallibs,syslibs)
+ * NormalCplusplusProgramTarget(pname,objfiles,deplibs,locallibs,syslibs)
+ * GCJavaCCProgramTarget(pname,javafiles.o,ccfiles.o,extra_libs)
+ * DocBook2HTML(target,main.sgml,other1.sgml other2.sgml ...)
+ * DocBook2HTMLFixIndex(target,..\/index.html)
+ *   ** NOTE ** target for DocBook2HTML and DocBook2HTMLFixIndex:
+ *              doctype: book -> book1.htm or BOOKTARGET
+ *              doctype: article -> t1.htm or ARTICLETARGET
+ */

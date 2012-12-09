@@ -1,0 +1,259 @@
+## Copyright (C) CopyrightYear  CopyrightHolder
+
+########################
+## top-level Makefile.am
+########################
+#SUBDIRS = @SUBDIRS@
+#EXTRA_DIST = AUTHORS COPYING ChangeLog INSTALL NEWS README
+#DIST_SUBDIRS = cfg @SUBDIRS@
+#
+## NOTE: do not put ChangeLog under revision control!
+#dist-hook ChangeLog::
+#	-cd $(top_srcdir); svn update; svn log -v > ChangeLog
+#
+#EXTRA_DIST += libproj.pc
+#pkgconfigdir = $(libdir)/pkgconfig
+#pkgconfig_DATA = libproj.pc
+
+########################
+## doxygen
+########################
+#docbasedir = @DOCBASEDIR@
+#doxy_htmldir = $(docbasedir)/doxygen/html
+#doxy_latexdir = $(docbasedir)/doxygen/latex
+#doxy_rftdir = $(docbasedir)/doxygen/rtf
+#
+#doxygen/html/index.html html: cfg/.doxygen $(addsuffix /.doxygen,$(DIST_SUBDIRS))
+#	-if test x$(DOXYGEN) != xfalse; then \
+#		$(DOXYGEN) Doxyfile; \
+#	fi
+#doxygen/latex/refman.pdf pdf: cfg/.doxygen $(addsuffix /.doxygen,$(DIST_SUBDIRS))
+#	-if test x$(LATEX) != xfalse; then \
+#		cd doxygen/latex && $(MAKE) $(AM_MAKEFLAGS) pdf pdf_2on1; \
+#	fi
+#doxygen/latex/refman.ps ps: cfg/.doxygen $(addsuffix /.doxygen,$(DIST_SUBDIRS))
+#	-if test x$(LATEX) != xfalse; then \
+#		cd doxygen/latex && $(MAKE) $(AM_MAKEFLAGS) ps ps_2on1; \
+#	fi
+#
+#cfg/.doxygen:
+#	touch $@
+#
+#if BUILDDOCS
+#install-data-hook::
+#	-$(mkdir_p) $(doxy_htmldir)
+#	-$(mkdir_p) $(doxy_rftdir)
+#	-$(INSTALL) doxygen/html/* $(doxy_htmldir)
+#	-$(INSTALL) doxygen/rtf/* $(doxy_rftdir)
+#	-if test x$(LATEX) != xfalse; then \
+#		$(mkdir_p) $(doxy_latexdir); \
+#		$(INSTALL) doxygen/latex/*.pdf doxygen/latex/*.ps $(doxy_latexdir); \
+#	fi
+#endif
+#
+#uninstall-local::
+#	$(RM) -fr $(docbasedir)
+#
+#clean-local::
+#	-if test x$(LATEX) != xfalse; then \
+#		cd latex && $(MAKE) $(AM_MAKEFLAGS) clean; \
+#	fi
+#	$(RM) -fr doxygen .doxygen
+
+#==============================================#
+########################
+# cfg/Makefile.am
+########################
+#SUBDIRS = 
+#
+#all-local:: .doxygen
+#
+#.doxygen: config.h
+#	touch $@
+#
+#clean-local::
+#	$(RM) .doxygen
+
+#==============================================#
+########################
+## src/Makefile.am
+########################
+#SUBDIRS =
+#AM_LDFLAGS = $(X_LIBS)
+#AM_CFLAGS = $(X_CFLAGS) -Wall -Werror -Wextra -Wconversion -Wreturn-type -Wstrict-prototypes
+#LDADD = $(X_PRE_LIBS) $(LIBS) $(X_EXTRA_LIBS)
+#
+#bin_PROGRAMS = skel
+#skel_SOURCES = skel.h skel.c
+#skel_LDADD = $(top_builddir)/lib/libskel.la
+#skel_CFLAGS = @LIBPROJ_CFLAGS@
+#skel_LDFLAGS = -L@PROJLIBDIR@
+#
+#all-local:: .doxygen
+#
+#.doxygen: $(SOURCES)
+#	touch $@
+#
+#clean-local::
+#	$(RM) .doxygen
+
+#==============================================#
+########################
+## lib/Makefile.am
+########################
+#SUBDIRS =
+#AM_LDFLAGS = $(X_LIBS)
+#AM_CFLAGS = -I@SKELINCDIR@ $(X_CFLAGS) -Wall -Werror -Wextra -Wconversion -Wreturn-type -Wstrict-prototypes
+#LDADD = $(X_PRE_LIBS) $(LIBS) $(X_EXTRA_LIBS)
+#pkginclude_HEADERS = skel.h
+
+########################
+## non-shared lib
+########################
+#lib_LIBRARIES = libskel.a
+#libskel_a_SOURCES = skel.c
+
+########################
+## shared lib
+########################
+#lib_LTLIBRARIES = libskel.la
+#libskel_la_SOURCES = skel.c
+#libskel_la_LDFLAGS =  -release @VERSION@
+#libskel_la_LDFLAGS += -version-info C:R:A
+## C:R:A
+## any code change       -> inc(R)
+## interface add/del/chg -> R=0, inc(C)
+## interface added       -> inc(A)
+## interfece removed     -> A=0
+#
+#all-local:: .doxygen
+#
+#.doxygen: $(SOURCES)
+#	touch $@
+#
+#clean-local::
+#	$(RM) .doxygen
+
+#==============================================#
+########################
+## sgml doc/Makefile.am
+########################
+#SUBDIRS = 
+#IMAGES = 
+#EXTRA_DIST = prog.sgml stylesheet.dsl $(IMAGES)
+##all-local:: index.html prog.pdf prog.txt .doxygen
+#all-local:: index.html .doxygen
+#docbasedir = @DOCBASEDIR@
+#sgml_htmldir = $(docbasedir)/html
+#sgml_pdfdir = $(docbasedir)/pdf
+#sgml_txtdir = $(docbasedir)/txt
+#stylesheet = $(srcdir)/stylesheet.dsl
+#INST_IMAGES = $(addprefix $(top_srcdir)/doc/,$(IMAGES))
+#
+#doimages: $(IMAGES)
+#	$(mkdir_p) images
+#	for image in $(INST_IMAGES); do \
+#		$(INSTALL) "$$image" images; \
+#	done
+#
+#index.html html: prog.sgml doimages
+#	$(RM) *.html *.htm
+#	$(doc_html) -d '$(stylesheet)#html' $<
+#
+#prog.pdf pdf: prog.sgml doimages
+#	$(doc_pdf) -d '$(stylesheet)#print' $<
+#
+#prog.txt txt: prog.sgml
+#	$(doc_txt) -d '$(stylesheet)#html' $<
+#
+#install-data-local:
+#	-$(mkdir_p) $(sgml_htmldir)
+#	-$(mkdir_p) $(sgml_pdfdir)
+#	-$(mkdir_p) $(sgml_txtdir)
+#	-$(INSTALL) *.html $(sgml_htmldir)
+#	-$(INSTALL) *.pdf $(sgml_pdfdir)
+#	-$(INSTALL) *.txt $(sgml_txtdir)
+##	-$(mkdir_p) $(sgml_htmldir)/images
+##	-for image in $(INST_IMAGES); do \
+##		$(INSTALL) "$$image" $(sgml_htmldir)/images; \
+##	done
+#
+#uninstall-local::
+#	$(RM) -fr $(docbasedir)
+#
+#.doxygen: $(SOURCES)
+#	touch $@
+#
+#clean-local::
+#	$(RM) *.html *.htm *.pdf *.txt .doxygen
+#	-$(RM) -fr images
+
+#==============================================#
+########################
+## tests/Makefile.am
+########################
+#SUBDIRS = 
+#EXTRA_DIST = CheckLog.xsl getgcov.sh gcov2html.png
+#AM_MAKEFLAGS = -k
+#CFLAGS =
+#AM_CFLAGS = -Wall -Werror -Wextra -Wconversion -Wreturn-type -Wstrict-prototypes \
+	-fprofile-arcs -ftest-coverage @CHECK_CFLAGS@ -I$(top_srcdir)/src
+#LDADD = @CHECK_LIBS@ $(top_builddir)/src/libskel.la
+#
+#if COND_HAVE_CHECK
+#TESTS = check_skel
+#noinst_PROGRAMS = check_skel
+#check_skel_SOURCES =  check_skel.c $(top_srcdir)/src/skel.c
+#check_skel_CPPFLAGS = -DUNIT_TEST
+#docbasedir = @DOCBASEDIR@
+#
+#check-local:
+#	-killall check_skel
+#	$(RM) CheckLog.html
+#	-if test x$(HTML_CHECK_RESULT) = xtrue; then \
+#		$(srcdir)/getgcov.sh skel.o CheckLog.xml; \
+#		$(XSLTPROC) $(srcdir)/CheckLog.xsl CheckLog*.xml > CheckLog.html; \
+#		if test x$(GCOV2HTML) != xfalse; then \
+#			$(GCOV2HTML) skel.c.gcov; \
+#			$(INSTALL) $(srcdir)/gcov2html.png .; \
+#		fi
+#	else \
+#		touch CheckLog.html; \
+#	fi
+#
+#CheckLog.html: $(check_PROGRAMS)
+#	$(MAKE) $(AM_MAKEFLAGS) check
+#
+#install-CheckLog: CheckLog.html
+#	$(mkdir_p) $(docbasedir)
+#	$(INSTALL) CheckLog.html skel.c.html $(srcdir)/gcov2html.png *.gcov $(docbasedir)
+#endif
+#
+#all-local:: .doxygen
+#	$(RM) CheckLog*.xml *.gcda
+#
+#uninstall-local::
+#	$(RM) -fr $(docbasedir)
+#
+#clean-local::
+#	$(RM) *.png *.html CheckLog*.txt CheckLog*.xml .doxygen *.gc*
+#	$(RM) $(shell find . -type p -print)
+#
+#.doxygen: $(SOURCES)
+#	touch $@
+
+#==============================================#
+########################
+## scripts
+########################
+#SUBDIRS =
+#ALLSCRIPTS = test-setup.sh comload.sh latserver2plot.sh
+#
+#dist_bin_SCRIPTS = $(ALLSCRIPTS)
+#
+#all-local:: .doxygen
+#
+#.doxygen: $(SOURCES)
+#        touch $@
+#
+#CLEANFILES = $(ALLSCRIPTS) .doxygen
