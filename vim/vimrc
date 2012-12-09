@@ -37,7 +37,7 @@ set smartcase		" ignore case if search string is all lowercase, don't ignore cas
 set scrolloff=5		" always show at least <n> lines at top and bottom
 set hidden		" allow switch to new buffer even if current is not saved (i.e. when using tags)
 set pastetoggle=<F2>	" hit <F2> before and after pasting to temporarily turn off autoindent (etc)
-set mouse=a		" enables the scroll wheel to work
+"set mouse=a		" enables the scroll wheel to work (but messes up mouse pasting)
 let loaded_matchparen = 1
 
 " to enable/disable spell checking
