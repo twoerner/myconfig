@@ -1,0 +1,2 @@
+#!/bin/bash
+socat - PROXY:127.0.0.1:$1:$2,proxyport=3128

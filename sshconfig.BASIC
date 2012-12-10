@@ -1,0 +1,10 @@
+# use the following if behind a restrictive (corporate) proxying firewall
+Host github.com
+	ProxyCommand /home/trevor/local/bin/gitproxy %h %p
+
+# the following makes using yocto images easier
+Host yimage
+    HostName 192.168.7.2
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+    User root
