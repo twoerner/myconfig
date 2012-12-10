@@ -1,25 +1,29 @@
 [user]
-	name = Trevor Woerner
-	email = <email>
+	#name = <user>
+	#email = <email>
+
 [color]
 	status = auto
 	branch = auto
 	diff = auto
 	pager = true
+
 [core]
 	pager = less -RU -x8
+	#gitproxy = $HOME/local/bin/gitproxy
+
 [merge]
 	conflictstyle = diff3
 	tool = myvimdiff
+
 [mergetool "myvimdiff"]
 	cmd = vimdiff -c \"wincmd J\" \"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
-[mergetool]
 	prompt = false
 
 [sendemail]
-	from = "Trevor Woerner <email>"
+	#from = "<user> <email>"
 	smtpserver = smtp.gmail.com
-	smtpuser = <email>
+	#smtpuser = <email>
 	smtpencryption = ssl
 	confirm = always
 
@@ -36,3 +40,6 @@
 
 [push]
 	default = simple
+
+[github]
+	#user = <github user>
