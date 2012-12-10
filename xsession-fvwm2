@@ -1,0 +1,14 @@
+#xmodmap -e 'keycode 115 = XF86Back'
+#xmodmap -e 'keycode 116 = XF86Back'
+#xmodmap -e 'keycode 117 = XF86Forward'
+#xmodmap -e 'keycode 111 = XF86Sleep'
+
+# to find multi-key:
+#xmodmap -pke | grep Multi
+
+if [ -f ~/.Xdefaults ]; then
+	xrdb -merge ~/.Xdefaults
+fi
+
+xrandr --output DVI-0 --mode 1920x1080 --left-of VGA-0
+fvwm2
