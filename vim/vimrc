@@ -46,6 +46,17 @@ let loaded_matchparen = 1
 :setlocal spelllang=en_ca
 nmap <silent> <Leader>s :set spell!<CR>
 
+" start using 'Par' more often, is this ever handy!
+" - set 'formatprg' to some command (e.g. :set formatprg=Par)
+" - highlight the lines you want to affect (V/Ctrl-V + {motion})
+" - hit 'gq' and the highlighted text is sent to the formatprg
+"   and its output replaces what had been highlighed
+" NOTE: on suse there already is a program called 'par' that does
+"       something else, suse doens't provide this 'par', you can
+"       find it here: https://build.opensuse.org/package/binary?arch=x86_64&filename=Par-1.52-8.45.x86_64.rpm&package=Par&project=home%3Aaljex&repository=openSUSE_Factory
+"       and it is called 'Par'
+set formatprg=Par
+
 set nobackup
 set viminfo=""
 set tags=tags,./tags,../tags,../../tags,../../../tags,../../../../tags,../../../../../tags
