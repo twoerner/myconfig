@@ -10,7 +10,7 @@ if &compatible || version < 600
     finish
 endif
 
-" .bb and .bbclass
+" .bb, .bbappend, and .bbclass
 au BufNewFile,BufRead *.b{b,bappend,bclass}	set filetype=bitbake
 
 " .inc
