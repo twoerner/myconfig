@@ -55,7 +55,7 @@ nmap <silent> <Leader>s :set spell!<CR>
 "       something else, suse doens't provide this 'par', you can
 "       find it here: https://build.opensuse.org/package/binary?arch=x86_64&filename=Par-1.52-8.45.x86_64.rpm&package=Par&project=home%3Aaljex&repository=openSUSE_Factory
 "       and it is called 'Par'
-set formatprg=Par
+set formatprg=Par\ f
 
 set nobackup
 set viminfo=""
