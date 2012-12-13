@@ -9,6 +9,13 @@ dircount() {
 	fi
 }
 
+jobscount() {
+	local _jcnt=`jobs | wc -l`
+	if [ $_jcnt -gt 0 ]; then
+		echo "{$_jcnt}"
+	fi
+}
+
 # User specific aliases and functions
 alias dirs='dirs -v -l'
 
@@ -48,10 +55,10 @@ title () {
   _cyan="$(tput setaf 6 2> /dev/null)"
   _white="$(tput setaf 7 2> /dev/null)"
 #fi
-export PS1="$_title"'\[$_green\][\[$_yellow\]\u@\h \W\[$_cyan\]$(__git_ps1)\[$_green\]]$(dircount)$\[$_noattr\] '
-export PR1="$_title"'\[$_green\][\[$_red\]\u@\h \W\[$_cyan\]$(__git_ps1)\[$_green\]]$(dircount)$\[$_noattr\] '
+export PS1="$_title"'\[$_green\][\[$_yellow\]\u@\h \W\[$_cyan\]$(__git_ps1)\[$_green\]]$(dircount)$(jobscount)$\[$_noattr\] '
+export PR1="$_title"'\[$_green\][\[$_red\]\u@\h \W\[$_cyan\]$(__git_ps1)\[$_green\]]$(dircount)$(jobscount)$\[$_noattr\] '
 export GIT_PS1="$_title"'\[$_cyan\]$(__git_ps1)\[$_green\]$\[$_noattr\] '
-export BUILD_PS1="$_title"'\[$_green\][\[$_yellow\]\u@\h \W\[$_cyan\]$(__git_ps1)\[$_green\]]$(dircount)$ \D{%b%d %I:%M:%S %P}\[$_noattr\] '
+export BUILD_PS1="$_title"'\[$_green\][\[$_yellow\]\u@\h \W\[$_cyan\]$(__git_ps1)\[$_green\]]$(dircount)$$(jobscount) \D{%b%d %I:%M:%S %P}\[$_noattr\] '
 if [ `id -ur` = 0 ]; then
 	PS1=$PR1
 fi
