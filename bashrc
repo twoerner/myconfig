@@ -1,6 +1,16 @@
 # .bashrc
 
+dircount() {
+	local _dircnt=`dirs -p | wc -l`
+	if [ $_dircnt -gt 1 ]; then
+		echo `expr $_dircnt - 1`
+	else
+		echo ""
+	fi
+}
+
 # User specific aliases and functions
+alias dirs='dirs -v -l'
 
 # Source global definitions
 if [ -f /etc/bash.bashrc ]; then
@@ -38,10 +48,10 @@ title () {
   _cyan="$(tput setaf 6 2> /dev/null)"
   _white="$(tput setaf 7 2> /dev/null)"
 #fi
-export PS1="$_title"'\[$_green\][\[$_yellow\]\u@\h \W\[$_cyan\]$(__git_ps1)\[$_green\]]$\[$_noattr\] '
-export PR1="$_title"'\[$_green\][\[$_red\]\u@\h \W\[$_cyan\]$(__git_ps1)\[$_green\]]$\[$_noattr\] '
+export PS1="$_title"'\[$_green\][\[$_yellow\]\u@\h \W\[$_cyan\]$(__git_ps1)\[$_green\]]$(dircount)$\[$_noattr\] '
+export PR1="$_title"'\[$_green\][\[$_red\]\u@\h \W\[$_cyan\]$(__git_ps1)\[$_green\]]$(dircount)$\[$_noattr\] '
 export GIT_PS1="$_title"'\[$_cyan\]$(__git_ps1)\[$_green\]$\[$_noattr\] '
-export BUILD_PS1="$_title"'\[$_green\][\[$_yellow\]\u@\h \W\[$_cyan\]$(__git_ps1)\[$_green\]]$ \D{%b%d %I:%M:%S %P}\[$_noattr\] '
+export BUILD_PS1="$_title"'\[$_green\][\[$_yellow\]\u@\h \W\[$_cyan\]$(__git_ps1)\[$_green\]]$(dircount)$ \D{%b%d %I:%M:%S %P}\[$_noattr\] '
 if [ `id -ur` = 0 ]; then
 	PS1=$PR1
 fi
