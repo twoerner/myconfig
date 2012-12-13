@@ -3,16 +3,14 @@
 dircount() {
 	local _dircnt=`dirs -p | wc -l`
 	if [ $_dircnt -gt 1 ]; then
-		echo `expr $_dircnt - 1`
-	else
-		echo ""
+		echo "[dirs:`expr $_dircnt - 1`]"
 	fi
 }
 
 jobscount() {
 	local _jcnt=`jobs | wc -l`
 	if [ $_jcnt -gt 0 ]; then
-		echo "{$_jcnt}"
+		echo "{jobs:$_jcnt}"
 	fi
 }
 
