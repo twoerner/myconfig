@@ -66,6 +66,12 @@ export CPATH=/home/trevor/local/include
 #export ftp_proxy=172.17.10.35:81
 export COPYRIGHTHOLDER="Trevor Woerner"
 export MANPATH=/home/trevor/local/man:/home/trevor/local/share/man:$MANPATH
+#export JAVA_HOME=/opt/jdk1.7.0_07
+#export JAVA_ROOT=$JAVA_HOME
+#export SDK_HOME=$JAVA_HOME
+#export JDK_HOME=$JAVA_HOME
+#export JAVA_BINDIR=$JAVA_HOME/bin
+#export JRE_HOME=$JAVA_HOME/jre
 
 # maven
 export M2_HOME=$HOME/local/packages/apache-maven-2.2.1
