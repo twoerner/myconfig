@@ -64,7 +64,6 @@ export PKG_CONFIG_PATH=/home/trevor/local/lib/pkgconfig:/usr/local/lib/pkgconfig
 export CPATH=/home/trevor/local/include
 #export http_proxy=172.17.10.35:81
 #export ftp_proxy=172.17.10.35:81
-export COPYRIGHTHOLDER="Trevor Woerner"
 export MANPATH=/home/trevor/local/man:/home/trevor/local/share/man:$MANPATH
 #export JAVA_HOME=/opt/jdk1.7.0_07
 #export JAVA_ROOT=$JAVA_HOME
