@@ -31,12 +31,12 @@ endif
 " Careful with "cterm=bold", it changes the color to bright for some terminals.
 " There are two sets of defaults: for a dark and a light background.
 if &background == "dark"
-  SynColor Comment	term=bold      cterm=NONE      ctermfg=Brown		ctermbg=NONE gui=NONE      guifg=#80a0ff guibg=NONE
+  SynColor Comment	term=bold      cterm=NONE      ctermfg=DarkGrey		ctermbg=NONE gui=NONE      guifg=#80a0ff guibg=NONE
   SynColor Constant	term=underline cterm=NONE      ctermfg=Magenta		ctermbg=NONE gui=NONE      guifg=#ffa0a0 guibg=NONE
   SynColor Special	term=bold      cterm=NONE      ctermfg=Red		ctermbg=NONE gui=NONE      guifg=Orange  guibg=NONE
   SynColor Identifier	term=underline cterm=bold      ctermfg=Cyan		ctermbg=NONE gui=NONE      guifg=#40ffff guibg=NONE
   SynColor Statement	term=bold      cterm=NONE      ctermfg=Yellow		ctermbg=NONE gui=bold      guifg=#ffff60 guibg=NONE
-  SynColor PreProc	term=underline cterm=NONE      ctermfg=LightBlue	ctermbg=NONE gui=NONE      guifg=#ff80ff guibg=NONE
+  SynColor PreProc	term=underline cterm=NONE      ctermfg=Brown		ctermbg=NONE gui=NONE      guifg=#ff80ff guibg=NONE
   SynColor Type		term=underline cterm=NONE      ctermfg=LightGreen	ctermbg=NONE gui=bold      guifg=#60ff60 guibg=NONE
   SynColor Underlined	term=underline cterm=underline ctermfg=LightBlue	                           gui=underline guifg=#80a0ff
   SynColor Ignore	term=NONE      cterm=NONE      ctermfg=black		ctermbg=NONE gui=NONE      guifg=bg      guibg=NONE
