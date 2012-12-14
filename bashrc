@@ -33,10 +33,6 @@ if [ -f /etc/bash.bashrc ]; then
 	. /etc/bash.bashrc
 fi
 
-if [ -f $HOME/.dir_colours ]; then
-	eval `dircolors -b $HOME/.dir_colours`
-fi
-
 # prompts (borrowed from OpenSuSE's /etc/bash.bashrc)
 test -z "$UID" && readonly UID=`id -ur 2> /dev/null`
 title () {
@@ -55,6 +51,9 @@ title () {
 _title="\$(title \l)"
 _noattr="$(tput sgr0 2> /dev/null)"
 if [ $(tput colors) -eq 256 ]; then
+	if [ -r $HOME/Data/myconfig/dir_colours.xterm-256colour ]; then
+		eval `dircolors -b $HOME/Data/myconfig/dir_colours.xterm-256colour`
+	fi
 	_red="$(tput setaf 167 2> /dev/null)"
 	_green="$(tput setaf 82 2> /dev/null)"
 	_yellow="$(tput setaf 227 2> /dev/null)"
@@ -63,6 +62,9 @@ if [ $(tput colors) -eq 256 ]; then
 	_cyan="$(tput setaf 14 2> /dev/null)"
 	_white="$(tput setaf 250 2> /dev/null)"
 elif [ $(tput colors) -eq 8 ]; then
+	if [ -r $HOME/Data/myconfig/dir_colours ]; then
+		eval `dircolors -b $HOME/Data/myconfig/dir_colours`
+	fi
 	_red="$(tput setaf 1 2> /dev/null)"
 	_green="$(tput setaf 2 2> /dev/null)"
 	_yellow="$(tput setaf 3 2> /dev/null)"
