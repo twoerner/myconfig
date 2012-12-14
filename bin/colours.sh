@@ -21,7 +21,7 @@ fi
 MAXCOLS=$(tput cols)
 COL=1
 while [ 1 ]; do
-	ESC=$(tput setaf $COLOUR)
+	ESC=$(tput setaf $COLOUR 2> /dev/null)
 	printf "%s%3d" $ESC $COLOUR
 	COL=`expr $COL + 3`
 	if [ $WIDE -eq 0 ]; then
