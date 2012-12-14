@@ -83,6 +83,10 @@ map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
 
+" status line
+set laststatus=2
+set statusline=%<%f\ %h%m%r\ %{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
+
 if has("autocmd")
  " general autocmd stuff
   augroup cprog
@@ -111,15 +115,41 @@ if has("autocmd")
  autocmd BufNewFile *.py call NewFilePython()
  autocmd BufNewFile Imakefile call NewImakefile()
  autocmd BufNewFile getgcov.sh call NewGetGcov()
+ autocmd BufNewFile *.bb call NewBB()
+
+ fun GetUserName()
+   let l:user_name = system ("git config --get user.name")
+   if v:shell_error
+     return system ("echo $COPYRIGHTHOLDER")
+   else
+     return substitute (l:user_name, "\n", "", "")
+ endfun
+
+ fun GetUserEmail()
+   let l:user_email = system ("git config --get user.email")
+   if v:shell_error
+     return
+   else
+     return substitute (l:user_email, "\n", "", "")
+ endfun
+
+ fun CpyRght()
+   let l:user_name = GetUserName()
+   let l:user_email = GetUserEmail()
+   let l:year = strftime("%Y")
+   return 'Copyright (C) ' . l:year . '  ' . l:user_name . ' <' . l:user_email . '>'
+ endfun
 
  fun NewConfigureIn()
-    0r $HOME/Data/myconfig/vim/template.configure.ac
-    call InsertArgs()
+    0 put='dnl ' . CpyRght()
+    put=''
+    2r $HOME/Data/myconfig/vim/template.configure.ac
  endfun
 
  fun NewMakefileAm()
-    0r $HOME/Data/myconfig/vim/template.Makefile.am
-    call InsertArgs()
+    0 put='## ' . CpyRght()
+    put=''
+    2r $HOME/Data/myconfig/vim/template.Makefile.am
  endfun
 
  fun NewDoxyfileIn()
@@ -144,38 +174,62 @@ if has("autocmd")
  endfun
 
  fun NewFileC()
-    0r $HOME/Data/myconfig/vim/template.c
-    call InsertArgs()
+    0 put='/*'
+    put=' * ' . CpyRght()
+    put=' */'
+    4
     set formatprg=Par\ r
  endfun
 
  fun NewFileLaTeX()
-    0r $HOME/Data/myconfig/vim/template.latex
-    call InsertArgs()
+    0 put='% ' . CpyRght()
+    2
  endfun
 
  fun NewFileAsm()
-    0r $HOME/Data/myconfig/vim/template.asm
-    call InsertArgs()
+    0 put='; ' . CpyRght()
+    2
  endfun
 
  fun NewFilePython()
-    0r $HOME/Data/myconfig/vim/template.python
-    call InsertArgs()
+    0 put='#! /usr/bin/env python'
+    put='## ' . CpyRght()
+    3
  endfun
 
  fun NewFileSGML()
-    0r $HOME/Data/myconfig/vim/template.sgml
-    call InsertArgs()
+    0 put='<!--'
+    put='  ' . CpyRght()
+    put='  VIM OPTIONS: vim:ts=4:sw=4:sts=4:expandtab'
+    put='-->'
+    5
  endfun
 
  fun NewGetGcov()
     0r $HOME/Data/myconfig/vim/template.getgcov.sh
  endfun
 
+ fun NewBB()
+    0 put='# ' . CpyRght()
+    put=''
+    put ='DESCRIPTION = \"\"'
+    put ='HOMEPAGE = \"\"'
+    put ='LICENSE = \"\"' 
+    put ='SECTION = \"\"'
+    put ='DEPENDS = \"\"'
+    put ='PR = \"r0\"'
+    put ='' 
+    put ='SRC_URI = \"\"'
+    " goto description to edit
+    0
+    /^DESCRIPTION =/
+    exec "normal 2f\""
+ endfun
+
  fun InsertArgs()
+    let l:user_name = GetUserName()
     exe "1,2g/CopyrightYear/s/CopyrightYear/" . strftime("%Y") . "/g"
-    exe "1,2g/CopyrightHolder/s/CopyrightHolder/" . $COPYRIGHTHOLDER . "/g"
+    exe "1,2g/CopyrightHolder/s/CopyrightHolder/" . l:user_name . "/g"
  endfun
 
 endif "autocmd

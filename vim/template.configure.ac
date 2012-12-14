@@ -1,5 +1,3 @@
-dnl Copyright (C) CopyrightYear  CopyrightHolder
-
 dnl AC_PREREQ(2.57)
 AC_INIT([Project Name], version, email, tarballname)
 AC_CONFIG_SRCDIR(src/main.c)

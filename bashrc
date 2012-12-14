@@ -1,6 +1,21 @@
 # .bashrc
 
+dircount() {
+	local _dircnt=`dirs -p | wc -l`
+	if [ $_dircnt -gt 1 ]; then
+		echo "[dirs:`expr $_dircnt - 1`]"
+	fi
+}
+
+jobscount() {
+	local _jcnt=`jobs | wc -l`
+	if [ $_jcnt -gt 0 ]; then
+		echo "{jobs:$_jcnt}"
+	fi
+}
+
 # User specific aliases and functions
+alias dirs='dirs -v -l'
 
 # Source global definitions
 if [ -f /etc/bash.bashrc ]; then
@@ -38,10 +53,10 @@ title () {
   _cyan="$(tput setaf 6 2> /dev/null)"
   _white="$(tput setaf 7 2> /dev/null)"
 #fi
-export PS1="$_title"'\[$_green\][\[$_yellow\]\u@\h \W\[$_cyan\]$(__git_ps1)\[$_green\]]$\[$_noattr\] '
-export PR1="$_title"'\[$_green\][\[$_red\]\u@\h \W\[$_cyan\]$(__git_ps1)\[$_green\]]$\[$_noattr\] '
+export PS1="$_title"'\[$_green\][\[$_yellow\]\u@\h \W\[$_cyan\]$(__git_ps1)\[$_green\]]$(dircount)$(jobscount)$\[$_noattr\] '
+export PR1="$_title"'\[$_green\][\[$_red\]\u@\h \W\[$_cyan\]$(__git_ps1)\[$_green\]]$(dircount)$(jobscount)$\[$_noattr\] '
 export GIT_PS1="$_title"'\[$_cyan\]$(__git_ps1)\[$_green\]$\[$_noattr\] '
-export BUILD_PS1="$_title"'\[$_green\][\[$_yellow\]\u@\h \W\[$_cyan\]$(__git_ps1)\[$_green\]]$ \D{%b%d %I:%M:%S %P}\[$_noattr\] '
+export BUILD_PS1="$_title"'\[$_green\][\[$_yellow\]\u@\h \W\[$_cyan\]$(__git_ps1)\[$_green\]]$(dircount)$$(jobscount) \D{%b%d %I:%M:%S %P}\[$_noattr\] '
 if [ `id -ur` = 0 ]; then
 	PS1=$PR1
 fi
@@ -54,8 +69,13 @@ export PKG_CONFIG_PATH=/home/trevor/local/lib/pkgconfig:/usr/local/lib/pkgconfig
 export CPATH=/home/trevor/local/include
 #export http_proxy=172.17.10.35:81
 #export ftp_proxy=172.17.10.35:81
-export COPYRIGHTHOLDER="Trevor Woerner"
 export MANPATH=/home/trevor/local/man:/home/trevor/local/share/man:$MANPATH
+#export JAVA_HOME=/opt/jdk1.7.0_07
+#export JAVA_ROOT=$JAVA_HOME
+#export SDK_HOME=$JAVA_HOME
+#export JDK_HOME=$JAVA_HOME
+#export JAVA_BINDIR=$JAVA_HOME/bin
+#export JRE_HOME=$JAVA_HOME/jre
 
 # maven
 export M2_HOME=$HOME/local/packages/apache-maven-2.2.1
