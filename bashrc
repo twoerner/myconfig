@@ -14,6 +14,17 @@ jobscount() {
 	fi
 }
 
+# set/update TERM
+if [ -n "$TERM" -a "$TERM" != "dumb" ]; then
+	export TERM=xterm-256color
+	setterm -blength 0
+
+	# turn off visual bell
+	bind 'set bell-style none'
+else
+	export TERM=vt100
+fi
+
 # User specific aliases and functions
 alias dirs='dirs -v -l'
 
@@ -29,35 +40,41 @@ fi
 # prompts (borrowed from OpenSuSE's /etc/bash.bashrc)
 test -z "$UID" && readonly UID=`id -ur 2> /dev/null`
 title () {
-  local _term="$1" _pwd _len _width
-  test -n "$_term" || return
-  test "${_term#tty}" = $_term && _term=pts/$_term
-  test -O /dev/$_term || return
-  _width=`tput cols`
-  _width=`expr $_width - 10`
-#  _pwd="$(dirs -l +0 | tr -s ' ' | sed -r "s/^ +//" | cut -d' ' -f2)"
-  _pwd="$(pwd)"
-  _len=$((${#_pwd}-${_width}))
-  test ${#_pwd} -le ${_width} || _pwd="...${_pwd#$(printf "%.*s" $_len "$_pwd")}"
-  printf "\e]2;%s\007\e]1;\007" "$_pwd" > /dev/$_term
+	local _term="$1" _pwd _len _width
+	test -n "$_term" || return
+	test "${_term#tty}" = $_term && _term=pts/$_term
+	test -O /dev/$_term || return
+	_width=`tput cols`
+	_width=`expr $_width - 10`
+	#_pwd="$(dirs -l +0 | tr -s ' ' | sed -r "s/^ +//" | cut -d' ' -f2)"
+	_pwd="$(pwd)"
+	_len=$((${#_pwd}-${_width}))
+	test ${#_pwd} -le ${_width} || _pwd="...${_pwd#$(printf "%.*s" $_len "$_pwd")}"
+	printf "\e]2;%s\007\e]1;\007" "$_pwd" > /dev/$_term
 }
-#if test \( "$TERM" = "xterm" -o "${TERM#screen}" != "$TERM" \) \
-#		-a -z "$EMACS" -a -z "$MC_SID" -a -n "$DISPLAY" -o $UID = 0
-#then
-  _title="\$(title \l)"
-  _noattr="$(tput sgr0 2> /dev/null)"
-  _red="$(tput setaf 1 2> /dev/null)"
-  _green="$(tput setaf 2 2> /dev/null)"
-  _yellow="$(tput setaf 3 2> /dev/null)"
-  _blue="$(tput setaf 4 2> /dev/null)"
-  _magenta="$(tput setaf 5 2> /dev/null)"
-  _cyan="$(tput setaf 6 2> /dev/null)"
-  _white="$(tput setaf 7 2> /dev/null)"
-#fi
-export PS1="$_title"'\[$_green\][\[$_yellow\]\u@\h \W\[$_cyan\]$(__git_ps1)\[$_green\]]$(dircount)$(jobscount)$\[$_noattr\] '
-export PR1="$_title"'\[$_green\][\[$_red\]\u@\h \W\[$_cyan\]$(__git_ps1)\[$_green\]]$(dircount)$(jobscount)$\[$_noattr\] '
+_title="\$(title \l)"
+_noattr="$(tput sgr0 2> /dev/null)"
+if [ $(tput colors) -eq 256 ]; then
+	_red="$(tput setaf 167 2> /dev/null)"
+	_green="$(tput setaf 82 2> /dev/null)"
+	_yellow="$(tput setaf 227 2> /dev/null)"
+	_blue="$(tput setaf 117 2> /dev/null)"
+	_magenta="$(tput setaf 13 2> /dev/null)"
+	_cyan="$(tput setaf 14 2> /dev/null)"
+	_white="$(tput setaf 250 2> /dev/null)"
+elif [ $(tput colors) -eq 8 ]; then
+	_red="$(tput setaf 1 2> /dev/null)"
+	_green="$(tput setaf 2 2> /dev/null)"
+	_yellow="$(tput setaf 3 2> /dev/null)"
+	_blue="$(tput setaf 4 2> /dev/null)"
+	_magenta="$(tput setaf 5 2> /dev/null)"
+	_cyan="$(tput setaf 6 2> /dev/null)"
+	_white="$(tput setaf 7 2> /dev/null)"
+fi
+export PS1="$_title"'\[$_green\][\[$_yellow\]\u@\h \W\[$_cyan\]$(__git_ps1)\[$_green\]]\[$_white\]$(dircount)$(jobscount)\[$_green\]$\[$_noattr\] '
+export PR1="$_title"'\[$_green\][\[$_red\]\u@\h \W\[$_cyan\]$(__git_ps1)\[$_green\]]\[$_white\]$(dircount)$(jobscount)\[$_green\]$\[$_noattr\] '
 export GIT_PS1="$_title"'\[$_cyan\]$(__git_ps1)\[$_green\]$\[$_noattr\] '
-export BUILD_PS1="$_title"'\[$_green\][\[$_yellow\]\u@\h \W\[$_cyan\]$(__git_ps1)\[$_green\]]$(dircount)$$(jobscount) \D{%b%d %I:%M:%S %P}\[$_noattr\] '
+export BUILD_PS1="$_title"'\[$_green\][\[$_yellow\]\u@\h \W\[$_cyan\]$(__git_ps1)\[$_green\]]\[$_white\]$(dircount)$(jobscount) \[$_green\](\D{%b%d %I:%M:%S %P})$\[$_noattr\] '
 if [ `id -ur` = 0 ]; then
 	PS1=$PR1
 fi
@@ -82,15 +99,4 @@ export MANPATH=/home/trevor/local/man:/home/trevor/local/share/man:$MANPATH
 export M2_HOME=$HOME/local/packages/apache-maven-2.2.1
 export PATH=$PATH:$M2_HOME/bin
 
-if [ -n "$TERM" -a "$TERM" != "dumb" ]; then
-	setterm -blength 0
-
-	# turn off visual bell
-	bind 'set bell-style none'
-
-	# set to 256 mode
-	export TERM=xterm-256color
-else
-	export TERM=vt100
-fi
 unset command_not_found_handle
