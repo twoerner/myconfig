@@ -15,6 +15,7 @@ highlight DiffDelete cterm=none ctermfg=Black ctermbg=Red gui=none guifg=bg guib
 highlight DiffChange cterm=none ctermfg=Black ctermbg=Yellow gui=none guifg=bg guibg=Yellow
 highlight DiffText cterm=none ctermfg=Black ctermbg=Magenta gui=none guifg=bg guibg=Magenta
 highlight LineNr term=NONE cterm=NONE ctermfg=DarkGrey ctermbg=Black gui=NONE guifg=DarkGrey guibg=NONE
+colo casu1dark
 
 " keyboard hacks for backspace etc
 set visualbell t_vb=

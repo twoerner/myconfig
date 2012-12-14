@@ -16,12 +16,12 @@ let g:colors_name="casu1dark"
 hi Normal       cterm=NONE     ctermfg=15	   ctermbg=233	
 hi NonText      cterm=NONE     ctermfg=210	 ctermbg=238	
 hi Function     cterm=NONE     ctermfg=11	 ctermbg=233	
-hi Statement    cterm=BOLD     ctermfg=105	  ctermbg=233	
+hi Statement    cterm=BOLD     ctermfg=204	  ctermbg=233	
 hi Special      cterm=NONE     ctermfg=14	    ctermbg=233	
 hi Constant     cterm=NONE     ctermfg=208	 ctermbg=233	
-hi Comment      cterm=NONE     ctermfg=114	 ctermbg=233	
-hi Preproc      cterm=NONE     ctermfg=83	 ctermbg=233	
-hi Type         cterm=NONE     ctermfg=204	 ctermbg=233	
+hi Comment      cterm=NONE     ctermfg=28	 ctermbg=233	
+hi Preproc      cterm=BOLD     ctermfg=83	 ctermbg=233	
+hi Type         cterm=BOLD     ctermfg=105	 ctermbg=233	
 hi Identifier   cterm=NONE     ctermfg=14	    ctermbg=233	
 hi StatusLine   cterm=BOLD     ctermfg=15	   ctermbg=58	
 hi StatusLineNC cterm=NONE     ctermfg=0	   ctermbg=252	
