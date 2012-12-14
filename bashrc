@@ -87,5 +87,10 @@ if [ -n "$TERM" -a "$TERM" != "dumb" ]; then
 
 	# turn off visual bell
 	bind 'set bell-style none'
+
+	# set to 256 mode
+	export TERM=xterm-256color
+else
+	export TERM=vt100
 fi
 unset command_not_found_handle
