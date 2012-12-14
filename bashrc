@@ -35,7 +35,8 @@ title () {
   test -O /dev/$_term || return
   _width=`tput cols`
   _width=`expr $_width - 10`
-  _pwd="$(dirs -l +0)"
+#  _pwd="$(dirs -l +0 | tr -s ' ' | sed -r "s/^ +//" | cut -d' ' -f2)"
+  _pwd="$(pwd)"
   _len=$((${#_pwd}-${_width}))
   test ${#_pwd} -le ${_width} || _pwd="...${_pwd#$(printf "%.*s" $_len "$_pwd")}"
   printf "\e]2;%s\007\e]1;\007" "$_pwd" > /dev/$_term
