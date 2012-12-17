@@ -100,9 +100,8 @@ static int
 rgb2xterm (uint8_t r, uint8_t g, uint8_t b)
 {
 	static bool tableInit = false;
-	uint8_t best;
 	double dst, dtmp;
-	int i;
+	int best, i;
 
 	if (!tableInit) {
 		for (i=0; i<=253; ++i)
