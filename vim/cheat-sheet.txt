@@ -4,6 +4,12 @@ Vim, but also includes items which are specific to my vimrc configuration.
 the default <leader> is \
 stuff in angle brackets is to be replaced (including the angle brackets)
 
+General
+	:%s/\s\+$//	trim whitespace at end of lines
+	:retab		set tabs how you want them, highlight, then
+			issue this command to change the tabs
+	=		to re-indent, select area then issue command
+
 Commandline Window
 	q/		open cmdline window with search history
 	q:		open cmdline window with command history
