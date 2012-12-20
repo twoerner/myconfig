@@ -1,0 +1,38 @@
+This cheat sheet contains tips that are generic to a default install of
+Vim, but also includes items which are specific to my vimrc configuration.
+
+the default <leader> is \
+stuff in angle brackets is to be replaced (including the angle brackets)
+
+Commandline Window
+	q/		open cmdline window with search history
+	q:		open cmdline window with command history
+	Ctrl-f		switch from cmdline to cmdline window
+
+Block Selection
+	Ctrl-V		to select a block of of text, instead of just
+			character-by-character or line-by-line
+
+		once selected, use the following to
+
+	c		change (delete and switch to insert mode)
+	I		insert in front of cursor
+	A		append after cursor
+	r		replace every character in selection
+	d		delete selection
+	o		toggle cursor to opposite selection corner
+
+Macros
+	q<reg>		to start a macro hit 'q' then the register key,
+			the register can be any letter a-z
+	q		end the macro
+	@<reg>		to replay the macro (can be prefixed with a count)
+
+Spell Checking
+	<leader>s	toggle spell check mode
+	]s		move to next misspelled word
+	[s		move to previous misspelled word
+	z=		bring up list of suggestions for misspelled word
+			under the cursor
+	zg		add word to dictionary ('g'ood word)
+	zw		mark word as bad
