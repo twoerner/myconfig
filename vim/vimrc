@@ -5,6 +5,8 @@
 " to follow a tag into another buffer: Ctrl-W + ]
 """"""""""""""""""""""""""""""""""""""
 
+runtime bundle/pathogen/autoload/pathgen.vim
+
 set nocompatible
 
 " colour
