@@ -1,6 +1,6 @@
-runtime bundle/pathogen/autoload/pathgen.vim
-
 set nocompatible
+runtime bundle/pathogen/autoload/pathogen.vim
+call pathogen#infect()
 
 " colour
 set background=dark
