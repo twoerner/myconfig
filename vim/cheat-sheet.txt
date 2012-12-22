@@ -9,6 +9,10 @@ General
 	:retab		set tabs how you want them, highlight, then
 			issue this command to change the tabs
 	=		to re-indent, select area then issue command
+	g{motion}	by default motion keys move up/down a line at
+			a time (regardless of wrap), if you want to
+			move up/down one visual line at a time prefix
+			the motion with 'g'
 
 Commandline Window
 	q/		open cmdline window with search history
@@ -42,3 +46,19 @@ Spell Checking
 			under the cursor
 	zg		add word to dictionary ('g'ood word)
 	zw		mark word as bad
+
+ctags
+	Ctrl-]		follow a tag
+	Ctrl-W ]	follow a tag into another buffer
+	Ctrl-T		pop an entry off the 'follow' stack
+
+Text Formatting
+	start using 'Par' more often, is it ever handy!
+	- set 'formatprg' to some external command (e.g. :set formatprg=Par)
+	- highlight the line you want to affect (V/Ctrl-V + {motion})
+	- hit 'gq' and the highlighted text is sent to the formatprg
+	  and its output replaces the highlighted section
+	NOTE: on openSuSE there already is a completely unrelated program
+	      called 'par', openSuSE doesn't provide this 'Par', it can be found
+	      https://build.opensuse.org/package/binary?arch=x86_64&filename=Par-1.52-8.4    5.x86_64.rpm&package=Par&project=home%3Aaljex&repository=openSUSE_Factory
+	      and is called 'Par'
