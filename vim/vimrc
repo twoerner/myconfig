@@ -100,7 +100,6 @@ if has("autocmd")
  autocmd BufNewFile *.py call NewFilePython()
  autocmd BufNewFile Imakefile call NewImakefile()
  autocmd BufNewFile getgcov.sh call NewGetGcov()
- autocmd BufNewFile *.bb call NewBB()
 
 " autocmd BufEnter *.c,*.cpp,*.cc colo cdesert
 " autocmd BufEnter *.h,*.chh,*.hh colo cdarkblue
@@ -195,23 +194,6 @@ if has("autocmd")
 
  fun NewGetGcov()
     0r $HOME/Data/myconfig/vim/template.getgcov.sh
- endfun
-
- fun NewBB()
-    0 put='# ' . CpyRght()
-    put=''
-    put ='DESCRIPTION = \"\"'
-    put ='HOMEPAGE = \"\"'
-    put ='LICENSE = \"\"' 
-    put ='SECTION = \"\"'
-    put ='DEPENDS = \"\"'
-    put ='PR = \"r0\"'
-    put ='' 
-    put ='SRC_URI = \"\"'
-    " goto description to edit
-    0
-    /^DESCRIPTION =/
-    exec "normal 2f\""
  endfun
 
  fun InsertArgs()

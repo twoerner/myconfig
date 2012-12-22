@@ -6,14 +6,19 @@
 "
 " This sets up the syntax highlighting for BitBake files, like .bb, .bbclass and .inc
 
-" .bb, .bbappend, and .bbclass
-au BufNewFile,BufRead *.b{b,bappend,bclass}	setf bitbake
+if &compatible || version < 600
+    finish
+endif
+
+" .bb, .bbappend and .bbclass
+au BufNewFile,BufRead *.{bb,bbappend,bbclass}	set filetype=bitbake
 
 " .inc
-au BufNewFile,BufRead *.inc 		setf bitbake
+au BufNewFile,BufRead *.inc 		set filetype=bitbake
 
 " .conf
 au BufNewFile,BufRead *.conf
     \ if (match(expand("%:p:h"), "conf") > 0) |
-    \     setf bitbake |
+    \     set filetype=bitbake |
     \ endif
+
