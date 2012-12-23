@@ -51,6 +51,27 @@ ctags
 	Ctrl-]		follow a tag
 	Ctrl-W ]	follow a tag into another buffer
 	Ctrl-T		pop an entry off the 'follow' stack
+	g]		show list of matches
+	Ctrl-W g]	show list, open selected item in new window
+	Ctrl-N		type part of an identifier, hit Ctrl-N (without having
+			to switch to cmd mode) and vim offers a list of possible
+			completions (:help complete-functions)
+
+The Opposite of ctags
+	Ctags are great if you are on a function and want to see its definition.
+	But what if you want to see all places where a given function is called?
+	A -> use vim's internal grep utility: vimgrep
+	e.g.
+	
+	:vim /search/j **/*
+
+	places the results in a 'quickfix' window
+	to open this window:
+	
+	:copen
+	
+	while in this window use regular motion commands, hit enter on a line
+	and be taken to that occurrence in a new buffer
 
 Text Formatting
 	start using 'Par' more often, is it ever handy!
