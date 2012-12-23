@@ -81,9 +81,9 @@ if has("autocmd")
   "   For C and C++ files set formatting of comments and set C-indenting on.
   "   For other files switch it off.
   "   Don't change the order, it's important that the line with * comes first.
-  autocmd FileType *      set formatoptions+=tcql nocindent comments&
-  autocmd FileType c,cpp,cc  set formatoptions+=croqja tw=78 cindent autoindent
-  autocmd FileType gitcommit set formatoptions+=ta tw=78
+  autocmd FileType *      set formatoptions=tcql nocindent comments&
+  autocmd FileType c,cpp,cc  set formatoptions=croqja tw=78 cindent autoindent
+  autocmd FileType gitcommit set formatoptions=tn tw=78
  augroup END
 
  " some specific autocmd stuff for all files
