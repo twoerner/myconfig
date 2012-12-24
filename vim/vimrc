@@ -86,6 +86,8 @@ if has("autocmd")
   autocmd FileType gitcommit set formatoptions=tn tw=78
  augroup END
 
+ autocmd BufReadPost fugitive://* set bufhidden=delete
+
  " some specific autocmd stuff for all files
  autocmd BufNewFile *.c,*.cpp,*.cc,*.h,*.hh,*.hpp,*.css,*.s call NewFileC()
  autocmd BufNewFile configure.ac call NewConfigureIn()
