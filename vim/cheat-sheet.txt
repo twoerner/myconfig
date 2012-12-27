@@ -13,6 +13,8 @@ General
 			a time (regardless of wrap), if you want to
 			move up/down one visual line at a time prefix
 			the motion with 'g'
+	Ctrl-e		move text up w/o moving cursor
+	Ctrl-y		move text down w/o moving cursor
 
 Commandline Window
 	q/		open cmdline window with search history
@@ -63,15 +65,31 @@ The Opposite of ctags
 	A -> use vim's internal grep utility: vimgrep
 	e.g.
 	
-	:vim /search/j **/*
+		:vim /search/j **/*
 
 	places the results in a 'quickfix' window
 	to open this window:
 	
-	:copen
+		:copen
+
+	better yet, just combine the whole thing into one line and open up a 45-line
+	quickfix window with the results:
+
+		:vimgrep /search/ **/* | :45copen
 	
-	while in this window use regular motion commands, hit enter on a line
-	and be taken to that occurrence in a new buffer
+	while in this quickfix window use regular motion commands, hit enter on a line
+	and be taken to that occurrence in a new buffer or hit
+
+		[q
+
+	to move to the previous entry or
+
+		]q
+
+	to move to the next quickfix entry
+
+	I have mapped <F3> to start the vimgrep automatically on whatever word
+	is under the cursor when it is pressed
 
 Text Formatting
 	start using 'Par' more often, is it ever handy!
@@ -81,5 +99,41 @@ Text Formatting
 	  and its output replaces the highlighted section
 	NOTE: on openSuSE there already is a completely unrelated program
 	      called 'par', openSuSE doesn't provide this 'Par', it can be found
-	      https://build.opensuse.org/package/binary?arch=x86_64&filename=Par-1.52-8.4    5.x86_64.rpm&package=Par&project=home%3Aaljex&repository=openSUSE_Factory
+	      https://build.opensuse.org/package/binary?arch=x86_64&filename=Par-1.52-8.45.x86_64.rpm&package=Par&project=home%3Aaljex&repository=openSUSE_Factory
 	      and is called 'Par'
+
+Writing/Building Code
+	since i always build my code in a location separate from where i write
+	it, simply invoking
+
+		:make
+	
+	will not work. however, if i change the 'make' command as follows:
+
+		:set makeprg=make -C ~/path/to/build/dir
+	
+	now
+
+		:make
+	
+	will work great and create a quickfix list for me. now that i have a
+	quickfix list, the regular [q and ]q will work as usual
+
+Folds
+	if you have just opened a C file and would like all the functions/comments/etc
+	folded just invoke
+
+		:set foldmethod=syntax
+	
+	then, while looking through the code, to unfold a given section use
+
+		zA
+
+	and then zA again to fold it back up
+
+	zi		toggle enabling/disabling all folds
+
+Windows
+	Ctrl-w_		set the current window to its maximum size
+	Ctrl-w=		set all windows to (roughly) equal sizes
+	Ctrl-{hjkl}	move to {left/down/up/right} window
