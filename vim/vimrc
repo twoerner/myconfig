@@ -59,6 +59,9 @@ set lcs=tab:>-,trail:#,eol:$
 "   pressing <Leader>zz again turns this off
 nnoremap <Leader>zz :let &scrolloff=999-&scrolloff<CR>
 
+" vimgrep for term under cursor with <F3>
+nmap <F3> :vimgrep /<C-R><C-W>/ **/*
+
 " the following 4 allow you go use (for example) Ctrl-h instead of Ctrl-w+h to move between buffers
 map <C-h> <C-w>h
 map <C-j> <C-w>j
