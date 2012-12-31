@@ -29,6 +29,7 @@ set number		" show line numbers
 set noincsearch
 set nohlsearch
 set noshowmatch
+set ignorecase
 set smartcase		" ignore case if search string is all lowercase, don't ignore case otherwise
 set scrolloff=5		" always show at least <n> lines at top and bottom
 set hidden		" allow switch to new buffer even if current is not saved (i.e. when using tags)
