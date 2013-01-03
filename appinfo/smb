@@ -1,0 +1,26 @@
+here are my instructions for mounting vanessa's old HDD so she could mount it
+from windows
+
+# mkdir /mnt/vanessa
+# mkdir /mnt/vhdd
+
+edit /etc/fstab:
+	/dev/disk/by-id/... /mnt/vanessa auto defaults 0 0
+
+play with suse's "smb server" settings:
+	- add new share:
+		- enabled
+		- not read-only
+		- name = vhdd
+		- path = /mnt/vhdd
+		- comment = vanessa's hdd
+		- inherit acls = yes
+
+manually edit /etc/samba/smb.conf
+	- update [vhdd]
+		- public = yes
+		- writeable = yes
+		- browseable = yes
+
+# mount -a
+# bindfs -o perms=777,group=users,owner=vanessa /mnt/vanessa /mnt/vhdd
