@@ -106,6 +106,7 @@ if has("autocmd")
 	autocmd BufNewFile *.py call NewFilePython()
 	autocmd BufNewFile Imakefile call NewImakefile()
 	autocmd BufNewFile getgcov.sh call NewGetGcov()
+	autocmd BufNewFile,BufRead * call SetLocalOptions(bufname("%"))
 
 	" autocmd BufEnter *.c,*.cpp,*.cc colo cdesert
 	" autocmd BufEnter *.h,*.chh,*.hh colo cdarkblue
@@ -206,6 +207,18 @@ if has("autocmd")
 		let l:user_name = GetUserName()
 		exe "1,2g/CopyrightYear/s/CopyrightYear/" . strftime("%Y") . "/g"
 		exe "1,2g/CopyrightHolder/s/CopyrightHolder/" . l:user_name . "/g"
+	endfun
+
+	fun SetLocalOptions(fname)
+		let dirname = fnamemodify(a:fname, ":p:h")
+		while "/" != dirname
+			let lvimrc  = dirname . "/.lvimrc"
+			if filereadable(lvimrc)
+				execute "source " . lvimrc
+				break
+			endif
+			let dirname = fnamemodify(dirname, ":p:h:h")
+		endwhile
 	endfun
 
 endif "autocmd
