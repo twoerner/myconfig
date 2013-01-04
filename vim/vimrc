@@ -76,136 +76,136 @@ set statusline=%<%f\ %h%m%r\ %{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 nnoremap <F5> :GundoToggle<CR>
 
 if has("autocmd")
- " general autocmd stuff
-  augroup cprog
-  " Remove all cprog autocommands
-  au!
+	" general autocmd stuff
+	augroup cprog
+		" Remove all cprog autocommands
+		au!
 
-  " When starting to edit a file:
-  "   For C and C++ files set formatting of comments and set C-indenting on.
-  "   For other files switch it off.
-  "   Don't change the order, it's important that the line with * comes first.
-  autocmd FileType *      set formatoptions=tcql nocindent comments&
-  autocmd FileType c,cpp,cc  set formatoptions=croqja tw=78 cindent autoindent
-  autocmd FileType gitcommit set formatoptions=tn tw=78
- augroup END
+		" When starting to edit a file:
+		"   For C and C++ files set formatting of comments and set C-indenting on.
+		"   For other files switch it off.
+		"   Don't change the order, it's important that the line with * comes first.
+		autocmd FileType *      set formatoptions=tcql nocindent comments&
+		autocmd FileType c,cpp,cc  set formatoptions=croqja tw=78 cindent autoindent
+		autocmd FileType gitcommit set formatoptions=tn tw=78
+	augroup END
 
- autocmd BufReadPost fugitive://* set bufhidden=delete
+	autocmd BufReadPost fugitive://* set bufhidden=delete
 
- " some specific autocmd stuff for all files
- autocmd BufNewFile *.c,*.cpp,*.cc,*.h,*.hh,*.hpp,*.css,*.s call NewFileC()
- autocmd BufNewFile configure.ac call NewConfigureIn()
- autocmd BufNewFile Makefile.am call NewMakefileAm()
- autocmd BufNewFile Doxyfile.in call NewDoxyfileIn()
- autocmd BufNewFile CheckLog.xsl call NewCheckLogXSL()
- autocmd BufNewFile *.pc.in call NewPackageIn()
- autocmd BufNewFile stylesheet.dsl call NewStylesheet()
- autocmd BufNewFile *.sgml,*.html,*.shtml call NewFileSGML()
- autocmd BufNewFile *.latex call NewFileLaTeX()
- autocmd BufNewFile *.asm call NewFileAsm()
- autocmd BufNewFile *.py call NewFilePython()
- autocmd BufNewFile Imakefile call NewImakefile()
- autocmd BufNewFile getgcov.sh call NewGetGcov()
+	" some specific autocmd stuff for all files
+	autocmd BufNewFile *.c,*.cpp,*.cc,*.h,*.hh,*.hpp,*.css,*.s call NewFileC()
+	autocmd BufNewFile configure.ac call NewConfigureIn()
+	autocmd BufNewFile Makefile.am call NewMakefileAm()
+	autocmd BufNewFile Doxyfile.in call NewDoxyfileIn()
+	autocmd BufNewFile CheckLog.xsl call NewCheckLogXSL()
+	autocmd BufNewFile *.pc.in call NewPackageIn()
+	autocmd BufNewFile stylesheet.dsl call NewStylesheet()
+	autocmd BufNewFile *.sgml,*.html,*.shtml call NewFileSGML()
+	autocmd BufNewFile *.latex call NewFileLaTeX()
+	autocmd BufNewFile *.asm call NewFileAsm()
+	autocmd BufNewFile *.py call NewFilePython()
+	autocmd BufNewFile Imakefile call NewImakefile()
+	autocmd BufNewFile getgcov.sh call NewGetGcov()
 
-" autocmd BufEnter *.c,*.cpp,*.cc colo cdesert
-" autocmd BufEnter *.h,*.chh,*.hh colo cdarkblue
+	" autocmd BufEnter *.c,*.cpp,*.cc colo cdesert
+	" autocmd BufEnter *.h,*.chh,*.hh colo cdarkblue
 
- fun GetUserName()
-   let l:user_name = system ("git config --get user.name")
-   if v:shell_error
-     return system ("echo $COPYRIGHTHOLDER")
-   else
-     return substitute (l:user_name, "\n", "", "")
- endfun
+	fun GetUserName()
+		let l:user_name = system ("git config --get user.name")
+		if v:shell_error
+			return system ("echo $COPYRIGHTHOLDER")
+		else
+			return substitute (l:user_name, "\n", "", "")
+		endfun
 
- fun GetUserEmail()
-   let l:user_email = system ("git config --get user.email")
-   if v:shell_error
-     return
-   else
-     return substitute (l:user_email, "\n", "", "")
- endfun
+	fun GetUserEmail()
+		let l:user_email = system ("git config --get user.email")
+		if v:shell_error
+			return
+		else
+			return substitute (l:user_email, "\n", "", "")
+	endfun
 
- fun CpyRght()
-   let l:user_name = GetUserName()
-   let l:user_email = GetUserEmail()
-   let l:year = strftime("%Y")
-   return 'Copyright (C) ' . l:year . '  ' . l:user_name . ' <' . l:user_email . '>'
- endfun
+	fun CpyRght()
+		let l:user_name = GetUserName()
+		let l:user_email = GetUserEmail()
+		let l:year = strftime("%Y")
+		return 'Copyright (C) ' . l:year . '  ' . l:user_name . ' <' . l:user_email . '>'
+	endfun
 
- fun NewConfigureIn()
-    0 put='dnl ' . CpyRght()
-    put=''
-    2r $HOME/Data/myconfig/vim/template.configure.ac
- endfun
+	fun NewConfigureIn()
+		0 put='dnl ' . CpyRght()
+		put=''
+		2r $HOME/Data/myconfig/vim/template.configure.ac
+	endfun
 
- fun NewMakefileAm()
-    0 put='## ' . CpyRght()
-    put=''
-    2r $HOME/Data/myconfig/vim/template.Makefile.am
- endfun
+	fun NewMakefileAm()
+		0 put='## ' . CpyRght()
+		put=''
+		2r $HOME/Data/myconfig/vim/template.Makefile.am
+	endfun
 
- fun NewDoxyfileIn()
-    0r $HOME/Data/myconfig/vim/template.Doxyfile.in
- endfun
+	fun NewDoxyfileIn()
+		0r $HOME/Data/myconfig/vim/template.Doxyfile.in
+	endfun
 
- fun NewCheckLogXSL()
-    0r $HOME/Data/myconfig/vim/template.CheckLog.xsl
- endfun
+	fun NewCheckLogXSL()
+		0r $HOME/Data/myconfig/vim/template.CheckLog.xsl
+	endfun
 
- fun NewPackageIn()
-    0r $HOME/Data/myconfig/vim/template.pc.in
- endfun
+	fun NewPackageIn()
+		0r $HOME/Data/myconfig/vim/template.pc.in
+	endfun
 
- fun NewStylesheet()
-    0r $HOME/Data/myconfig/vim/template.stylesheet.dsl
- endfun
+	fun NewStylesheet()
+		0r $HOME/Data/myconfig/vim/template.stylesheet.dsl
+	endfun
 
- fun NewImakefile()
-    0r $HOME/Data/myconfig/vim/template.Imakefile
-    call InsertArgs()
- endfun
+	fun NewImakefile()
+		0r $HOME/Data/myconfig/vim/template.Imakefile
+		call InsertArgs()
+	endfun
 
- fun NewFileC()
-    0 put='/*'
-    put=' * ' . CpyRght()
-    put=' */'
-    4
-    set formatprg=Par\ r
- endfun
+	fun NewFileC()
+		0 put='/*'
+		put=' * ' . CpyRght()
+		put=' */'
+		4
+		set formatprg=Par\ r
+	endfun
 
- fun NewFileLaTeX()
-    0 put='% ' . CpyRght()
-    2
- endfun
+	fun NewFileLaTeX()
+		0 put='% ' . CpyRght()
+		2
+	endfun
 
- fun NewFileAsm()
-    0 put='; ' . CpyRght()
-    2
- endfun
+	fun NewFileAsm()
+		0 put='; ' . CpyRght()
+		2
+	endfun
 
- fun NewFilePython()
-    0 put='#! /usr/bin/env python'
-    put='## ' . CpyRght()
-    3
- endfun
+	fun NewFilePython()
+		0 put='#! /usr/bin/env python'
+		put='## ' . CpyRght()
+		3
+	endfun
 
- fun NewFileSGML()
-    0 put='<!--'
-    put='  ' . CpyRght()
-    put='  VIM OPTIONS: vim:ts=4:sw=4:sts=4:expandtab'
-    put='-->'
-    5
- endfun
+	fun NewFileSGML()
+		0 put='<!--'
+		put='  ' . CpyRght()
+		put='  VIM OPTIONS: vim:ts=4:sw=4:sts=4:expandtab'
+		put='-->'
+		5
+	endfun
 
- fun NewGetGcov()
-    0r $HOME/Data/myconfig/vim/template.getgcov.sh
- endfun
+	fun NewGetGcov()
+		0r $HOME/Data/myconfig/vim/template.getgcov.sh
+	endfun
 
- fun InsertArgs()
-    let l:user_name = GetUserName()
-    exe "1,2g/CopyrightYear/s/CopyrightYear/" . strftime("%Y") . "/g"
-    exe "1,2g/CopyrightHolder/s/CopyrightHolder/" . l:user_name . "/g"
- endfun
+	fun InsertArgs()
+		let l:user_name = GetUserName()
+		exe "1,2g/CopyrightYear/s/CopyrightYear/" . strftime("%Y") . "/g"
+		exe "1,2g/CopyrightHolder/s/CopyrightHolder/" . l:user_name . "/g"
+	endfun
 
 endif "autocmd
