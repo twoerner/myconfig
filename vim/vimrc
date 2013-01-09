@@ -86,7 +86,8 @@ if has("autocmd")
 		"   For other files switch it off.
 		"   Don't change the order, it's important that the line with * comes first.
 		autocmd FileType *      set formatoptions=tcql nocindent comments&
-		autocmd FileType c,cpp,cc  set formatoptions=croqja tw=78 cindent autoindent
+		" having 'a' in the formatoptions is great, but messes me up too often
+		autocmd FileType c,cpp,cc  set formatoptions=croqj tw=78 cindent autoindent
 		autocmd FileType gitcommit set formatoptions=tn tw=78
 	augroup END
 
