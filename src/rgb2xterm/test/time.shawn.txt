@@ -1,5 +1,0 @@
-$ time ./test.sh > shawn.txt
-
-real    2902m35.875s
-user    1510m4.117s
-sys     1283m54.383s
