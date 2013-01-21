@@ -49,7 +49,7 @@ Style "rxvt"        Icon term.xpm, SloppyFocus, IconBox -70 1 -1 -140
 Style "rxvt"        MWMBorder, MWMButtons
 
 # Styles for various common programs:
-Style "*lock"       NoTitle, NoHandles, Sticky
+Style "*lock"       NoTitle, NoHandles, CirculateSkip, WindowListSkip, NeverFocus
 Style "xbiff"       NoTitle, Sticky, WindowListSkip, ClickToFocus
 Style "xcalc"       Icon xcalc.xpm, NoButton 2,RandomPlacement,ClickToFocus
 Style "xmh"         Icon mail1.xpm, NoIconTitle,StickyIcon
