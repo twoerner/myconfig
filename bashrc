@@ -54,29 +54,31 @@ if [ $(tput colors) -eq 256 ]; then
 	if [ -r $HOME/Data/myconfig/dir_colours.xterm-256colour ]; then
 		eval `dircolors -b $HOME/Data/myconfig/dir_colours.xterm-256colour`
 	fi
-	_red="$(tput setaf 167 2> /dev/null)"
-	_green="$(tput setaf 82 2> /dev/null)"
-	_yellow="$(tput setaf 227 2> /dev/null)"
-	_blue="$(tput setaf 117 2> /dev/null)"
-	_magenta="$(tput setaf 13 2> /dev/null)"
-	_cyan="$(tput setaf 14 2> /dev/null)"
+	_regdelim="$(tput setaf 82 2> /dev/null)"
+	_rootdelim="$(tput setaf 167 2> /dev/null)"
+	_machine="$(tput setaf 227 2> /dev/null)"
 	_white="$(tput setaf 250 2> /dev/null)"
+	_git="$(tput setaf 14 2> /dev/null)"
 elif [ $(tput colors) -eq 8 ]; then
 	if [ -r $HOME/Data/myconfig/dir_colours ]; then
 		eval `dircolors -b $HOME/Data/myconfig/dir_colours`
 	fi
-	_red="$(tput setaf 1 2> /dev/null)"
-	_green="$(tput setaf 2 2> /dev/null)"
-	_yellow="$(tput setaf 3 2> /dev/null)"
-	_blue="$(tput setaf 4 2> /dev/null)"
-	_magenta="$(tput setaf 5 2> /dev/null)"
-	_cyan="$(tput setaf 6 2> /dev/null)"
+	_regdelim="$(tput setaf 2 2> /dev/null)"
+	_rootdelim="$(tput setaf 1 2> /dev/null)"
+	_machine="$(tput setaf 3 2> /dev/null)"
 	_white="$(tput setaf 7 2> /dev/null)"
+	_git="$(tput setaf 6 2> /dev/null)"
+
+#	_red="$(tput setaf 1 2> /dev/null)"
+#	_green="$(tput setaf 2 2> /dev/null)"
+#	_yellow="$(tput setaf 3 2> /dev/null)"
+#	_blue="$(tput setaf 4 2> /dev/null)"
+#	_magenta="$(tput setaf 5 2> /dev/null)"
 fi
-export PS1="$_title"'\[$_green\][\[$_yellow\]\u@\h \W\[$_cyan\]$(__git_ps1)\[$_green\]]\[$_white\]$(dircount)$(jobscount)\[$_green\]$\[$_noattr\] '
-export PR1="$_title"'\[$_green\][\[$_red\]\u@\h \W\[$_cyan\]$(__git_ps1)\[$_green\]]\[$_white\]$(dircount)$(jobscount)\[$_green\]$\[$_noattr\] '
-export GIT_PS1="$_title"'\[$_cyan\]$(__git_ps1)\[$_green\]$\[$_noattr\] '
-export BUILD_PS1="$_title"'\[$_green\][\[$_yellow\]\u@\h \W\[$_cyan\]$(__git_ps1)\[$_green\]]\[$_white\]$(dircount)$(jobscount) \[$_green\](\D{%b%d %I:%M:%S %P})$\[$_noattr\] '
+export PS1="$_title"'\[$_regdelim\][\[$_machine\]\u@\h \W\[$_git\]$(__git_ps1)\[$_regdelim\]]\[$_white\]$(dircount)$(jobscount)\[$_regdelim\]$\[$_noattr\] '
+export PR1="$_title"'\[$_rootdelim\][\[$_machine\]\u@\h \W\[$_git\]$(__git_ps1)\[$_rootdelim\]]\[$_white\]$(dircount)$(jobscount)\[$_rootdelim\]$\[$_noattr\] '
+export GIT_PS1="$_title"'\[$_git\]$(__git_ps1)\[$_regdelim\]$\[$_noattr\] '
+export BUILD_PS1="$_title"'\[$_regdelim\][\[$_machine\]\u@\h \W\[$_git\]$(__git_ps1)\[$_regdelim\]]\[$_white\]$(dircount)$(jobscount) \[$_regdelim\](\D{%b%d %I:%M:%S %P})$\[$_noattr\] '
 if [ `id -ur` = 0 ]; then
 	PS1=$PR1
 fi
