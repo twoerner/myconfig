@@ -107,6 +107,7 @@ if has("autocmd")
 	autocmd BufNewFile *.py call NewFilePython()
 	autocmd BufNewFile Imakefile call NewImakefile()
 	autocmd BufNewFile getgcov.sh call NewGetGcov()
+	autocmd BufNewFile,BufRead *.stp call STap()
 	autocmd BufNewFile,BufRead * call SetLocalOptions(bufname("%"))
 
 	" autocmd BufEnter *.c,*.cpp,*.cc colo cdesert
@@ -133,6 +134,12 @@ if has("autocmd")
 		let l:user_email = GetUserEmail()
 		let l:year = strftime("%Y")
 		return 'Copyright (C) ' . l:year . '  ' . l:user_name . ' <' . l:user_email . '>'
+	endfun
+
+	fun STap()
+		set filetype=stap
+		setlocal cindent
+		setlocal cino=+0
 	endfun
 
 	fun NewConfigureIn()
