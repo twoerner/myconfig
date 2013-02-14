@@ -150,6 +150,7 @@ AddToMenu Viewers "Document Viewers"            Title
 +    "X dvi"                                    Exec exec xdvi
 +    ""                                         Nop
 +    "Konqueror"                                Exec exec konqueror
++    "Chromium"					Exec exec chromium
 +    "Firefox"                                  Exec exec firefox
 
 AddToMenu Programming "Programming"         Title
