@@ -609,7 +609,7 @@ Key Left    A   SM  Scroll -100000 0
 
 ## Alt + Tab = Move pointer to next window (on current page)
 #Key Tab     A   M   Next (CurrentPage, AnyScreen) WarpToWindow -1 -1
-Key Tab     A   M   Next (CurrentPage) WarpToWindow -1 -1
+Key Tab     A   M   Next (CurrentPage) WarpToWindow -35p -1
 
 ## left windows key = root menu
 Key XF86Back A N Menu RootMenu Nop
