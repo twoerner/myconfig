@@ -86,7 +86,7 @@ fi
 
 export EDITOR=vim
 export LC_ALL=C
-export PATH=/home/trevor/local/bin:/usr/local/bin:/usr/bin:/usr/X11R6/bin:/bin:/usr/sbin:/sbin:/opt/kde3/bin
+export PATH=/home/trevor/local/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
 export LD_LIBRARY_PATH=/home/trevor/local/lib
 export PKG_CONFIG_PATH=/home/trevor/local/lib/pkgconfig:/usr/local/lib/pkgconfig
 export CPATH=/home/trevor/local/include
