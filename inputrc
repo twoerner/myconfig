@@ -1,0 +1,11 @@
+################################################################################
+## ~/.inputrc
+##
+## Control the behaviour of the readline library used e.g.
+## by the bash in the interactive mode for line editing.
+##
+################################################################################
+
+$if bash
+set editing-mode vi
+$endif
