@@ -157,7 +157,7 @@ AddToMenu Programming "Programming"         Title
 +    "Qt Designer"                          Exec exec designer
 +    "Glade"                                Exec exec glade-2
 +    "VirtualBox"                           Exec exec VirtualBox
-+    "Xilinx ISE 14.2"                      Exec exec /home/trevor/local/packages/Xilinx/14.2/start_ISE.sh
++    "Xilinx ISE 14.2"                      Exec exec /usr/local/packages/Xilinx/14.2/start_ISE.sh
 +    "Eclipse"                              Exec exec eclipse
 +    "KDE Hex Editor (okteta)"              Exec exec okteta
 +    "Kompare"                              Exec exec kompare
