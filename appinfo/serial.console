@@ -1,0 +1,38 @@
+In order to figure out how to connect to a device, first start by figuring out
+what serial devices you have available:
+
+	# setserial /dev/ttyS0
+	/dev/ttyS0, UART: unknown, Port 0x3f8, IRQ: 4
+
+There is no serial port at /dev/ttyS0
+
+	# setserial /dev/ttyS4
+	/dev/ttyS4, UART: 16550A, Port: 0xec00, IRQ: 17
+	# setserial /dev/ttyS5
+	/dev/ttyS5, UART: 16550A, Port: 0xe880, IRQ: 17
+
+Aha, the serial ports on my machine are at /dev/ttyS4 and /dev/ttyS5.
+
+------------------------------------------------------------------------------
+Here are some notes on kermit:
+
+[taken from: http://gumstix.org/connect-to-my-gumstix-system.html]
+
+You can start kermit with:
+	# kermit
+
+If you know your device, use:
+	# kermit -l /dev/ttyS5
+
+To get kermit to read in a config file:
+	C-Kermit> take ~/.kermitrc
+
+Alternately you can setup the configuration yourself:
+	# kermit
+	C-Kermit> set line /dev/ttyS5
+	C-Kermit> set speed 115200
+	C-Kermit> set flow-control none
+	C-Kermit> set carrier-watch off
+	C-Kermit> connect
+
+To break out of your kermit session hit 'Ctrl-\' followed by 'c'
