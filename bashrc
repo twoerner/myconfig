@@ -87,8 +87,8 @@ fi
 export EDITOR=vim
 export LC_ALL=C
 export PATH=/home/trevor/local/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
-export LD_LIBRARY_PATH=/home/trevor/local/lib
-export PKG_CONFIG_PATH=/home/trevor/local/lib/pkgconfig:/usr/local/lib/pkgconfig
+export LD_LIBRARY_PATH=/home/trevor/local/lib:/home/trevor/local/lib64
+export PKG_CONFIG_PATH=/home/trevor/local/lib/pkgconfig:/home/trevor/local/lib64/pkgconfig:/usr/local/lib/pkgconfig
 export CPATH=/home/trevor/local/include
 #export http_proxy=172.17.10.35:81
 #export ftp_proxy=172.17.10.35:81
