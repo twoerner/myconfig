@@ -155,14 +155,12 @@ AddToMenu Viewers "Document Viewers"            Title
 
 AddToMenu Programming "Programming"         Title
 +    "Qt Designer"                          Exec exec designer
-+    "Glade"                                Exec exec glade-2
 +    "VirtualBox"                           Exec exec VirtualBox
++    "GNU radio"                            Exec exec gnuradio-companion
 +    "Xilinx ISE 14.2"                      Exec exec /usr/local/packages/Xilinx/14.2/start_ISE.sh
 +    "Eclipse"                              Exec exec eclipse
 +    "KDE Hex Editor (okteta)"              Exec exec okteta
 +    "Kompare"                              Exec exec kompare
-+    "UML Modeller"                         Exec exec umbrello
-+    "Graphic CVS Tool"                     Exec exec cervisia
 +    "Ethereal"                             Exec exec ethereal
 +    "DDD"                                  Exec exec ddd
 +    "K Debugger"                           Exec exec kdbg
