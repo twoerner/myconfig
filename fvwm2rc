@@ -166,22 +166,23 @@ AddToMenu Programming "Programming"         Title
 +    "K Debugger"                           Exec exec kdbg
 
 AddToMenu Utilities "Desktop Utilities"     Title
-+    "Kmail"                                Exec exec kmail
++    "KDE Calculator"                       Exec exec kcalc
 +    "akregator RSS reader"                 Exec exec akregator
-+    "liferea RSS reader"                   Exec exec liferea
-+    "K netnews reader"                     Exec exec knode
++    "skype"                                Exec exec skype
 +    "X Chat"                               Exec exec xchat
 +    "k3b"                                  Exec exec k3b
-+    "Address Book"                         Exec exec kaddressbook
-+    "Kontact"                              Exec exec kontact
-+    "Organizer"                            Exec exec korganizer
+#+    "Address Book"                         Exec exec kaddressbook
+#+    "Kontact"                              Exec exec kontact
+#+    "Organizer"                            Exec exec korganizer
+#+    "Kmail"                                Exec exec kmail
+#+    "liferea RSS reader"                   Exec exec liferea
+#+    "K netnews reader"                     Exec exec knode
 +    ""                                     Nop
-+    "IM"                                   Exec exec kopete
-+    "KDE Calculator"                       Exec exec kcalc
+#+    "IM"                                   Exec exec kopete
 +    "X Font Selector"                      Exec exec xfontsel
-+    "Colour Selector"                      Exec exec kcolorchooser
-+    "Character Selector"                   Exec exec kcharselect
-+    "Archiving Tool"                       Exec exec ark
+#+    "Colour Selector"                      Exec exec kcolorchooser
+#+    "Character Selector"                   Exec exec kcharselect
+#+    "Archiving Tool"                       Exec exec ark
 +    ""                                     Nop
 +    "Man Pages"                            Exec exec xman
 +    "Magnifying Glass"                     Exec exec xmag
