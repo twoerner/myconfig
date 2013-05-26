@@ -633,3 +633,6 @@ Key Print A N ScnSaver
 #Key Escape  A   M   GotoDesk 1
 #Key Next         A       SCM     Next [*] Focus
 #Key Prior        A       SCM     Prev [*] Focus
+
+## f6 toggle touchpad
+Key	F6	A	N	/home/trevor/local/bin/toggle_touchpad.sh
