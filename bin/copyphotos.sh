@@ -22,7 +22,11 @@ get_files() {
 			orientation=`exiftool -Orientation -S -n "$DESTDIR/$fname" | cut -d' ' -f2`
 			if [ "$orientation"x = "6"x -o "$orientation"x = "8"x ]; then
 				echo -n "rotating ... "
-				imgrot.sh "$DESTDIR/$fname"
+				if [ -x $(which exiftran) ]; then
+					exiftran -ai "$DESTDIR/$fname"
+				else
+					imgrot.sh "$DESTDIR/$fname"
+				fi
 			fi
 
 			# chmod
