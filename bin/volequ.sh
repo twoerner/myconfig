@@ -20,7 +20,7 @@ for (( I=1 ; I <= $FILECNT ; I=`expr $I + 1` )); do
 	rm -f $TMPOUT
 
 	echo -n "working on file: \"$1\": "
-	TMP=`sox "$1" -e stat -v 2>&1`
+	TMP=`sox "$1" -n stat -v 2>&1`
 	echo "$TMP "
 
 	if [ "$TMP" != "1.000" ]; then
