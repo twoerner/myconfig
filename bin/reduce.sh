@@ -15,7 +15,7 @@ while [ $# -gt 0 ]; do
 	TMPFILE=${TMPFILE}.jpg
 
 	echo -n "processing file $1 ... "
-	convert -geometry "640x480" -quality 82 "$1" "$TMPFILE"
+	convert -geometry "1024x768" -quality 83 "$1" "$TMPFILE"
 	mv "$TMPFILE" "$1"
 	echo "done"
 
