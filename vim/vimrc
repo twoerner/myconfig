@@ -1,4 +1,6 @@
 set nocompatible
+set wildmode=full
+set wildmenu
 runtime bundle/pathogen/autoload/pathogen.vim
 call pathogen#infect()
 
