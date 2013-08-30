@@ -15,6 +15,21 @@ General
 			the motion with 'g'
 	Ctrl-e		move text up w/o moving cursor
 	Ctrl-y		move text down w/o moving cursor
+	colorcolumn	there is an interesting thing called "colorcolumn"
+			which will set a vertical bar down your page to tell
+			you where a certain column is located
+				:set colorcolumn=78
+				:set colorcolumn=0
+
+Insert Mode
+	Ctrl-w		delete the word before the cursor (works in bash too)
+	Ctrl-u		delete the whole, current line (works in bash too)
+	Ctrl-n/Ctrl-p	completion (up and down the list)
+	Ctrl-x Ctrl-l	full line completion
+	Ctrl-o		execute one cmd, return to insert mode
+
+	* to find insert-mode help specifically, prefix a help query with 'i_'
+	  e.g. :help i_^w (also works with 'v_' for visual mode)
 
 Commandline Window
 	q/		open cmdline window with search history
