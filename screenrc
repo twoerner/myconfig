@@ -147,8 +147,10 @@ bind ^] paste [.]
 
 backtick 1 5 5 memuse.sh
 backtick 2 1 1 cpuuse.sh
-backtick 3 5 5 diskuse.sh /dev/sdb3
-backtick 4 5 5 diskuse.sh /dev/sdc1
+backtick 3 5 5 diskuse.sh /dev/sdc1
+backtick 4 5 5 diskuse.sh /dev/sde1
+backtick 5 5 5 diskuse.sh /dev/sda2
+backtick 6 5 5 diskuse.sh /dev/sda1
 
 # caption always "%3n %t%? @%u%?%? [%h]%?%=%c"
 #caption always "%{.bW}%-w%{.rW}%n %t%{-}%+w %=%{..G} %H %{..Y} %d/%m %C%a "
@@ -158,7 +160,7 @@ caption always "%-Lw%{= BW}%50>%n%f* %t%{-}%+Lw%<"
 hardstatus alwayslastline
 # %L current window number?
 #hardstatus string '%{= kG}[ %{G}%H %{g}][%= %{=kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B}%Y-%m-%d %{W}%c %{g}]'
-hardstatus string '%{= bw}[%H]%=[disk use: /:%3` /extra:%4`]%=[memory use: %1`]%=[CPU load: %2`]%=[%D %M %d %Y - %C%a]'
+hardstatus string '%{= bw}[%H]%=[disk use: /:%3` /home:%4` ~/build:%5` ~/devel:%6`]%=[memory use: %1`]%=[CPU load: %2`]%=[%D %M %d %Y - %C%a]'
 
 # bind = resize =
 # bind + resize +1
