@@ -1,0 +1,4 @@
+Ctrl-l		clear screen
+Ctrl-w		delete previous word
+Ctrl-u		clear/delete entire line
+Esc-#		comment out current line and run

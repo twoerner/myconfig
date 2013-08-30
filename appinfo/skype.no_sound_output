@@ -1,0 +1,23 @@
+Skype
+^^^^^
+
+"Can't output sound"
+--------------------
+For some bizarre reason, Skype just stopped working one day (problem with
+outputting sound). As it turns out I needed to install a bunch of
+alsa/pulseaudio 32-bit libraries and everything was fine. I discovered this by
+starting Skype from the cmdline. Every once in a while it would output:
+
+	ALSA lib dlmisc.c:236:(snd1_dlobj_cache_get) Cannot open shared library
+	/usr/lib/alsa-lib/libasound_module_pcm_pulse.so
+
+Those libraries were available, it's just that they were in /usr/lib64
+(meaning they were the 64-bit, or native, versions). Doing a search for "alsa"
+in the package manager and installing everything that said "32bit" made that
+problem go away.
+
+How and when they got uninstalled I have no idea. Skype did work perfectly
+fine when I first installed it (that's how I was able to do my interviews for
+the Linaro job). But somewhere between then (about 5 weeks ago) and now those
+libraries must have been uninstalled. The thing is, I certainly didn't
+explicitly uninstall them :-(
