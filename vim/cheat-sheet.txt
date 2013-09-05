@@ -20,6 +20,11 @@ General
 			you where a certain column is located
 				:set colorcolumn=78
 				:set colorcolumn=0
+	:[range]t{addr}	copy a set of lines to addr
+				e.g. :19t. copies line 19 to the line under
+				           the line where your cursor is
+				           presently located
+	:[range]m{addr}	same as copy (above) but moves line(s) instead
 
 Insert Mode
 	Ctrl-w		delete the word before the cursor (works in bash too)
