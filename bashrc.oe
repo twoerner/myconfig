@@ -1,0 +1,53 @@
+# .bashrc.oe
+
+# DEVSHELL
+# ^^^^^^^^
+# many of the 'export' lines from my general-purpose .bashrc have a nasty
+# habit of conflicting (in a bad way, of course) with OE/Yocto's devshell.
+# Therefore I have created this bash rcfile which is to be used when invoking
+# the devshell (see bin/oeshell.sh).
+
+# set/update TERM
+if [ -n "$TERM" -a "$TERM" != "dumb" ]; then
+	export TERM=xterm-256color
+	setterm -blength 0
+
+	# turn off visual bell
+	bind 'set bell-style none'
+else
+	export TERM=vt100
+fi
+
+# User specific aliases and functions
+alias dirs='dirs -v -l'
+alias gwr='watch -d -c -n 5 git log --color --graph --abbrev-commit --pretty=oneline'
+
+# Source global definitions
+if [ -f /etc/bash.bashrc ]; then
+	. /etc/bash.bashrc
+fi
+
+# prompts (borrowed from OpenSuSE's /etc/bash.bashrc)
+_noattr="$(tput sgr0 2> /dev/null)"
+if [ $(tput colors) -eq 256 ]; then
+	if [ -r $HOME/Data/myconfig/dir_colours.xterm-256colour ]; then
+		eval `dircolors -b $HOME/Data/myconfig/dir_colours.xterm-256colour`
+	fi
+	_regdelim="$(tput setaf 82 2> /dev/null)"
+	_rootdelim="$(tput setaf 167 2> /dev/null)"
+	_machine="$(tput setaf 227 2> /dev/null)"
+	_white="$(tput setaf 250 2> /dev/null)"
+	_git="$(tput setaf 14 2> /dev/null)"
+elif [ $(tput colors) -eq 8 ]; then
+	if [ -r $HOME/Data/myconfig/dir_colours ]; then
+		eval `dircolors -b $HOME/Data/myconfig/dir_colours`
+	fi
+	_regdelim="$(tput setaf 2 2> /dev/null)"
+	_rootdelim="$(tput setaf 1 2> /dev/null)"
+	_machine="$(tput setaf 3 2> /dev/null)"
+	_white="$(tput setaf 7 2> /dev/null)"
+	_git="$(tput setaf 6 2> /dev/null)"
+fi
+export PS1='\[$_rootdelim\][\[$_machine\]\u@\h \W\[$_rootdelim\]]\$\[$_noattr\] '
+
+unset command_not_found_handle
