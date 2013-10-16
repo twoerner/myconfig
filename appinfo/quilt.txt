@@ -1,0 +1,64 @@
+quilt cheat-sheet (with OE/Yocto's '-c devshell')
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+to create a new patch:
+---------------------
+$ quilt new <patch name>
+$ quilt add <filenames which are part of patch>
+(edit files, listed in filenames above)
+$ quilt refresh
+
+NOTE: that you /have/ to "quilt add" the filenames *before* you edit them,
+      otherwise quilt doesn't notice that they've changed
+
+      in my opinion it is sad this is how quilt has to work since it is not
+      always possible to know ahead of time which files need to be part of a
+      particular patch. sometimes when you're jumping around from file to file
+      (using tags, for example) you'll need to keep track of which files you
+      visited and changed and be sure to "quilt add" them before you make any
+      changes
+
+
+to modify an existing patch:
+---------------------------
+as an amazing feature, OE/Yocto uses quilt when applying a recipe's patches.
+therefore when you "bitbake -c devshell <recipe>" you'll end up at a prompt,
+ready to go, with all the patches already applied and placed in a series for
+quilt to use
+
+therefore, if you need to edit/update a patch somewhere in the series you can
+back up the patches, make the change, and re-apply the remaining patches;
+in order
+
+for example, let's say a recipe applies the following patches (in order):
+	A.patch
+	B.patch
+	C.patch
+	D.patch
+	E.patch
+	F.patch
+
+if you do:
+	$ bitbake -c devshell recipe
+when you get to a prompt:
+	$ quilt series
+	A.patch
+	B.patch
+	C.patch
+	D.patch
+	E.patch
+	F.patch
+
+if you want to modify C.patch simply:
+	$ quilt pop patches/C.patch
+	(not modify any files you want, if the file you're modifying is
+	already part of C.patch then you don't have to do anything other than
+	modify the file, if you want to add more files to the patch you have
+	to remember to "quilt add" them first)
+	$ quilt refresh
+	$ quilt pop -a
+
+from the previous steps, the "pop" will unapply patches F.patch, E.patch, and
+D.patch. you can then make any modifications you want to C.patch and then
+refresh quilt so that any changes you have made will now be part of C.patch.
+then you can re-apply the remaining patches by popping "all" of them.
