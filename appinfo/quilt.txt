@@ -51,7 +51,7 @@ when you get to a prompt:
 
 if you want to modify C.patch simply:
 	$ quilt pop patches/C.patch
-	(not modify any files you want, if the file you're modifying is
+	(note modify any files you want, if the file you're modifying is
 	already part of C.patch then you don't have to do anything other than
 	modify the file, if you want to add more files to the patch you have
 	to remember to "quilt add" them first)
