@@ -2,3 +2,7 @@ Ctrl-l		clear screen
 Ctrl-w		delete previous word
 Ctrl-u		clear/delete entire line
 Esc-#		comment out current line and run
+
+bash:
+!:n		to obtain the nth argument of the last command
+		NOTE: count starts at zero
