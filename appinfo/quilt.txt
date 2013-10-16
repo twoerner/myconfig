@@ -56,9 +56,9 @@ if you want to modify C.patch simply:
 	modify the file, if you want to add more files to the patch you have
 	to remember to "quilt add" them first)
 	$ quilt refresh
-	$ quilt pop -a
+	$ quilt push -a
 
 from the previous steps, the "pop" will unapply patches F.patch, E.patch, and
 D.patch. you can then make any modifications you want to C.patch and then
 refresh quilt so that any changes you have made will now be part of C.patch.
-then you can re-apply the remaining patches by popping "all" of them.
+then you can re-apply the remaining patches by pushing "all" of them.
