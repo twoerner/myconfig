@@ -1,0 +1,27 @@
+to type special symbols you need a compose key
+by default (or at least in my case) the compose key sequence is:
+	shift + right ctrl
+
+(see the file /usr/share/X11/locale/en_US.UTF-8/Compose for more)
+
+british pound symbol:
+	xchat:
+		left ctrl + left shift + u + a + 3
+		(hold ctrl + shift while typing u a 3)
+	xterm:
+		compose + l + -
+
+euro symbol:
+	xchat:
+		compose + e + =
+	xterm:
+		unfortunately the default iso-5589-1 font doesn't include the euro symbol
+		you need to switch to something ending in iso8859-15
+			$ xlsfonts -fn '*-iso8859-15'
+			  (select a font)
+			look at the font with:
+			$ xfd -fn <font name>
+			use font with:
+			$ xterm -fn <font name>
+		now you can use the following to get the euro symbol:
+			compose + x + o
