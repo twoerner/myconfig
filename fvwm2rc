@@ -589,7 +589,7 @@ AddToFunc ScnSaver		  "I" Exec exec xscreensaver-command -lock
 ## Ctrl + Tab = move cursor to right of root
 #Key Tab     A  C    Any (CurrentPage, !CurrentScreen) WarpToWindow 1 1
 #Key Tab     A  C    Next (FvwmPager) WarpToWindow 1 1
-Key Tab      A  C    WindowId root WarpToWindow 100 0
+#Key Tab      A  C    WindowId root WarpToWindow 100 0
 
 ## Shift + Tab = move cursor to left of root
 Key Tab      A  S    WindowId root WarpToWindow 0 0
