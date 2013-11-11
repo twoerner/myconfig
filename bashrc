@@ -25,6 +25,14 @@ else
 	export TERM=vt100
 fi
 
+##################
+# Key bindings
+# re-bind C-w from unix-word-rubout to backward-kill-word
+# this means C-w will stop at punctuation and not just whitespace
+stty werase undef
+bind '"\C-w":backward-kill-word'
+##################
+
 # User specific aliases and functions
 alias dirs='dirs -v -l'
 alias gwr='watch -d -c -n 5 git log --color --graph --abbrev-commit --pretty=oneline'
