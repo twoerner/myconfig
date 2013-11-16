@@ -21,17 +21,18 @@ if [ -n "$TERM" -a "$TERM" != "dumb" ]; then
 
 	# turn off visual bell
 	bind 'set bell-style none'
+
+	##################
+	# Key bindings
+	# re-bind C-w from unix-word-rubout to backward-kill-word
+	# this means C-w will stop at punctuation and not just whitespace
+	stty werase undef
+	bind '"\C-w":backward-kill-word'
+	##################
+
 else
 	export TERM=vt100
 fi
-
-##################
-# Key bindings
-# re-bind C-w from unix-word-rubout to backward-kill-word
-# this means C-w will stop at punctuation and not just whitespace
-stty werase undef
-bind '"\C-w":backward-kill-word'
-##################
 
 # User specific aliases and functions
 alias dirs='dirs -v -l'
