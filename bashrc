@@ -14,6 +14,14 @@ jobscount() {
 	fi
 }
 
+hex2string() {
+	_i=0
+	while [ $_i -lt ${#1} ]; do
+		echo -en "\x"${1:$_i:2}
+		let "_i += 2"
+	done
+}
+
 # set/update TERM
 if [ -n "$TERM" -a "$TERM" != "dumb" ]; then
 	export TERM=xterm-256color
