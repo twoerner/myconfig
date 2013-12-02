@@ -159,6 +159,7 @@ AddToMenu Programming "Programming"         Title
 +    "GNU radio"                            Exec exec gnuradio-companion
 +    "Xilinx ISE 14.2"                      Exec exec /usr/local/packages/Xilinx/14.2/start_ISE.sh
 +    "Eclipse"                              Exec exec eclipse
++    "Arduino"                              Exec exec arduino
 +    "KDE Hex Editor (okteta)"              Exec exec okteta
 +    "Kompare"                              Exec exec kompare
 +    "Ethereal"                             Exec exec ethereal
