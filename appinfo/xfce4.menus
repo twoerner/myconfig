@@ -1,0 +1,23 @@
+How To Add New Menu Items To xfce4
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+to add a new entry into the menu:
+- go to ~/.local/share/applications
+- create a *.desktop entry for your app
+- e.g. eclipse.desktop
+	[Desktop Entry]
+	Categories=Development;
+	Comment=
+	Exec=eclipse
+	Icon=eclipse
+	Name=eclipse
+	NoDisplay=false
+	StartupNotify=true
+	Terminal=false
+	Type=Application
+- put the icon into ~/.icons (e.g. eclipse.xpm)
+
+
+to configure the menu itself
+- go to ~/.config/menus
+- edit xfce-applications.menu
