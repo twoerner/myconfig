@@ -1,0 +1,8 @@
+[Desktop Entry]
+Comment=
+Terminal=false
+Name=2/3 Screen L
+Exec=xterm -g 207x104
+Type=Application
+Icon=gnome-panel-launcher
+Categories=Quick;

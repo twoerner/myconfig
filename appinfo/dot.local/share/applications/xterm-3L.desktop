@@ -1,0 +1,8 @@
+[Desktop Entry]
+Comment=
+Terminal=false
+Name=Full Screen L
+Exec=xterm -g 314x104+0+0
+Type=Application
+Icon=gnome-panel-launcher
+Categories=Quick;

@@ -1,0 +1,8 @@
+[Desktop Entry]
+Comment="right monitor, half size"
+Terminal=false
+Name=halfR
+Exec=xterm -g 145x105
+Type=Application
+Icon=gnome-panel-launcher
+Categories=Quick;

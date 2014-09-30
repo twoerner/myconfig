@@ -1,0 +1,8 @@
+[Desktop Entry]
+Comment=
+Terminal=false
+Name=1/2 Screen S
+Exec=xterm -g 102x97
+Type=Application
+Icon=gnome-panel-launcher
+Categories=Quick;
