@@ -1,0 +1,55 @@
+to build gnu radio follow the instructions here:
+	http://gnuradio.org/redmine/projects/gnuradio/wiki/BuildGuide
+
+after performing the "cmake" command, you'll probably want to review
+the list of what was found and what wasn't and try to install the
+related "-devel" pacakges.
+
+note that UHD and SHD are drivers for specific hardware devices; neither
+are really required, i couldn't get shd to be found, their sources can be
+found at:
+	SHD: git://github.com/symplex/shd
+	UHD: git://github.com/EttusResearch/uhd.git
+
+openSUSE doesn't provide any packages for comedilib:
+	git://comedi.org/git/comedi/comedilib.git
+
+
+
+after building, when i tried to run i got a dialog box saying something
+was wrong (cannot import gnuradio) and asking me if i had properly setup
+PYTHONPATH and a bunch of other env vars. so i tried running it "by hand":
+
+	python
+	>>> from gnuradio import gr
+	Traceback (most recent call last):
+	  File "<string>", line 1, in <module>
+	  File "/usr/lib/python2.7/site-packages/gnuradio/gr/__init__.py", line 43, in <module>
+	    from gnuradio_core import *
+	  File "/usr/lib/python2.7/site-packages/gnuradio/gr/gnuradio_core.py", line 23, in <module>
+	    from gnuradio_core_runtime import *
+	  File "/usr/lib/python2.7/site-packages/gnuradio/gr/gnuradio_core_runtime.py", line 26, in <module>
+	    _gnuradio_core_runtime = swig_import_helper()
+	  File "/usr/lib/python2.7/site-packages/gnuradio/gr/gnuradio_core_runtime.py", line 22, in swig_import_helper
+	    _mod = imp.load_module('_gnuradio_core_runtime', fp, pathname, description)
+	ImportError: dynamic module does not define init function (init_gnuradio_core_runtime)
+
+the solution is to be found here:
+	https://bbs.archlinux.org/viewtopic.php?id=147452
+
+the problem is that my system includes both python2 and python3,
+coincidentally it builds against python3 but tries to run with python2
+
+solution:
+	1) remove python3
+
+	2) run configure as follows:
+		cmake -DPYTHON_EXECUTABLE=/usr/bin/python2.7 \
+		-DPYTHON_INCLUDE_DIR=/usr/include/python2.7 \
+		-DPYTHON_LIBRARY=/usr/lib/libpython2.7.so \
+		...
+
+
+other good configure line items are:
+	-DQWT_INCLUDE_DIRS=/usr/include/qwt5
+	-DCMAKE_INSTALL_PREFIX=/home/trevor/local/packages/gnuradio-git
