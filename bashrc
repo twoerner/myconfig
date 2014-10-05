@@ -97,6 +97,7 @@ export PS1="$_title"'\[$_regdelim\][\[$_machine\]\u@\h \W\[$_git\]$(__git_ps1)\[
 export PR1="$_title"'\[$_rootdelim\][\[$_machine\]\u@\h \W\[$_git\]$(__git_ps1)\[$_rootdelim\]]\[$_white\]$(dircount)$(jobscount)\[$_rootdelim\]\$\[$_noattr\] '
 export GIT_PS1="$_title"'\[$_git\]$(__git_ps1)\[$_regdelim\]$\[$_noattr\] '
 export BUILD_PS1="$_title"'\[$_regdelim\][\[$_machine\]\u@\h \W\[$_git\]$(__git_ps1)\[$_regdelim\]]\[$_white\]$(dircount)$(jobscount) \[$_regdelim\](\D{%b%d %I:%M:%S %P})\$\[$_noattr\] '
+export PS1=$BUILD_PS1
 if [ `id -ur` = 0 ]; then
 	PS1=$PR1
 fi
