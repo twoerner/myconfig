@@ -13,6 +13,12 @@
 	pager = less -RU -x8
 	#gitproxy = $HOME/local/bin/gitproxy
 
+[credential]
+	# uncomment the following to avoid having to enter
+	# passwords when, e.g., sending email
+	# considered dangerous as credentials are stored clear!
+	#helper = store
+
 [merge]
 	conflictstyle = diff3
 	tool = myvimdiff
