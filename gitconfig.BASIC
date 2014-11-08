@@ -35,6 +35,9 @@
 	to = linux-kernel@vger.kernel.org
 	cccmd = scripts/get_maintainer.pl
 
+[sendmail.libopencm3]
+	to = libopencm3-devel@lists.sourceforge.net
+
 [sendemail.yocto]
 	to = yocto@yoctoproject.org
 	cccmd = get_oe_maintainer.pl
