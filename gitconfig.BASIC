@@ -26,6 +26,7 @@
 	#smtpuser = <email>
 	smtpencryption = ssl
 	confirm = always
+	suppresscc = self
 
 [sendemail.xorg]
 	to = xorg-devel@lists.x.org
