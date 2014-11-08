@@ -49,7 +49,7 @@
 	cccmd = get_oe_maintainer.pl
 
 [push]
-	default = simple
+	default = current
 
 [github]
 	#user = <github user>
