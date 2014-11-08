@@ -53,6 +53,7 @@ Block Selection
 	r		replace every character in selection
 	d		delete selection
 	o		toggle cursor to opposite selection corner
+	gw		format text (using formatprg)
 
 Macros
 	q<reg>		to start a macro hit 'q' then the register key,
