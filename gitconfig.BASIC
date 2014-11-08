@@ -37,6 +37,16 @@
 
 [sendemail.yocto]
 	to = yocto@yoctoproject.org
+	cccmd = get_oe_maintainer.pl
+[sendemail.oecore]
+	to = openembedded-core@lists.openembedded.org
+	cccmd = get_oe_maintainer.pl
+[sendemail.oedev]
+	to = openembedded-devel@lists.openembedded.org
+	cccmd = get_oe_maintainer.pl
+[sendemail.fsl]
+	to = meta-freescale@yoctoproject.org
+	cccmd = get_oe_maintainer.pl
 
 [push]
 	default = simple
