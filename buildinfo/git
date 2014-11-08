@@ -1,0 +1,29 @@
+building git from source (git)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+NOTE: VPATH not supported
+
+$ cd ~/devel/extern/git
+$ make clean
+$ git pull
+
+$ make -j8 prefix=/home/trevor/local/packages/git all
+$ make -j8 prefix=/home/trevor/local/packages/git doc
+$ make -j8 prefix=/home/trevor/local/packages/git info
+	NOTE: the last one always fails
+
+$ pushd ~/local/packages
+$ stow -D git
+$ mv git BAK
+$ popd
+
+$ make prefix=/home/trevor/local/packages/git install
+$ make prefix=/home/trevor/local/packages/git install-doc
+$ make prefix=/home/trevor/local/packages/git install-html
+$ make prefix=/home/trevor/local/packages/git install-info
+	NOTE: the last one always fails
+
+$ pushd ~/local/packages
+$ stow git
+<test git>
+$ rm -fr BAK
+$ popd

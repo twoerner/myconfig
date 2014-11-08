@@ -1,0 +1,54 @@
+building vi from source (hg)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+NOTE: VPATH not supported
+
+$ cd ~/devel/extern/vim-hg
+$ hg pull
+$ hg update
+$ cd src
+$ make clean
+$ ./configure \
+	--prefix=/home/trevor/local/packages/vim-hg \
+	--with-features=huge \
+	--enable-cscope \
+	--enable-pythoninterp \
+	--enable-tclinterp
+[
+	check configure to make sure GUI is enabled:
+		...
+		checking --enable-gui argument... yes/auto - automatic GUI support
+		checking whether or not to look for GTK+ 2... yes 
+		checking whether or not to look for GNOME... no
+		checking whether or not to look for Motif... yes 
+		checking whether or not to look for Athena... yes 
+		checking whether or not to look for neXtaw... yes 
+		checking whether or not to look for Carbon... yes 
+		checking --disable-gtktest argument... gtk test enabled
+		checking for pkg-config... (cached) /usr/bin/pkg-config
+		checking for GTK - version >= 2.2.0... yes; found version 2.24.22
+		checking for X11/SM/SMlib.h... (cached) yes 
+		checking for X11/xpm.h... (cached) yes 
+		checking for X11/Sunkeysym.h... (cached) yes 
+		checking for XIMText in X11/Xlib.h... yes 
+		X GUI selected; xim has been enabled
+		...
+	
+	if GUI is not enabled, then make sure the following package is installed
+	and try again:
+	
+		xorg-x11-server-sdk
+
+	this allows +clipboard option to be built and included
+]
+$ make -j8
+$ make install
+
+$ cd ~/devel/extern/vim-hg/runtime/doc
+$ make html
+$ mkdir -p ~/local/packages/vim-hg/share/doc/vim
+$ cp *html ~/local/packages/vim-hg/share/doc/vim
+
+$ cd ~/local/packages/bin
+$ ln -s vim vi
+$ cd ..
+$ stow vim-hg
