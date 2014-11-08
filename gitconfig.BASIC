@@ -61,3 +61,10 @@
 
 [github]
 	#user = <github user>
+
+[alias]
+	# see: http://stackoverflow.com/questions/1527234/finding-a-branch-point-with-git
+	# the 'firstcommit' alias finds the first commit of a branch ($1) from a branch-off point ($2)
+	# the 'lastcommoncommit' alias finds the last common commit between a branch ($1) and its branching-off point ($2)
+	firstcommit = !bash -c 'git rev-list ${2:-HEAD}...${1:-master} | tail -1' -
+	lastcommoncommit = !bash -c 'diff -u <(git rev-list --first-parent "${1:-master}") <(git rev-list --first-parent "${2:-HEAD}") | sed -ne \"s/^ //p\" | head -1' -
