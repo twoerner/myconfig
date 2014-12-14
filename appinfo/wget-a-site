@@ -1,0 +1,4 @@
+$ wget -rkpH -D x.org --continue -l2 http://www.x.org/wiki/Events/XDC2014/Program/
+
+-D: comma-separated list of sites of the only sites from which to recurse
+-l: the level or depth to recurse
