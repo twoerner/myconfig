@@ -19,13 +19,13 @@
 	# update-alternatives --config javac
 	...
 
-4. update firefox browser plugin
+5. update firefox browser plugin
 	# cd /usr/lib64/browser-plugins
 	# rm libnpjp2.so
 	# ln -s /opt/jdk.../jre/lib/amd64/libnpjp2.so
 
-5. restart firefox
+6. restart firefox
 
-6. check
+7. check
 	url -> about:plugins
 	http://java/com/en/download/installed.jsp
