@@ -29,3 +29,7 @@
 7. check
 	url -> about:plugins
 	http://java/com/en/download/installed.jsp
+
+8. update env
+	edit ~/.bashrc
+	update JAVA_HOME variable
