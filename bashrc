@@ -45,6 +45,7 @@ fi
 # User specific aliases and functions
 alias dirs='dirs -v -l'
 alias gwr='watch -d -c -n 5 git log --color --graph --abbrev-commit --pretty=oneline'
+alias info='info --vi-keys'
 
 # Source global definitions
 if [ -f /etc/bash.bashrc ]; then
