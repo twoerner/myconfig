@@ -5,13 +5,19 @@
 	# gzip -d < /home/trevor/Downloads/jdk...tar.gz | tar xfv -
 
 3. update alternatives
-	# update-alternatives /usr/bin/java java /opt/jdk.../bin/java 1
-	# update-alternatives /usr/bin/javac javac /opt/jdk.../bin/javac 1
-	# update-alternatives /usr/bin/javadoc javadoc /opt/jdk.../bin/javadoc 1
+	# update-alternatives --install /usr/bin/java java /opt/jdk.../bin/java 1
+	# update-alternatives --install /usr/bin/javac javac /opt/jdk.../bin/javac 1
+	# update-alternatives --install /usr/bin/javadoc javadoc /opt/jdk.../bin/javadoc 1
 	.
 	.
 	.
 	jdb, jar, javaws
+
+4. choose latest java, javac, ...
+	# update-alternatives --config java
+	  <choose the java you just installed>
+	# update-alternatives --config javac
+	...
 
 4. update firefox browser plugin
 	# cd /usr/lib64/browser-plugins
