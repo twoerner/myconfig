@@ -22,7 +22,7 @@
 4. update firefox browser plugin
 	# cd /usr/lib64/browser-plugins
 	# rm libnpjp2.so
-	# ln -s /opt/jdk.../jre/lib/libnpjp2.so
+	# ln -s /opt/jdk.../jre/lib/amd64/libnpjp2.so
 
 5. restart firefox
 
