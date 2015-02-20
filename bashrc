@@ -118,6 +118,7 @@ export MANPATH=/home/trevor/local/man:/home/trevor/local/share/man:$MANPATH
 #export JAVA_BINDIR=$JAVA_HOME/bin
 #export JRE_HOME=$JAVA_HOME/jre
 export PYTHONPATH=/home/trevor/local/lib/python2.7/site-packages
+export VAGRANT_HOME=/extra/vagrant
 
 # maven
 export M2_HOME=$HOME/local/packages/apache-maven-2.2.1
