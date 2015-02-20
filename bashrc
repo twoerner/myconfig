@@ -25,7 +25,6 @@ hex2string() {
 # set/update TERM
 if [ -n "$TERM" -a "$TERM" != "dumb" ]; then
 	export TERM=xterm-256color
-	setterm -blength 0
 
 	# turn off visual bell
 	bind 'set bell-style none'
