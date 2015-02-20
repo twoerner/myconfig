@@ -102,7 +102,7 @@ elif [ $(tput colors) -eq 8 ]; then
 #	_blue="$(tput setaf 4 2> /dev/null)"
 #	_magenta="$(tput setaf 5 2> /dev/null)"
 fi
-BUILD_PS1="$_term_resize$_title"'\[$_regdelim\][\[$_machine\]\u@\h \W\[$_git\]$(__git_ps1)\[$_regdelim\]]\[$_white\]$(dircount)$(jobscount) \[$_regdelim\](\D{%b%d %I:%M:%S %P})\$\[$_noattr\] '
+BUILD_PS1="$_term_resize$_title"'\[$_regdelim\][\[$_machine\]\u@\h \W\[$_git\]$(__git_ps1)\[$_regdelim\]]\[$_white\]$(dircount)$(jobscount)\[$_regdelim\](\D{%b%d %I:%M:%S %P})\$\[$_noattr\] '
 BUILD_PR1="$_term_resize$_title"'\[$_rootdelim\][\[$_machine\]\u@\h \W\[$_git\]$(__git_ps1)\[$_rootdelim\]]\[$_white\]$(dircount)$(jobscount)\[$_rootdelim\](\D{%b%d %I:%M:%S %P})\$\[$_noattr\] '
 if [ `id -ur` = 0 ]; then
 	export PS1=$BUILD_PR1
