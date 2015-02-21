@@ -86,8 +86,7 @@ last_cmd_duration() {
 			_m=$((($_duration%3600)/60))
 			_s=$(($_duration%60))
 			printf "{%02d:%02d:%02d}" $_h $_m $_s
-		fi
-		if [ $_duration -ne 0 ]; then
+		elif [ $_duration -ne 0 ]; then
 			echo "{$_duration}"
 		fi
 	fi
