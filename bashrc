@@ -60,6 +60,39 @@ term_resize() {
 }
 _term_resize="\$(term_resize)"
 
+# display the duration of the last command
+# if the duration is less than 60 seconds then just show seconds
+# otherwise show hh:mm:ss
+# don't show anything if the duration is zero
+trap "echo \$SECONDS > $HOME/.$$.SECONDS" DEBUG
+last_cmd_duration() {
+	local _fname="$HOME/.$$.SECONDS"
+	local _laststamp
+	local _currstamp
+	local _duration
+	local _h
+	local _m
+	local _s
+
+	if [ ! -r $_fname ]; then
+		echo ""
+	else
+		_laststamp=$(cat $_fname)
+		_currstamp=$SECONDS
+		rm -f $_fname
+		_duration=$(echo "$_currstamp - $_laststamp" | bc)
+		if [ $_duration -ge 60 ]; then
+			_h=$(($_duration/3600))
+			_m=$((($_duration%3600)/60))
+			_s=$(($_duration%60))
+			printf "{%02d:%02d:%02d}" $_h $_m $_s
+		fi
+		if [ $_duration -ne 0 ]; then
+			echo "{$_duration}"
+		fi
+	fi
+}
+
 # prompts (borrowed from OpenSuSE's /etc/bash.bashrc)
 test -z "$UID" && readonly UID=`id -ur 2> /dev/null`
 title () {
@@ -102,8 +135,8 @@ elif [ $(tput colors) -eq 8 ]; then
 #	_blue="$(tput setaf 4 2> /dev/null)"
 #	_magenta="$(tput setaf 5 2> /dev/null)"
 fi
-BUILD_PS1="$_term_resize$_title"'\[$_regdelim\][\[$_machine\]\u@\h \W\[$_git\]$(__git_ps1)\[$_regdelim\]]\[$_white\]$(dircount)$(jobscount)\[$_regdelim\](\D{%b%d %I:%M:%S %P})\$\[$_noattr\] '
-BUILD_PR1="$_term_resize$_title"'\[$_rootdelim\][\[$_machine\]\u@\h \W\[$_git\]$(__git_ps1)\[$_rootdelim\]]\[$_white\]$(dircount)$(jobscount)\[$_rootdelim\](\D{%b%d %I:%M:%S %P})\$\[$_noattr\] '
+BUILD_PS1="$_term_resize$_title"'\[$_regdelim\][\[$_machine\]\u@\h \W\[$_git\]$(__git_ps1)\[$_regdelim\]]\[$_white\]$(dircount)$(jobscount)\[$_regdelim\](\D{%b%d %I:%M:%S %P})$(last_cmd_duration)\$\[$_noattr\] '
+BUILD_PR1="$_term_resize$_title"'\[$_rootdelim\][\[$_machine\]\u@\h \W\[$_git\]$(__git_ps1)\[$_rootdelim\]]\[$_white\]$(dircount)$(jobscount)\[$_rootdelim\](\D{%b%d %I:%M:%S %P})$(last_cmd_duration)\$\[$_noattr\] '
 if [ `id -ur` = 0 ]; then
 	export PS1=$BUILD_PR1
 else
