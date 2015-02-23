@@ -22,6 +22,19 @@ hex2string() {
 	done
 }
 
+# ubuntu/opensuse-specific section
+lsb_release -d | grep -i ubuntu > /dev/null 2>&1
+if [ $? -eq 0 ]; then
+	# Ubuntu
+	alias ls="ls --color"
+
+	if [ -f /usr/share/bash-completion/bash_completion ]; then
+		. /usr/share/bash-completion/bash_completion
+	elif [ -f /etc/bash_completion ]; then
+		. /etc/bash_completion
+	fi
+fi
+
 # set/update TERM
 if [ -n "$TERM" -a "$TERM" != "dumb" ]; then
 	export TERM=xterm-256color
