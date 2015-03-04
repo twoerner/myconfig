@@ -77,14 +77,19 @@ _term_resize="\$(term_resize)"
 # if the duration is less than 60 seconds then just show seconds
 # otherwise show hh:mm:ss
 # don't show anything if the duration is zero
-trap "_STARTSECONDS=$(echo \$SECONDS)" DEBUG
+trap '_STARTSECONDS=${_STARTSECONDS:-$SECONDS}' DEBUG
+PROMPT_COMMAND=last_cmd_duration_stop
+last_cmd_duration_stop() {
+    _SECONDS=$(($SECONDS - $_STARTSECONDS))
+    unset _STARTSECONDS
+}
 last_cmd_duration() {
 	local _duration
 	local _h
 	local _m
 	local _s
 
-	_duration=$(echo "$SECONDS - $_STARTSECONDS" | bc)
+	_duration=_SECONDS
 	if [ $_duration -ge 60 ]; then
 		_h=$(($_duration/3600))
 		_m=$((($_duration%3600)/60))
