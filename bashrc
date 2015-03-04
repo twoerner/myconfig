@@ -84,19 +84,17 @@ last_cmd_duration_stop() {
     unset _STARTSECONDS
 }
 last_cmd_duration() {
-	local _duration
 	local _h
 	local _m
 	local _s
 
-	_duration=_SECONDS
-	if [ $_duration -ge 60 ]; then
-		_h=$(($_duration/3600))
-		_m=$((($_duration%3600)/60))
-		_s=$(($_duration%60))
+	if [ $_SECONDS -ge 60 ]; then
+		_h=$(($_SECONDS/3600))
+		_m=$((($_SECONDS%3600)/60))
+		_s=$(($_SECONDS%60))
 		printf "{%02d:%02d:%02d}" $_h $_m $_s
-	elif [ $_duration -ne 0 ]; then
-		echo "{$_duration}"
+	elif [ $_SECONDS -ne 0 ]; then
+		echo "{$_SECONDS}"
 	fi
 }
 
