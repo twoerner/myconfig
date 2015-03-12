@@ -1,0 +1,39 @@
+screen tips
+^^^^^^^^^^^
+
+1. when starting screen, give the session a sessionname using -S
+   e.g.
+   	$ screen -S <sessionname>
+   then when you list your sessions, it is obvious which session is which
+   e.g.
+   	$ screen -ls
+   	There are screens on:
+   		13478.session1	(Attached)
+   		12235.session2	(Attached)
+   		15282.session3	(Attached)
+   		\___/ \______/
+   		  |       |
+   		 pid   sessionname
+
+   if you don't use -S you'll get the tty instead of a sessionname, and that's
+   rarely useful
+
+   if you did not use -S and now want to give a running session a sessionname,
+   from within the session do:
+   	Ctrl-a :sessionname <new sessionname>
+
+
+2. to attach to an already running named session:
+	$ screen -x <sessionname>
+
+3. to detach:
+	Ctrl-a d
+
+4. to scroll back
+	Ctrl-a [
+	(then use vi keys to move around)
+
+5. to create a new window, with a shell, and switch to it:
+	Ctrl-a Ctrl-c
+   note that windows are numbered, to switch to window #2 (for example)
+   	Ctrl-a 2
