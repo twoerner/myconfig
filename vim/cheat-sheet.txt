@@ -4,6 +4,21 @@ Vim, but also includes items which are specific to my vimrc configuration.
 the default <leader> is \
 stuff in angle brackets is to be replaced (including the angle brackets)
 
+Using git (via fugitive)
+	most git commands are available via fugitive by prefixing them
+	with a capital 'G' in command mode
+
+	:Glog
+	:Gblame
+
+	some commands place their results in the "quickfix" window
+
+Quickfix Commands
+	:copen		open quickfix at bottom of screen
+	:45copen	open quickfix list with 45 lines
+	]q		next item in quickfix list
+	[q		previous item in quickfix list
+
 General
 	:%s/\s\+$//	trim whitespace at end of lines
 	:retab		set tabs how you want them, highlight, then
