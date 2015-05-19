@@ -33,3 +33,4 @@
 8. update env
 	edit ~/.bashrc
 	update JAVA_HOME variable
+	$ java -version
