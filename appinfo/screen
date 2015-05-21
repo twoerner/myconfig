@@ -37,3 +37,7 @@ screen tips
 	Ctrl-a Ctrl-c
    note that windows are numbered, to switch to window #2 (for example)
    	Ctrl-a 2
+
+6. to rename a screen
+	switch to it
+	Ctrl-a A    (this is case sensitive!)
