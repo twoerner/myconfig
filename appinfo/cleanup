@@ -1,0 +1,9 @@
+block device:
+	# wipe -l2 -x2 -p2 -e <block device>
+	# wipe -l2 -x2 -p2 -e /dev/sdf
+
+
+files:
+	$ shred -fuvz <file>
+wipe also works on files and directories, seems like a better option than shred
+wipe has a recursive option, shred only seems to work on files
