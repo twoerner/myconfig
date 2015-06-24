@@ -1,0 +1,108 @@
+Embedded Development Setup
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+June 22, 2015
+
+ When doing embedded devel with various boards, I like to use my desktop/host
+ computer as the "server". My host has wifi to get to the internet but also
+ has a wired ethernet hub to which the boards connect (which isn't, by
+ default, routable to the internet).
+
+
+
+                      wifi to internet
+                       | interface: wlp0s29f7u5u1
+                       | ip: 192.168.141.85
+              .        |
+              |    <---+
+             / \                               +~~~~~~~~~+
+      +=================+                  ....| board 1 |...........
+      |                 |                  :   +~~~~~~~~~+          :
+      |  host computer  |                  :                        :
+      |                 |                  :    +~~~~~~~~~+         :
+      +=================+   +----------+   :  ..| board 2 |......   :
+          :          :      |          |...:  : +~~~~~~~~~+     :   :
+          :          :      | 10-port  |......:                 :   :
+          :          :......| USB2 hub |... etc                 :   :
+          :                 |          |                        :   :
+          :                 +----------+                        :   :
+          :        +-----------+                                :   :
+          :        |           |                                :   :
+          :........| 8-port    |................................:   :
+ interface: enp6s0 | ethernet  |....................................:
+ ip: 192.168.142.1 | switch    |... etc
+                   |           |
+                   +-----------+
+
+
+
+usb console
+-----------
+ Most boards now-a-days have some sort of console that can be accessed via
+ some sort of USB-to-serial cable. Either the board has a mini or micro USB
+ connector on it (type A) or it has some pins and/or GPIO area into which an
+ FTDI cable can be plugged.
+
+ In any case it helps to have a couple minicom configurations setup. e.g.:
+
+  +--  /etc/minirc.usb0  --------------------------------------------------------+
+  | # Machine-generated file - use setup menu in minicom to change parameters.   |
+  | pu port             /dev/ttyUSB0                                             |
+  | pu baudrate         115200                                                   |
+  | pu bits             8                                                        |
+  | pu parity           N                                                        |
+  | pu stopbits         1                                                        |
+  +------------------------------------------------------------------------------+
+
+ Then, to start a minicom listening to a given usb port:
+
+ 	# minicom usb0
+
+
+
+dhcp
+----
+ When the boards come up they usually run some sort of dhcp client in an
+ attempt to obtain an IP address for the wired, ethernet interface. A nice,
+ simple, dns server to run is dnsmasq:
+
+	# dnsmasq \
+		--strict-order \
+		--except-interface=lo \
+		--interface=enp6s0 \
+		--listen-address=192.168.142.1 \
+		--bind-interfaces \
+		-d \
+		-q \
+		--dhcp-range=enp6s0,192.168.142.130,192.168.142.140,255.255.255.0,192.168.142.255 \
+		--conf-file=""
+
+
+ 
+port forwarding
+---------------
+ To allow the devices on the enp6s0 interface to route through the wifi
+ interface so they can access the internet, try running the following script
+ (which is specific to the configuration in the drawing above) as root:
+
+  +--  wireless-bridge.sh  -------------------------------------------------------+
+  | #!/bin/bash                                                                   |
+  | # from: http://www.glennklockwood.com/sa/rpi-wifi-bridge.php                  |
+  |                                                                               |
+  | IPT=/usr/sbin/iptables                                                        |
+  | IFACE_LOCAL=enp6s0                                                            |
+  | IFACE_INET=wlp0s29f7u5u1                                                      |
+  | ADDR_INET=192.168.141.85                                                      |
+  |                                                                               |
+  | $IPT -F INPUT                                                                 |
+  | $IPT -F OUTPUT                                                                |
+  | $IPT -F FORWARD                                                               |
+  |                                                                               |
+  | $IPT -t nat -P PREROUTING ACCEPT                                              |
+  | $IPT -t nat -P POSTROUTING ACCEPT                                             |
+  | $IPT -t nat -P OUTPUT ACCEPT                                                  |
+  |                                                                               |
+  | $IPT -A FORWARD -p ALL -i $IFACE_LOCAL -j ACCEPT                              |
+  | $IPT -A FORWARD -i $IFACE_INET -m state --state ESTABLISHED,RELATED -j ACCEPT |
+  |                                                                               |
+  | $IPT -t nat -A POSTROUTING -o $IFACE_INET -j SNAT --to-source $ADDR_INET      |
+  +-------------------------------------------------------------------------------+
