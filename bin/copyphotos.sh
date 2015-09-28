@@ -55,22 +55,17 @@ get_files() {
 
 # check usage
 if [ $# -ne 2 ]; then
-	echo "usage: `basename $0` <\"micromate\"|\"flash\"> <directory to place camera contents>"
+	echo "usage: `basename $0` <source dir of /mount> <directory to place camera contents>"
 	exit 1
 fi
 
-# check 1st arg
-if [ "$1"x = "micromate"x -o "$1"y = "flash"y ]; then
-	echo
-else
-	echo "first arg must be one of 'micromate' or 'flash'"
-	exit 1
-fi
-
-if [ "$1"x = "micromate" ]; then
+if [ -e "/mnt/$1/dcim" ]; then
 	SOURCEDIR="/mnt/$1/dcim"
-else
+elif [ -e "/mnt/$1/DCIM" ]; then
 	SOURCEDIR="/mnt/$1/DCIM"
+else
+	echo "can't find mounted camera files at /mnt/$1"
+	exit 1
 fi
 DESTDIR="$2"
 
