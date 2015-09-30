@@ -1,0 +1,2 @@
+to remove the audio track from a video:
+	$ ffmpeg -i input.avi -c copy -an output.avi
