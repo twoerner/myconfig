@@ -2,3 +2,10 @@ copy contents of src directory to dst directory:
 	$ rsync -rtv src/ dst
 	-- OR --
 	$ rsync -av src/ dst
+
+
+to resume a stopped/broken scp:
+(the --copy-links is necessary when the thing your copying is a link, in this case we
+want rsync to copy the thing to which the link points, and not the link itself)
+
+	$ rsync --copy-links --partial --progress --rsh=ssh <source> [<destination>]
