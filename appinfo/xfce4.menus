@@ -21,3 +21,4 @@ to add a new entry into the menu:
 to configure the menu itself
 - go to ~/.config/menus
 - edit xfce-applications.menu
+- if there is no xfce-applications.menu then copy it from /etc/xdg/menus
