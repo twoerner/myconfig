@@ -22,3 +22,13 @@ to configure the menu itself
 - go to ~/.config/menus
 - edit xfce-applications.menu
 - if there is no xfce-applications.menu then copy it from /etc/xdg/menus
+
+
+How To Make the Applications Menu the Only Menu
+(and remove the desktop menu)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Settings
+	-> Settings Manager
+		-> Desktop
+			-> Icons
+				-> Icon type: set to "None"
