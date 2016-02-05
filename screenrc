@@ -159,7 +159,7 @@ caption always "%-Lw%{= BW}%50>%n%f* %t%{-}%+Lw%<"
 hardstatus alwayslastline
 # %L current window number?
 #hardstatus string '%{= kG}[ %{G}%H %{g}][%= %{=kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B}%Y-%m-%d %{W}%c %{g}]'
-hardstatus string '%{= bw}[%H]%=[disk use: /:%2` /home:%3` ~/build:%4` ~/devel:%5`]%=[memory use: %1`]%=[CPU load: %l]%=[%D %M %d %Y - %C%a]'
+hardstatus string '%?%E%{= rw}%:%{= bw}%?[%S]%=[disk use: /:%2` /home:%3` ~/build:%4` ~/devel:%5`]%=[memory use: %1`]%=[CPU load: %l]%=[%D %M %d %Y - %C%a]'
 
 # bind = resize =
 # bind + resize +1
