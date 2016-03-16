@@ -5,6 +5,7 @@ to remove the audio track from a video:
 	$ ffmpeg -i input.avi -vcodec copy -an output.avi
 
 rotate a video:
+(do it twice to get the left/right correct)
 	(90 ccw)
 	ffmpeg -i input.mp4 -vf vflip output.mp4
 
