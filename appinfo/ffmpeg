@@ -1,0 +1,12 @@
+use download helper from youtube
+$ ffmpeg -i <in.flv> -vn -acodec libvorbis <out.ogg>
+
+to remove the audio track from a video:
+	$ ffmpeg -i input.avi -vcodec copy -an output.avi
+
+rotate a video:
+	(90 ccw)
+	ffmpeg -i input.mp4 -vf vflip output.mp4
+
+	(90 cw)
+	ffmpeg -i input.mp4 -vf hflip output.mp4
