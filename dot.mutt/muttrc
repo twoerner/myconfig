@@ -18,8 +18,8 @@ set imap_keepalive = 900
 set mbox_type = Maildir
 unset mark_old
 set imap_check_subscribed
-set sort=threads
-set sort_aux=reverse-last-date-received
+set sort = threads
+set sort_aux = reverse-last-date-received
 set mail_check = 120
 set menu_scroll
 set charset = utf-8
@@ -28,11 +28,11 @@ bind index \CG imap-fetch-mail
 folder-hook . "exec collapse-all"
 auto_view text/html
 alternative_order text/plain text/enriched text/html
-set date_format="%a %Y-%m-%d @ %I:%M:%S %p"
-set index_format="%4C  %Z  |%D|  %-30.30L  %?M?<#%03M>&(%4c)?  %s"
+set date_format = "%a %Y-%m-%d @ %I:%M:%S %p"
+set index_format = "%4C  %Z  |%D|  %-30.30L  %?M?<#%03M>&(%4c)?  %s"
 set pager_index_lines = 15
 unset resolve
-set editor="vim -c 'set spell spelllang=en_ca'"
+set editor = "vim -c 'set spell spelllang=en_ca'"
 
 # charset
 charset-hook ^us-ascii$ cp1252
@@ -48,7 +48,7 @@ bind index,pager <esc>j sidebar-next
 bind index,pager <esc>o sidebar-open
 
 # colour
-source  ~/.mutt/configlets/theme.mutt-colors-solarized-dark-256
+source ~/.mutt/configlets/theme.mutt-colors-solarized-dark-256
 
 # extra configs
 source ~/.mutt/configlets/patch.coloured-diffs
