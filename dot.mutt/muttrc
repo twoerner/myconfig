@@ -29,7 +29,7 @@ folder-hook . "exec collapse-all"
 auto_view text/html
 alternative_order text/plain text/enriched text/html
 set date_format="%a %Y-%m-%d @ %I:%M:%S %p"
-set index_format="%4C  %Z  |%D|  %-15.15L  %?M?<#%03M>&(%4c)?  %s"
+set index_format="%4C  %Z  |%D|  %-30.30L  %?M?<#%03M>&(%4c)?  %s"
 set pager_index_lines = 15
 unset resolve
 set editor="vim -c 'set spell spelllang=en_ca'"
