@@ -11,6 +11,7 @@ set message_cachedir = ~/.mutt/cache/bodies
 set certificate_file = ~/.mutt/certificates
 set mailcap_path = ~/.mutt/configlets/mailcap
 set tmpdir = ~/.mutt/tmp
+set record = ~/.mutt/sent
 
 # options
 set move = no
