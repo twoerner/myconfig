@@ -148,8 +148,12 @@ else
 	export PS1=$BUILD_PS1
 fi
 
+# required for the new python3-based OE
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+export LANGUAGE=en_US.UTF-8
+
 export EDITOR=vim
-export LC_ALL=C
 export PATH=/home/trevor/local/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
 export LD_LIBRARY_PATH=/home/trevor/local/lib:/home/trevor/local/lib64:/usr/local/lib:/usr/local/lib64
 export PKG_CONFIG_PATH=/home/trevor/local/lib/pkgconfig:/home/trevor/local/lib64/pkgconfig:/usr/local/lib/pkgconfig:/usr/local/lib64/pkgconfig
