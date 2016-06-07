@@ -1,0 +1,14 @@
+1. capture image on cell phone: VID.mp4
+
+2. strip audio
+	$ ffmpeg -i VID.mp4 -vcodec copy -an outvid.mp4
+
+3. (optionally) flip video (why is it flipped to begin with?)
+	$ ffmpeg -i outvid.mp4 -vf "transpose=2" outvid2.mp4
+	$ ffmpeg -i outvid2.mp4 -vf "transpose=1" outvid3.mp4
+
+4. (optionally) resize/scale down
+	$ ffmpeg -i outvid3.mp4 -vf scale=320:240 small.mp4
+
+5. convert to animated gif
+	$ convert -delay 0 -loop 0 small.mp4 small.gif
