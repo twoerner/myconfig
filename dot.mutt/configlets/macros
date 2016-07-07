@@ -1,0 +1,1 @@
+macro index (p "<enter-command>unset wait_key<enter><tag-prefix><pipe-message>mutt-savembox<enter><enter-command>set wait_key<enter>" "output git patches"

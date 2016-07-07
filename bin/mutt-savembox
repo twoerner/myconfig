@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# make sure ~/.mutt/tmp and ~/.mutt/patches exist before running this script
+
+TMPFILE=$(mktemp --tmpdir="$HOME/.mutt/tmp" patch.XXXXXX)
+cat > $TMPFILE
+MESSAGEID=$(cat $TMPFILE | formail -c -xMessage-ID: | sed -e 's/^[[:space:]]*//' | cut -d'<' -f2 | cut -d'@' -f1)
+INREPLYTO=$(cat $TMPFILE | formail -c -xIn-Reply-To: | head -n1 | sed -e 's/^[[:space:]]*//' | cut -d'<' -f2 | cut -d'@' -f1)
+PATCHNAME=$(cat $TMPFILE | formail -c -xSubject: | sed -e 's/^[[:space:]]*//' | tr "'" "." | sed -e '{ s@\[@@g; s@\]@@g; s@[*()" \t]@_@g; s@[/:]@-@g; s@^ \+@@; s@\.\.@.@g; s@-_@_@g; s@__@_@g; s@\.$@@; }' | cut -c 1-70).patch
+
+DIRNAME=$MESSAGEID
+if [ -n "$INREPLYTO" ]; then
+	DIRNAME=$INREPLYTO
+fi
+mkdir -p $HOME/.mutt/patches/$DIRNAME
+
+# NOTE: it's fine if both MESSAGEID and INREPLYTO are empty
+#       in that case the patch will simply go in $HOME/.mutt/patches
+mv $TMPFILE $HOME/.mutt/patches/$DIRNAME/$PATCHNAME
