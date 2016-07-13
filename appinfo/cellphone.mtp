@@ -1,0 +1,36 @@
+$ su
+
+after plugging phone in, unlock screen,
+swipe down, hit "USB Charging" for other options,
+hit "file transfer (MTP)"
+
+# simple-mtpfs --list-devices
+1: Google Inc (for LG Electronics/Samsung)Nexus 4/5/7/10 (MTP)
+
+this fails:
+# simple-mtpfs /mnt/tmp
+
+but this succeeds:
+# mkdir ~/mnt
+# simple-mtpfs ~/mnt
+
+# ls ~/mnt
+Alarms   DCIM      .HhTjqSRo6dybqDAV2ImUSREmnZU=  Music          Pictures  Ringtones
+Android  Download  Movies                         Notifications  Podcasts
+
+pics are in:
+~/mnt/DCIM/Camera
+
+to unmount
+# fusermount -u ~/mnt
+
+
+
+log file when camera in plugged into desktop:
+	Jul 13 11:14:23 openSUSE-i7 kernel: usb 2-4.4.1: new high-speed USB device number 19 using ehci-pci
+	Jul 13 11:14:23 openSUSE-i7 kernel: usb 2-4.4.1: New USB device found, idVendor=18d1, idProduct=4ee1
+	Jul 13 11:14:23 openSUSE-i7 kernel: usb 2-4.4.1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+	Jul 13 11:14:23 openSUSE-i7 kernel: usb 2-4.4.1: Product: Nexus 5X
+	Jul 13 11:14:23 openSUSE-i7 kernel: usb 2-4.4.1: Manufacturer: LGE
+	Jul 13 11:14:23 openSUSE-i7 kernel: usb 2-4.4.1: SerialNumber: 017b4cc19acbbaf3
+	Jul 13 11:14:24 openSUSE-i7 org.gtk.Private.GPhoto2VolumeMonitor[2595]: (process:2958): GVFS-GPhoto2-WARNING **: device (null) has no BUSNUM property, ignoring
