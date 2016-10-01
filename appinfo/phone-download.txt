@@ -1,0 +1,22 @@
+mtp - https://wiki.archlinux.org/index.php/MTP
+
+# simple-mtpfs --list-devices
+1: Google Inc (for LG Electronics/Samsung)Nexus 4/5/7/10 (MTP)
+
+************** I M P O R T A N T **************
+- now go to the phone
+- unlock the screen
+- swipe down from the top
+- USB charging options
+- set to "Transfer photos (PTP)
+************** I M P O R T A N T **************
+
+# mkdir -f ~/mnt
+# simple-mtpfs ~/mnt
+
+(
+copy photos/videos
+most likely in ~/mnt/DCIM/Camera
+)
+
+# fusermount -u ~/mnt
