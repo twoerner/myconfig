@@ -1,0 +1,3 @@
+how to take a screen shot with a browser dropdown dropped down:
+
+	$ sleep <n>; import -window root <output>.png
