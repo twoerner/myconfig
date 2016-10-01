@@ -1,0 +1,88 @@
+bluetooth dongle:
+	ASUS USB-BT400
+bluetooth device:
+	Bluedio T2+ wireless bluetooth headphones
+
+https://wiki.archlinux.org/index.php/Bluetooth_headset
+
+1. plug bluetooth USB dongle into computer
+
+	Sep 29 23:42:47 openSUSE-i7 kernel: usb 2-3.4: new full-speed USB device number 11 using ehci-pci
+	Sep 29 23:42:47 openSUSE-i7 kernel: usb 2-3.4: New USB device found, idVendor=0b05, idProduct=17cb
+	Sep 29 23:42:47 openSUSE-i7 kernel: usb 2-3.4: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+	Sep 29 23:42:47 openSUSE-i7 kernel: usb 2-3.4: Product: BCM20702A0
+	Sep 29 23:42:47 openSUSE-i7 kernel: usb 2-3.4: Manufacturer: Broadcom Corp
+	Sep 29 23:42:47 openSUSE-i7 kernel: usb 2-3.4: SerialNumber: 5CF37074D0FF
+	Sep 29 23:42:47 openSUSE-i7 mtp-probe[4388]: checking bus 2, device 11: "/sys/devices/pci0000:00/0000:00:1d.7/usb2/2-3/2-3.4"
+	Sep 29 23:42:47 openSUSE-i7 mtp-probe[4388]: bus: 2, device: 11 was not an MTP device
+	Sep 29 23:42:47 openSUSE-i7 kernel: Bluetooth: hci0: BCM: chip id 63
+	Sep 29 23:42:47 openSUSE-i7 kernel: Bluetooth: hci0: BCM20702A1 (001.002.014) build 0000
+	Sep 29 23:42:47 openSUSE-i7 kernel: bluetooth hci0: Direct firmware load for brcm/BCM20702A1-0b05-17cb.hcd failed with error -2
+	Sep 29 23:42:47 openSUSE-i7 kernel: Bluetooth: hci0: BCM: Patch brcm/BCM20702A1-0b05-17cb.hcd not found
+	Sep 29 23:42:47 openSUSE-i7 bluetoothd[893]: Failed to obtain handles for "Service Changed" characteristic
+	Sep 29 23:42:47 openSUSE-i7 bluetoothd[893]: Endpoint registered: sender=:1.36 path=/MediaEndpoint/A2DPSource
+	Sep 29 23:42:47 openSUSE-i7 bluetoothd[893]: Endpoint registered: sender=:1.36 path=/MediaEndpoint/A2DPSink
+	Sep 29 23:42:48 openSUSE-i7 systemd[1]: Starting Load/Save RF Kill Switch Status of rfkill3...
+	Sep 29 23:42:48 openSUSE-i7 systemd[1]: Starting Bluetooth.
+	Sep 29 23:42:48 openSUSE-i7 systemd[1]: Reached target Bluetooth.
+	Sep 29 23:42:48 openSUSE-i7 systemd[1]: Started Load/Save RF Kill Switch Status of rfkill3.
+
+2. press and hold headset power button until LED lights up blue
+
+3. on computer:
+	# bluetoothctl
+	[NEW] Controller 5C:F3:70:74:D0:FF openSUSE-i7.site [default]
+	[NEW] Device 16:06:15:37:0A:E5 Bluedio
+
+	[bt]# power on
+	[CHG] Controller 5C:F3:70:74:D0:FF Class: 0x000104
+	Changing power on succeeded
+	[CHG] Controller 5C:F3:70:74:D0:FF Powered: yes
+
+	[bt]# agent on
+	Agent registered
+
+	[bt]# default-agent
+	Default agent request successful
+
+	[bt]# scan on
+	Discovery started
+	[CHG] Controller 5C:F3:70:74:D0:FF Discovering: yes
+	[NEW] Device 16:06:15:37:0A:E5 Bluedio
+
+	[bt]# pair 16:06:15:37:0A:E5
+	Attempting to pair with 16:06:15:37:0A:E5
+	[CHG] Device 16:06:15:37:0A:E5 Connected: yes
+	[CHG] Device 16:06:15:37:0A:E5 Paired: yes
+	Pairing successful
+	[CHG] Device 16:06:15:37:0A:E5 Connected: no
+
+	[bt]# connect 16:06:15:37:0A:E5
+	Attempting to connect to 16:06:15:37:0A:E5
+	[CHG] Device 16:06:15:37:0A:E5 Connected: yes
+	Connection successful
+
+
+	=> now you need to leave this terminal open and leave bluetoothctl running
+
+4. in a separate terminal figure out the index of the bluetooth headset and
+   set its profile to a2dp_sink
+
+
+NOTES / TIPS:
+	- to reset/restart/re-init pulseaudio
+	$ pulseaudio -k
+
+	- to find out what devices pulseaudio knows and their indecies
+	$ pacmd list-sinks
+
+	- to set the device at index 2 as the default:
+	$ pacmd set-default-sink 2
+
+	- to set device at index 2 to a2dp (Advances Audio Distribution Profile)
+	$ pacmd set-card-profile 2 a2dp_sink
+
+	- when done listening, power-off the headphones
+	- when you want to use them again, power them on and you should only need
+	  to re-run the "connect" line above, the previous pairing, etc should all
+	  still be in effect
