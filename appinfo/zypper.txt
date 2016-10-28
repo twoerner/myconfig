@@ -1,0 +1,70 @@
+zypper cheat-sheet
+^^^^^^^^^^^^^^^^^^
+
+index:
+001) how to find out the packages contained in a "-t pattern" meta-package:
+
+
+------------------------------------------------------------------------------
+001) how to find out the packages contained in a "-t pattern" meta-package:
+	$ zypper info -t pattern devel_basis
+	Loading repository data...
+	Reading installed packages...
+
+
+	Information for pattern devel_basis:
+	------------------------------------
+	Repository: openSUSE-Leap-42.1-Update
+	Name: devel_basis
+	Version: 20150918-12.1
+	Arch: x86_64
+	Vendor: openSUSE
+	Installed: Yes
+	Visible to User: Yes
+	Summary: Base Development
+	Description:
+	  Minimal set of tools for compiling and linking applications.
+	Contents:
+
+	S | Name                          | Type    | Dependency
+	--+-------------------------------+---------+-----------
+	i | autoconf                      | package |
+	i | automake                      | package |
+	i | bin86                         | package |
+	i | binutils                      | package |
+	i | binutils-devel                | package |
+	i | bison                         | package |
+	i | cpp                           | package |
+	i | cvs                           | package |
+	i | e2fsprogs-devel               | package |
+	i | fdupes                        | package |
+	i | flex                          | package |
+	i | gcc                           | package |
+	i | gcc-c++                       | package |
+	i | gcc-info                      | package |
+	i | gdbm-devel                    | package |
+	i | gettext-tools                 | package |
+	  | gettext-tools-mini            | package |
+	i | glibc-devel                   | package |
+	i | glibc-info                    | package |
+	i | gmp-devel                     | package |
+	i | gperf                         | package |
+	i | libaio-devel                  | package |
+	i | libapparmor-devel             | package |
+	i | libdb-4_8-devel               | package |
+	i | libgcj-devel                  | package |
+	i | libosip2-devel                | package |
+	i | libstdc++-devel               | package |
+	i | libtool                       | package |
+	i | m4                            | package |
+	i | make                          | package |
+	i | makeinfo                      | package |
+	i | ncurses-devel                 | package |
+	i | openldap2-devel               | package |
+	i | pam-devel                     | package |
+	i | patch                         | package |
+	i | patterns-openSUSE-base        | package |
+	i | patterns-openSUSE-devel_basis | package |
+	i | pkg-config                    | package |
+	i | subversion                    | package |
+	i | zlib-devel                    | package |
