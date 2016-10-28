@@ -1,5 +1,5 @@
 copy contents of src directory to dst directory:
-	$ rsync -rtv src/ dst
+	$ rsync -rltv src/ dst
 	-- OR --
 	$ rsync -av src/ dst
 
