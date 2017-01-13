@@ -1,0 +1,13 @@
+i like using gqview to view images
+openSUSE stopped included it years ago
+the sources still compile:
+	http://gqview.sourceforge.net/view-down.html
+	gqview-2.1.5.tar.gz
+but you have to add '-lm' when compiling:
+	$ ./configure ...
+	$ make CFLAGS=-lm
+
+the gqview-2.1.5.tar.xz included in this repository
+already has the necessary adjustment, just simply:
+	$ ./configure ...
+	$ make -jX
