@@ -106,3 +106,20 @@ port forwarding
   |                                                                               |
   | $IPT -t nat -A POSTROUTING -o $IFACE_INET -j SNAT --to-source $ADDR_INET      |
   +-------------------------------------------------------------------------------+
+
+
+console blanking
+----------------
+ By default Linux will blank plain consoles after about 10 minutes:
+ 	# cat /sys/module/kernel/parameters/consoleblank
+ 	600
+ To disable:
+ 	# setterm -blank 0
+ check:
+ 	# cat /sys/module/kernel/parameters/consoleblank
+ 	0
+ 
+ Sometimes this doesn't work, maybe try:
+ 	# echo -ne "\033[9;0]" >> /etc/issue
+ or
+ 	# echo -ne "\033[9;0]" > /dev/console
