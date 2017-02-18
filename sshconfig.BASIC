@@ -8,3 +8,11 @@ Host yimage
     StrictHostKeyChecking no
     UserKnownHostsFile /dev/null
     User root
+
+# to vnc to work
+# or on the cmdline use:
+# $ ssh -L 5901:localhost:5901 work
+Host work
+	...
+	ServerAliveInterval 300
+	LocalForward 5901 localhost:5901
