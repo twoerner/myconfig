@@ -18,3 +18,9 @@ they need to be run though ffmpeg, but nothing needs to be done. just simply
 run them through ffmpeg and they come out fine:
 
 	$ ffmpeg -i <videofromphone>.mp4 out.mp4
+
+reduce the size of a video:
+	- make sure to calculate the -s values, it will distort if you get
+	  them wrong (mplayer will tell you when you play the video)
+
+	$ ffmpeg -i cat.mp4 -s 270x480 -b:v 512k catsm.mp4
