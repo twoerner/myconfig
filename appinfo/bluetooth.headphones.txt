@@ -86,3 +86,67 @@ NOTES / TIPS:
 	- when you want to use them again, power them on and you should only need
 	  to re-run the "connect" line above, the previous pairing, etc should all
 	  still be in effect
+	- or, better, when done, just put the headphones down, they sleep
+	  automatically and will come back when you start playing something again
+
+	- get volume:
+
+		$ pacmd list-sinks
+		...
+		    index: 2
+			name: <bluez_sink.16_06_15_37_0A_E5.a2dp_sink>
+			driver: <module-bluez5-device.c>
+			flags: HARDWARE DECIBEL_VOLUME LATENCY 
+			state: RUNNING
+			suspend cause: 
+			priority: 9030
+			volume: front-left: 60000 /  92% / -2.30 dB,   front-right: 60000 /  92% / -2.30 dB
+				balance 0.00
+			base volume: 65536 / 100% / 0.00 dB
+			volume steps: 65537
+			muted: no
+			current latency: 45.45 ms
+			max request: 4 KiB
+			max rewind: 0 KiB
+			monitor source: 3
+			sample spec: s16le 2ch 44100Hz
+			channel map: front-left,front-right
+				     Stereo
+			used by: 1
+			linked by: 1
+			fixed latency: 48.22 ms
+			card: 3 <bluez_card.16_06_15_37_0A_E5>
+			module: 25
+			properties:
+				bluetooth.protocol = "a2dp_sink"
+				device.description = "Bluedio"
+				device.string = "16:06:15:37:0A:E5"
+				device.api = "bluez"
+				device.class = "sound"
+				device.bus = "bluetooth"
+				device.form_factor = "headset"
+				bluez.path = "/org/bluez/hci0/dev_16_06_15_37_0A_E5"
+				bluez.class = "0x240404"
+				bluez.alias = "Bluedio"
+				device.icon_name = "audio-headset-bluetooth"
+				device.intended_roles = "phone"
+			ports:
+				headset-output: Headset (priority 0, latency offset 0 usec, available: yes)
+					properties:
+
+			active port: <headset-output>
+
+		- here we find the bluetooth (bluez) device: sink index 2
+		- we also see that the current volume (for both left and right) is 60000
+		  which is considered to be 92% of full volume, that means full volume
+		  is 65535
+
+	- set volume
+		- know which sink index (in the example here it's 2)
+
+			$ pactl set-sink-volume <index> <value|offset>
+
+		e.g.
+
+			$ pactl set-sink-volume 2 60000
+			$ pactl set-sink-volume 2 -5000
