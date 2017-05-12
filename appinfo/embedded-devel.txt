@@ -76,8 +76,22 @@ dhcp
 		--dhcp-range=enp6s0,192.168.142.130,192.168.142.140,255.255.255.0,192.168.142.255 \
 		--conf-file=""
 
+ Here is the cmdline for my multi-homed development machine. I have no idea
+ why, but the ipaddr of eth0 is 192.168.142.2 (why didn't i set it to .1?):
 
- 
+ 	# dnsmasq \
+ 		--strict-order \
+ 		--except-interface=lo \
+ 		--except-interface=eth1 \
+ 		--interface=eth0 \
+ 		--listen-address=192.168.142.2 \
+ 		--bind-interfaces \
+ 		-d \
+ 		-q \
+ 		--dhcp-range=eth0,192.168.142.130,192.168.142.50,255.255.255.0,192.168.142.255 \
+ 		--conf-file=""
+
+
 port forwarding
 ---------------
  To allow the devices on the enp6s0 interface to route through the wifi
