@@ -1,0 +1,27 @@
+due to the fact i'm running jenkins as a "normal" user (instead of as root)
+
+	in /etc/sysconfig/jenkins:
+
+		## Type:        string
+		## Default:     "jenkins"
+		## ServiceRestart: jenkins
+		#
+		# Unix user account that runs the Jenkins daemon
+		# Be careful when you change this, as you need to update
+		# permissions of $JENKINS_HOME and /var/log/jenkins.
+		#
+		#JENKINS_USER="jenkins"
+		JENKINS_USER="trevor"
+
+this means that after every jenkins update i need to:
+
+	# chown -R trevor:users /var/log/jenkins* /var/cache/jenkins/
+
+
+the flow for a jenkins update is:
+
+	# systemctl stop jenkins.service
+	# zypper update --download-in-advance
+	# chown -R trevor:users /var/log/jenkins* /var/cache/jenkins/
+	# systemctl daemon-reload
+	# systemctl start jenkins.service
