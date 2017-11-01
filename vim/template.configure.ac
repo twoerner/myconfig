@@ -156,11 +156,12 @@ AC_SUBST(SUBDIRS)
 dnl **********************************
 dnl output
 dnl **********************************
-AC_OUTPUT(Makefile
-libproj.pc
-Doxyfile
-cfg/Makefile
-lib/Makefile
-doc/Makefile
-src/Makefile
-tests/Makefile)
+AC_CONFIG_FILES([Makefile])
+AC_CONFIG_FILES([libproj.pc)]
+AC_CONFIG_FILES([Doxyfile)]
+AC_CONFIG_FILES([cfg/Makefile)]
+AC_CONFIG_FILES([lib/Makefile)]
+AC_CONFIG_FILES([doc/Makefile)]
+AC_CONFIG_FILES([src/Makefile)]
+AC_CONFIG_FILES([tests/Makefile])
+AC_OUTPUT
