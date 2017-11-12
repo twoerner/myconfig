@@ -1,0 +1,43 @@
+Many components of the python system on openSUSE are old and need updating.
+Instead of messing with the system's packages and messing everything up,
+python has this really neat 'virtualenv' thingy whereby you can perform
+updates as a regular user just in a small area without affecting the entire
+system, and then come back and keep using that virtual environment in the
+future.
+
+	$ mkdir some/where
+	$ cd some
+
+	$ virtualenv where
+	Using base prefix '/usr'
+	New python executable in where/bin/python3
+	Also creating executable in where/bin/python
+	Installing setuptools, pip, wheel...done.
+
+	$ cd where
+	$ . bin/activate
+
+	(where)$ pip3 install --upgrade pipA
+	Collecting pip
+	  Using cached pip-9.0.1-py2.py3-none-any.whl
+	Installing collected packages: pip
+	  Found existing installation: pip 7.1.2
+	    Uninstalling pip-7.1.2:
+	      Successfully uninstalled pip-7.1.2
+	Successfully installed pip-9.0.1
+
+	(where)$ pip3 install --upgrade setuptools
+	Collecting setuptools
+	  Using cached setuptools-36.7.1-py2.py3-none-any.whl
+	Installing collected packages: setuptools
+	  Found existing installation: setuptools 18.2
+	    Uninstalling setuptools-18.2:
+	      Successfully uninstalled setuptools-18.2
+	Successfully installed setuptools-36.7.1
+
+When you're done, simply close the shell
+
+When you want to return:
+
+$ cd some
+$ . where/bin/activate
