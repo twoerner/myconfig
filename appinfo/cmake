@@ -1,0 +1,5 @@
+the cmake equivalent of:
+	~/src/configure --prefix=/home/trevor/local/packages
+
+is:
+	cmake -DCMAKE_INSTALL_PREFIX:PATH=/home/trevor/local/packages ~/src
