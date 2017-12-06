@@ -17,7 +17,7 @@ future.
 	$ cd where
 	$ . bin/activate
 
-	(where)$ pip3 install --upgrade pipA
+	(where)$ pip3 install --upgrade pip
 	Collecting pip
 	  Using cached pip-9.0.1-py2.py3-none-any.whl
 	Installing collected packages: pip
