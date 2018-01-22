@@ -1,0 +1,35 @@
+- open/switch-to folder/mbox
+	c
+	?
+
+- tag email(s)
+	Esc-t	tag thread
+	t	tag a single email
+
+- to move a group of messages
+	<tag>
+	;s	(save)move to another mbox (the tagged messages)
+	Alt-o	refresh/(re-)open mbox
+
+- mark messages as read
+	<tag>
+	;Wn
+
+- toggle collapse thread
+	Esc-v
+
+- save email/patches (in index)
+	<tag>
+	(p
+
+	- sometimes this doesn't work
+	- so from either the index or the message itself
+		v
+		s
+
+- load gmail mbox archive
+	$ mutt -f <mbox file archive>
+
+- view attachment
+	- select email
+	v
