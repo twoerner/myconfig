@@ -23,6 +23,7 @@ $ sudo zypper -n install \
 	mpc-devel \
 	isl-devel \
 	gcc-c++
+	python-devel
 	... AND expat-devel (or whatever) (for gcc xml parsing)
 <enter password>
 
