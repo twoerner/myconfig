@@ -1,0 +1,42 @@
+- when building target code, newlib is selected by default
+  gcc-arm-embedded's newlib-nano is selected by:
+
+  	-specs=nano.specs
+
+- make sure you have at least 20GB available
+- e.g. VM: 20GB HDD, 2GB RAM, 3 CPUs
+
+$ sudo zypper -n install \
+	autoconf \
+	m4 \
+	automake \
+	libtool \
+	patch \
+	make \
+	makeinfo \
+	flex \
+	bison \
+	termcap \
+	ncurses-devel \
+	mpfr-devel \
+	gmp-devel \
+	mpc-devel \
+	isl-devel \
+	gcc-c++
+	... AND expat-devel (or whatever) (for gcc xml parsing)
+<enter password>
+
+
+download from
+	https://developer.arm.com/open-source/gnu-toolchain/gnu-rm/downloads
+	- OR -
+	https://launchpad.net/gcc-arm-embedded
+$ bzip2 -d < ~/devel/arm/Downloads/gcc-arm-none-eabi-7-2018-q2-update-src.tar.bz2 | tar xf -
+$ cd gcc-arm-none-eabi-7-2018-q2-update/src
+$ find . -name "*tar*" -print | xargs -I% tar -xvf %
+$ cd ..
+#$ ./install-sources.sh --skip_steps=mingw32
+#$ ./build-prerequisites.sh --skip_steps=mingw32
+$ ./build-toolchain.sh --skip_steps=manual,mingw32
+
+the results are in the "install-native" folder
