@@ -11,6 +11,7 @@
 
 [diff]
 	compactionHeuristic = true
+	renames = true
 
 [pager]
 	log = diff-highlight | less
@@ -63,6 +64,8 @@
 [sendemail.fsl]
 	to = meta-freescale@yoctoproject.org
 	cccmd = get_oe_maintainer.pl
+[sendemail.uboot]
+	to = "U-Boot Mailing List" <u-boot@lists.denx.de>
 
 [push]
 	default = current
@@ -76,3 +79,4 @@
 	# the 'lastcommoncommit' alias finds the last common commit between a branch ($1) and its branching-off point ($2)
 	firstcommit = !bash -c 'git rev-list ${2:-HEAD}...${1:-master} | tail -1' -
 	lastcommoncommit = !bash -c 'diff -u <(git rev-list --first-parent "${1:-master}") <(git rev-list --first-parent "${2:-HEAD}") | sed -ne \"s/^ //p\" | head -1' -
+	brancha = !bash -c 'git branch -a --sort=committerdate'
