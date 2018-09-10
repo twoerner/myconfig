@@ -56,7 +56,7 @@ XTerm*SimpleMenu.foreground:	black
 ! the contents of the screen when they are exited to what they were before
 ! they were started.  When it is off, the contents of vi will remain on the
 ! screen after the program is quit.
-XTerm.VT100.titeInhibit:  true
+XTerm*titeInhibit:  true
 
 ! Uncomment this to turn off color mode in your xterms
 XTerm.VT100*dynamicColors:  on

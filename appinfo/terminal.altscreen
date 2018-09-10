@@ -1,0 +1,45 @@
+vim: tw=78
+
+Getting Rid of That Annoying Alt-Screen Garbage
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+One of the main reasons why I've stuck with xterm for so long and not moved
+to, say, xfce4-terminal (or gnome-terminal under Ubuntu) is that I figured out
+a long time ago how to disable the alt-screen in xterm, but other terminals
+ignore .Xdefaults and don't have any similar functionality.
+
++--  ~/.Xdefaults  --------------------------+
+| ...                                        |
+| XTerm*titeInhibit: true                    |
+| ...                                        |
++--------------------------------------------+
+
+One way to trick them is to get them to use a TERM type that doesn't support
+alt-screen functionality. Or, if you really like the TERM you're using, edit
+it to remove alt-screen.
+
+$ echo $TERM
+xterm-256color
+
+- de-compile the terminal information for your term and store it in a file:
+$ infocmp > ~/tmp/xterm-color256.txt
+
+- edit ~/tmp/xterm-color256.txt and remove the 'rmcup' and 'smcup' lines
+
+- recompile this new terminfo, storing it in ~/.terminfo
+$ tic ~/tmp/xterm-color256.txt
+$ tree ~/.terminfo
+└── x
+    └── xterm-256color
+
+
+
+
+NOTES:
+^^^^^
+- infocmp will automatically decompile the current $TERM, unless you tell it
+  otherwise
+- tic will automatically store the results in ~/.terminfo, creating it if
+  necessary, unless you tell it otherwise
+- there's no need to restart your terminals, apparently the changes take
+  effect immediately, even in all currently running terminals
