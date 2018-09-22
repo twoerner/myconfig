@@ -1,0 +1,6 @@
+target extended-remote :3333
+layout asm
+layout regs
+winheight regs 21
+winheight asm 70
+focus cmd

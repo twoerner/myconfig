@@ -1,0 +1,2 @@
+debugging u-boot on lpc32xx with openocd:
+$ arm-oe-linux-gnueabi-gdb -x ~/Data/myconfig.git/gdbinit/lpc32xx --symbols=u-boot.map u-boot
