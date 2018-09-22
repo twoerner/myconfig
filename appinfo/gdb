@@ -1,2 +1,3 @@
-debugging u-boot on lpc32xx with openocd:
+debugging u-boot on lpc32xx with openocd (two terminals):
+$ openocd -f interface/ftdi/olimex-arm-usb-ocd-h.cfg -f board/phytec_lpc3250.cfg
 $ arm-oe-linux-gnueabi-gdb -x ~/Data/myconfig.git/gdbinit/lpc32xx --symbols=u-boot.map u-boot
