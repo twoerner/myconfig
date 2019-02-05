@@ -3,6 +3,7 @@ zypper cheat-sheet
 
 index:
 001) how to find out the packages contained in a "-t pattern" meta-package:
+002) can't download
 
 
 ------------------------------------------------------------------------------
@@ -68,3 +69,28 @@ index:
 	i | pkg-config                    | package |
 	i | subversion                    | package |
 	i | zlib-devel                    | package |
+
+
+------------------------------------------------------------------------------
+002) can't download
+
+    problem:
+	# zypper update --download-only
+	The following package is going to be upgraded:
+          jenkins
+	1 package to upgrade.
+	Overall download size: 73.5 MiB. Already cached: 0 B. Download only.
+	Continue? [y/n/...? shows all options] (y): 
+	Retrieving package jenkins-2.163-1.2.noarch                                                                                                                               (1/1),  73.5 MiB ( 73.7 MiB unpacked)
+	Retrieving: jenkins-2.163-1.2.noarch.rpm ...................................[not found]
+	File './jenkins-2.163-1.2.noarch.rpm' not found on medium 'https://pkg.jenkins.io/opensuse'
+	Abort, retry, ignore? [a/r/i/...? shows all options] (a): 
+	Abort, retry, ignore? [a/r/i/...? shows all options] (a): 
+	Problem occurred during or after installation or removal of packages:
+	Installation aborted by user
+	Please see the above error message for a hint.
+
+    fix:
+	# zypper clean
+	# zypper update --download-only
+	... (works)
