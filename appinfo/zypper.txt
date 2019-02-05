@@ -94,3 +94,7 @@ index:
 	# zypper clean
 	# zypper update --download-only
 	... (works)
+
+    explanation:
+    	probably in the cache with the wrong digest
+    	maybe the package was changed/re-uploaded since i last read its repo
