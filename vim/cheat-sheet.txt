@@ -94,6 +94,9 @@ ctags
 	Ctrl-N		type part of an identifier, hit Ctrl-N (without having
 			to switch to cmd mode) and vim offers a list of possible
 			completions (:help complete-functions)
+	:ts		gives list of tags (if more than one)
+	:tn		next tag in list (if more than one)
+	:tp		prev tag in list (if more than one)
 
 The Opposite of ctags
 	Ctags are great if you are on a function and want to see its definition.
