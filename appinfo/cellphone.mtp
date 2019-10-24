@@ -1,5 +1,12 @@
 $ su
 
+I'm pretty sure the USB-C adapter has to be plugged in a specific way
+for file transfers to work. Plugged in one way it only does recharging,
+plugged in the other way, it'll do both recharging and file transfers.
+I find this confusing because I thought one of the main goals of USB-C was
+to get rid of the keyed connector. In any case, I'm pretty sure the USB-C
+cable has to be plugged in a specific way for xfer to work.
+
 after plugging phone in, unlock screen,
 swipe down, hit "USB Charging" for other options,
 hit "file transfer (MTP)"
