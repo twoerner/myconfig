@@ -1,6 +1,7 @@
+set history save on
 target extended-remote :3333
 layout asm
 layout regs
 winheight regs 21
-winheight asm 70
+winheight asm 60
 focus cmd
