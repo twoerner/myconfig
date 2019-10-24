@@ -13,7 +13,6 @@ fi
 
 while [ $# -ge 1 ]; do
 	BASENAME=`basename "$1" .aiff`
-	#echo "file: $BASENAME"
 	OUTNAME="$BASENAME".ogg
 	ffmpeg -i "$1" -vn -acodec libvorbis "$OUTNAME"
 	shift
