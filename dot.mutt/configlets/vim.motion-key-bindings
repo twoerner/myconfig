@@ -17,6 +17,8 @@ bind index G last-entry
 
 bind index \Cd half-down
 bind index \Cu half-up
+bind index \Cf next-page
+bind index \Cb previous-page
 
 bind index l collapse-thread
 bind index z collapse-all
