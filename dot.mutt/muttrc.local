@@ -1,0 +1,45 @@
+source ~/.mutt/emailalias.list
+
+# bindings
+bind index \CG imap-fetch-mail
+
+# paths
+set header_cache = ~/.mutt/cache/headers
+set message_cachedir = ~/.mutt/cache/bodies
+set certificate_file = ~/.mutt/certificates
+set mailcap_path = ~/.mutt/configlets/mailcap
+set tmpdir = ~/.mutt/tmp
+set record = ~/.mutt/sent
+
+# options
+set move = no
+set mbox_type = Maildir
+unset mark_old
+set imap_check_subscribed
+set sort = threads
+set sort_aux = reverse-last-date-received
+set menu_scroll
+set charset = utf-8
+set send_charset = utf-8
+folder-hook . "exec collapse-all"
+auto_view text/html
+alternative_order text/plain text/enriched text/html
+set date_format = "%Y-%m-%d@%H:%M:%S"
+set index_format = "%4C %Z |%D| %-15.15L  %?M?<#%03M>&(%4c)?  %s"
+set pager_index_lines = 15
+unset resolve
+set pipe_split = yes
+set editor = "vim -c 'set spell spelllang=en_ca'"
+
+# charset
+charset-hook ^us-ascii$ cp1252
+charset-hook ^iso-8859-1$ cp1252
+set assumed_charset="cp1252"
+
+# colour
+source ~/.mutt/configlets/theme.mutt-colors-solarized-dark-256
+
+# extra configs
+source ~/.mutt/configlets/patch.coloured-diffs
+source ~/.mutt/configlets/vim.motion-key-bindings
+source ~/.mutt/configlets/macros

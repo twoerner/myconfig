@@ -1,0 +1,2 @@
+#!/bin/bash
+mutt -F ~/.mutt/muttrc.local -f .
