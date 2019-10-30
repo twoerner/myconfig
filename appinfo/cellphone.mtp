@@ -1,3 +1,47 @@
+vim: nowrap tw=78
+
+--  new phone (nokia)  ------------------------------------------------------
+plug phone in, check syslog for messages
+	Oct 30 14:40:56 linux-uys3 kernel: usb 3-14.1.4: new high-speed USB device number 23 using xhci_hcd
+	Oct 30 14:40:56 linux-uys3 kernel: usb 3-14.1.4: New USB device found, idVendor=2e04, idProduct=c025
+	Oct 30 14:40:56 linux-uys3 kernel: usb 3-14.1.4: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+	Oct 30 14:40:56 linux-uys3 kernel: usb 3-14.1.4: Product: Android
+	Oct 30 14:40:56 linux-uys3 kernel: usb 3-14.1.4: Manufacturer: Android
+	Oct 30 14:40:56 linux-uys3 kernel: usb 3-14.1.4: SerialNumber: E2MBD90104008506
+	Oct 30 14:40:56 linux-uys3 kernel: usb-storage 3-14.1.4:1.1: USB Mass Storage device detected
+	Oct 30 14:40:56 linux-uys3 kernel: scsi host14: usb-storage 3-14.1.4:1.1
+	Oct 30 14:40:56 linux-uys3 gvfs-gphoto2-vo[3489]: device (null) has no BUSNUM property, ignoring
+	Oct 30 14:40:56 linux-uys3 gvfs-gphoto2-vo[3489]: device (null) has no BUSNUM property, ignoring
+	Oct 30 14:40:57 linux-uys3 kernel: scsi 14:0:0:0: CD-ROM            Linux    File-CD Gadget   0318 PQ: 0 ANSI: 2
+	Oct 30 14:40:57 linux-uys3 kernel: sr 14:0:0:0: Power-on or device reset occurred
+	Oct 30 14:40:57 linux-uys3 kernel: sr 14:0:0:0: [sr1] scsi-1 drive
+	Oct 30 14:40:57 linux-uys3 kernel: sr 14:0:0:0: Attached scsi CD-ROM sr1
+	Oct 30 14:40:57 linux-uys3 kernel: sr 14:0:0:0: Attached scsi generic sg10 type 5
+
+on phone select:
+	-> USB Preferences
+		-> File transfer
+
+$ su
+
+# simple-mtpfs --list-devices
+1: Nokia6
+
+# simple-mtpfs --device 1 ~/mnt
+(check status of "mount" command)
+# mount
+	...
+	simple-mtpfs on /root/mnt type fuse.simple-mtpfs (rw,nosuid,nodev,relatime,user_id=0,group_id=0)
+
+pics are in:
+	~/mnt/SD\ card/DCIM/Camera/
+	~/mnt/Internal\ shared\ storage/DCIM/Camera/
+
+umount:
+# fusermount -u ~/mnt
+
+
+--  old phone (nexus)  ------------------------------------------------------
 $ su
 
 I'm pretty sure the USB-C adapter has to be plugged in a specific way
