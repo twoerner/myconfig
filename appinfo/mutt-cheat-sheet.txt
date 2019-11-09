@@ -18,8 +18,12 @@
 	<tag>
 	;Wn
 
-- toggle collapse thread
+- toggle collapse/expand thread
 	Esc-v
+
+- mark all messages in thread as read (without tagging)
+	<expand thread>
+	Ctrl-r
 
 - save email/patches (in index)
 	<tag>
