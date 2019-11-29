@@ -21,6 +21,9 @@
 - toggle collapse/expand thread
 	Esc-v
 
+- toggle collapse/expand all threads
+	Esc-V
+
 - mark all messages in thread as read (without tagging)
 	<expand thread>
 	Ctrl-r
