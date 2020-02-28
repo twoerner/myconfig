@@ -2,3 +2,9 @@ $ wget -rkpH -D x.org --continue -l2 http://www.x.org/wiki/Events/XDC2014/Progra
 
 -D: comma-separated list of sites of the only sites from which to recurse
 -l: the level or depth to recurse
+
+
+- to just download the files at a location (and everything below)
+  to the current location
+- no directory structure
+$ wget -rkpNcH --cut-dirs 5 --reject "index.html*" --no-host-directories https://mirror.linux.org.au/pub/linux.conf.au/2020/room_7/Monday/
