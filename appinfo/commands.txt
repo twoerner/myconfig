@@ -1,0 +1,16 @@
+vim: tw=78 sts=4 sw=4 ts=4 expandtab
+
+startup things:
+    - blueberry
+    - pavucontrol
+
+A Curated List of Nifty Commands to do Neat Things!
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+$ find elc-elce/2018-elce -name '*[(mkv|mp4|webm)]' -print | xargs -I '{}' cp '{}' ALTelcelce/2018-elce/videos/
+    - look in elc-elce/2018-elce (and subdirs) for any file ending with any of
+      mkv, mp4, or webm and copy it to ALTelcelce/2018-elc/videos
+
+$ ls -r | xargs -I{} mplayer "{}"
+    - play a set of songs in the current directory in reverse order
+    - the song titles can include spaces
