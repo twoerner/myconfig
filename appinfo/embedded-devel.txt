@@ -137,3 +137,37 @@ console blanking
  	# echo -ne "\033[9;0]" >> /etc/issue
  or
  	# echo -ne "\033[9;0]" > /dev/console
+
+xserver blanking
+----------------
+# export DISPLAY=:0
+
+(order is important)
+# xset s noblank
+# xset s noexpose
+# xset s 0 0
+# xset s off
+# xset dpms 0 0 0
+
+(check with)
+# xset q
+Keyboard Control:
+  auto repeat:  on    key click percent:  0    LED mask:  00000000
+  auto repeating keys:  00ffffffdffffbbf
+                        fadfffefffedffff
+                        9fffffffffffffff
+                        fff7ffffffffffff
+  bell percent:  50    bell pitch:  400    bell duration:  100
+Pointer Control:
+  acceleration:  2/1    threshold:  4
+Screen Saver:
+  prefer blanking:  no    allow exposures:  no
+  timeout:  0    cycle:  0
+Colors:
+  default colormap:  0x20    BlackPixel:  0x0    WhitePixel:  0xffffff
+Font Path:
+  built-ins
+DPMS (Energy Star):
+  Standby: 0    Suspend: 0    Off: 0
+  DPMS is Enabled
+  Monitor is On
