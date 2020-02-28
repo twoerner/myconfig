@@ -12,8 +12,9 @@ if [ $# -lt 1 ]; then
 fi
 
 while [ $# -ge 1 ]; do
-	BASENAME=`basename "$1" .aiff`
-	OUTNAME="$BASENAME".ogg
-	ffmpeg -i "$1" -vn -acodec libvorbis "$OUTNAME"
+	# replace the following two lines with the ${i%%...} thing
+	#BASENAME=`basename "$1" .aiff`
+	#OUTNAME="$BASENAME".ogg
+	ffmpeg -i "$1" -vn -acodec libvorbis "${1%aiff}ogg"
 	shift
 done
