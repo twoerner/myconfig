@@ -197,9 +197,10 @@ if has("autocmd")
 	endfun
 
 	fun NewFilePython()
-		0 put='#! /usr/bin/env python'
+		0 put='#! /usr/bin/env python3'
 		put='## ' . CpyRght()
-		3
+		put='## vim: sw=4 ts=4 sts=4 expandtab'
+		4
 	endfun
 
 	fun NewFileSGML()
