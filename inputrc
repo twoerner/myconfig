@@ -8,4 +8,5 @@
 
 $if bash
 set editing-mode vi
+set mark-symlinked-directories on
 $endif
