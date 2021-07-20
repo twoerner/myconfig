@@ -1,0 +1,28 @@
+There are lots of python modules/packages that i would like to install, but i
+don't want to mess up the package manager of my OpenSUSE. In theory I could
+just become root and do lots of "pip3 install …" but that would get messy over
+time.
+
+Ideally I'd like to do installs as a regular user to my "local" area.
+
+I already have a $HOME/local/packages where I install most things. I then use
+"stow" to put things into $HOME/local or remove them.
+
+pip3 does have a --user option that removes the need to be the root user.
+Instead, everything will be placed in $HOME/.local So, to install things as a
+non-root user into my own location, try the following:
+
+	$ mkdir -p ~/local/packages/pdbpp
+	$ pip3 install pdbpp \
+		--install-option="--prefix=~/local/packages/pdbpp" \
+		--ignore-installed \
+		--verbose
+	$ cd ~/local/packages
+	$ stow -vvv pdbpp
+
+--ignore-installed is a good idea as it ignores anything in ~/.local
+
+In any case make sure your .bashrc contains:
+
+	export PYTHONPATH=$HOME/local/lib/python3.6/site-packages
+	export PATH=$HOME/local/bin
