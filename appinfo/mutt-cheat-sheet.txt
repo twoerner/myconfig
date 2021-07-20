@@ -43,3 +43,17 @@
 - view attachment
 	- select email
 	v
+
+- moving around using the folder list on the left
+	i've patched my mutt so that a folder list appears on the left side
+	of my window. the current folder will be highlighted with a yellow
+	bar. to open a new folder, move the highlight up or down using:
+
+		Alt-j (down)
+		Alt-k (up)
+
+	when the highlight is on the folder you want to open:
+
+		Alt-o (open)
+
+	you can use Alt-o at any time to refresh the current folder
