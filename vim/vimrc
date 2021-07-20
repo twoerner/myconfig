@@ -4,6 +4,10 @@ set wildmenu
 runtime bundle/pathogen/autoload/pathogen.vim
 call pathogen#infect()
 
+" persistent undo
+set undodir=~/.vim/undodir
+set undofile
+
 " colour
 set background=dark
 syntax on
