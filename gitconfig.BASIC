@@ -53,7 +53,7 @@
 [sendmail.libopencm3]
 	to = libopencm3-devel@lists.sourceforge.net
 [sendemail.yocto]
-	to = yocto@yoctoproject.org
+	to = yocto@lists.yoctoproject.org
 	cccmd = get_oe_maintainer.pl
 [sendemail.oecore]
 	to = openembedded-core@lists.openembedded.org
@@ -62,7 +62,7 @@
 	to = openembedded-devel@lists.openembedded.org
 	cccmd = get_oe_maintainer.pl
 [sendemail.fsl]
-	to = meta-freescale@yoctoproject.org
+	to = meta-freescale@lists.yoctoproject.org
 	cccmd = get_oe_maintainer.pl
 [sendemail.uboot]
 	to = "U-Boot Mailing List" <u-boot@lists.denx.de>
