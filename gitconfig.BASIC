@@ -50,8 +50,8 @@
 	to = xorg-devel@lists.x.org
 [sendemail.linux]
 	to = linux-kernel@vger.kernel.org
-	cccmd = ~/local/bin/gitcc.sh
-	tocmd = ~/local/bin/gitto.sh
+	tocmd = ~/local/bin/linux-to.sh
+	cccmd = ~/local/bin/linux-cc.sh
 [sendmail.libopencm3]
 	to = libopencm3-devel@lists.sourceforge.net
 [sendemail.yocto]
