@@ -42,11 +42,12 @@
 	#smtpuser = <email>
 	smtpencryption = ssl
 	confirm = always
+	chainreplyto = false
+	thread = false
 	suppresscc = self
 
 [sendemail.xorg]
 	to = xorg-devel@lists.x.org
-	chainreplyto = true
 [sendemail.linux]
 	to = linux-kernel@vger.kernel.org
 	cccmd = scripts/get_maintainer.pl
