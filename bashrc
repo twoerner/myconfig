@@ -6,6 +6,7 @@ dircount() {
 		echo "[dirs:`expr $_dircnt - 1`]"
 	fi
 }
+_dircount="\$(dircount)"
 
 jobscount() {
 	local _jcnt=`jobs | wc -l`
@@ -13,6 +14,7 @@ jobscount() {
 		echo "{jobs:$_jcnt}"
 	fi
 }
+_jobscount="\$(jobscount)"
 
 hex2string() {
 	_i=0
@@ -97,6 +99,7 @@ last_cmd_duration() {
 		echo "{$_SECONDS}"
 	fi
 }
+_last_cmd_duration="\$(last_cmd_duration)"
 
 # prompts (borrowed from OpenSuSE's /etc/bash.bashrc)
 test -z "$UID" && readonly UID=`id -ur 2> /dev/null`
@@ -140,12 +143,44 @@ elif [ $(tput colors) -eq 8 ]; then
 #	_blue="$(tput setaf 4 2> /dev/null)"
 #	_magenta="$(tput setaf 5 2> /dev/null)"
 fi
-BUILD_PS1="$_term_resize$_title"'\[$_regdelim\][\[$_machine\]\u@\h \W\[$_git\]$(__git_ps1)\[$_regdelim\]]\[$_white\]$(dircount)$(jobscount)\[$_regdelim\](\D{%b%d %I:%M:%S %P})$(last_cmd_duration)\$\[$_noattr\] '
-BUILD_PR1="$_term_resize$_title"'\[$_rootdelim\][\[$_machine\]\u@\h \W\[$_git\]$(__git_ps1)\[$_rootdelim\]]\[$_white\]$(dircount)$(jobscount)\[$_rootdelim\](\D{%b%d %I:%M:%S %P})$(last_cmd_duration)\$\[$_noattr\] '
+PS1_ELEMENTS=(
+	"$_term_resize"
+	"$_title"
+	"\[$_regdelim\]["
+	"\[$_machine\]"
+	"\u@\h \W"
+	"\[$_git\]\$(__git_ps1)"
+	"\[$_delim\]]"
+	"\[$_white\]"
+	"$_dircount"
+	"$_jobscount"
+	"\[$_regdelim\]"
+	"(\D{%b%d %I:%M:%S %P})"
+	"$_last_cmd_duration"
+	"\$\[$_noattr\]"
+	" "
+)
+PR1_ELEMENTS=(
+	"$_term_resize"
+	"$_title"
+	"\[$_rootdelim\]["
+	"\[$_machine\]"
+	"\u@\h \W\"
+	"[$_git\]\$(__git_ps1)"
+	"\[$_rootdelim\]]"
+	"\[$_white\]"
+	"$_dircount"
+	"$_jobscount"
+	"\[$_rootdelim\]"
+	"(\D{%b%d %I:%M:%S %P})"
+	"$_last_cmd_duration"
+	"\$\[$_noattr\]"
+	" "
+)
 if [ `id -ur` = 0 ]; then
-	export PS1=$BUILD_PR1
+	export PS1=$(IFS=; echo "${PR1_ELEMENTS[*]}")
 else
-	export PS1=$BUILD_PS1
+	export PS1=$(IFS=; echo "${PS1_ELEMENTS[*]}")
 fi
 
 # required for the new python3-based OE
