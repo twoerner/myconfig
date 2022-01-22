@@ -122,8 +122,11 @@ if [ $(tput colors) -eq 256 ]; then
 	if [ -r $HOME/Data/myconfig/dir_colours.xterm-256colour ]; then
 		eval `dircolors -b $HOME/Data/myconfig/dir_colours.xterm-256colour`
 	fi
-	_regdelim="$(tput setaf 82 2> /dev/null)"
-	_rootdelim="$(tput setaf 167 2> /dev/null)"
+	if [ `id -ur` = 0 ]; then
+		_delim="$(tput setaf 167 2> /dev/null)"
+	else
+		_delim="$(tput setaf 82 2> /dev/null)"
+	fi
 	_machine="$(tput setaf 227 2> /dev/null)"
 	_white="$(tput setaf 250 2> /dev/null)"
 	_git="$(tput setaf 14 2> /dev/null)"
@@ -131,8 +134,11 @@ elif [ $(tput colors) -eq 8 ]; then
 	if [ -r $HOME/Data/myconfig/dir_colours ]; then
 		eval `dircolors -b $HOME/Data/myconfig/dir_colours`
 	fi
-	_regdelim="$(tput setaf 2 2> /dev/null)"
-	_rootdelim="$(tput setaf 1 2> /dev/null)"
+	if [ `id -ur` = 0 ]; then
+		_delim="$(tput setaf 1 2> /dev/null)"
+	else
+		_delim="$(tput setaf 2 2> /dev/null)"
+	fi
 	_machine="$(tput setaf 3 2> /dev/null)"
 	_white="$(tput setaf 7 2> /dev/null)"
 	_git="$(tput setaf 6 2> /dev/null)"
@@ -146,7 +152,7 @@ fi
 PS1_ELEMENTS=(
 	"$_term_resize"
 	"$_title"
-	"\[$_regdelim\]["
+	"\[$_delim\]["
 	"\[$_machine\]"
 	"\u@\h \W"
 	"\[$_git\]\$(__git_ps1)"
@@ -154,34 +160,13 @@ PS1_ELEMENTS=(
 	"\[$_white\]"
 	"$_dircount"
 	"$_jobscount"
-	"\[$_regdelim\]"
+	"\[$_delim\]"
 	"(\D{%b%d %I:%M:%S %P})"
 	"$_last_cmd_duration"
 	"\$\[$_noattr\]"
 	" "
 )
-PR1_ELEMENTS=(
-	"$_term_resize"
-	"$_title"
-	"\[$_rootdelim\]["
-	"\[$_machine\]"
-	"\u@\h \W\"
-	"[$_git\]\$(__git_ps1)"
-	"\[$_rootdelim\]]"
-	"\[$_white\]"
-	"$_dircount"
-	"$_jobscount"
-	"\[$_rootdelim\]"
-	"(\D{%b%d %I:%M:%S %P})"
-	"$_last_cmd_duration"
-	"\$\[$_noattr\]"
-	" "
-)
-if [ `id -ur` = 0 ]; then
-	export PS1=$(IFS=; echo "${PR1_ELEMENTS[*]}")
-else
-	export PS1=$(IFS=; echo "${PS1_ELEMENTS[*]}")
-fi
+export PS1=$(IFS=; echo "${PS1_ELEMENTS[*]}")
 
 # required for the new python3-based OE
 export LC_ALL=C.UTF-8
