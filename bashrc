@@ -104,7 +104,7 @@ _last_cmd_duration="\$(last_cmd_duration)"
 # prompts (borrowed from OpenSuSE's /etc/bash.bashrc)
 test -z "$UID" && readonly UID=`id -ur 2> /dev/null`
 title () {
-	local _term="$1" _pwd _len _width
+	local _term="$1" _pwd _len _width _sdate
 	test -n "$_term" || return
 	test "${_term#tty}" = $_term && _term=pts/$_term
 	test -O /dev/$_term || return
@@ -114,7 +114,8 @@ title () {
 	_pwd="$(pwd)"
 	_len=$((${#_pwd}-${_width}))
 	test ${#_pwd} -le ${_width} || _pwd="...${_pwd#$(printf "%.*s" $_len "$_pwd")}"
-	printf "\e]2;%s\007\e]1;\007" "$_pwd" > /dev/$_term
+	_sdate=$(date "+%b%d %I:%M:%S %P")
+	printf "\e]2;%s\007\e]1;\007" "$_sdate $_pwd" > /dev/$_term
 }
 _title="\$(title \l)"
 _noattr="$(tput sgr0 2> /dev/null)"
@@ -149,12 +150,43 @@ elif [ $(tput colors) -eq 8 ]; then
 #	_blue="$(tput setaf 4 2> /dev/null)"
 #	_magenta="$(tput setaf 5 2> /dev/null)"
 fi
+
+move_cursor_to_start_of_ps1() {
+	local _rows=$(history 1 | wc -l) _vmvmt _cmd _cmdlen _plen _tlen _lines
+	if [ "$_rows" -gt 1 ]; then
+		_vmvmt=$_rows+1
+	else
+		_cmd=$(history 1 | sed 's/^\s*[0-9]*\s*//')
+		_cmdlen=${#_cmd}
+		_plen=${#PS1}
+		_tlen=$_cmdlen+$_plen
+		_lines=$_tlen/${COLUMNS}+1
+		_vmvmt=$_lines+1
+	fi
+	tput cuu $_vmvmt
+}
+_move_curpos="\$(move_cursor_to_start_of_ps1)"
+_save_curpos="\e[s"
+_restore_curpos="\e[u"
+PS0_ELEMENTS=(
+	"$_title"
+	"$_save_curpos"
+	"$_move_curpos"
+	"\[$_delim\]["
+	"\[$_machine\]"
+	"\D{%b%d %I:%M:%S %P} "
+	"$_restore_curpos"
+	"\[$_noattr\]"
+)
+export PS0=$(IFS=; echo "${PS0_ELEMENTS[*]}")
+
 PS1_ELEMENTS=(
 	"$_term_resize"
 	"$_title"
 	"\[$_delim\]["
 	"\[$_machine\]"
-	"\u@\h \W"
+	"----- --:--:-- -- "
+	"\W"
 	"\[$_git\]\$(__git_ps1)"
 	"\[$_delim\]]"
 	"\[$_white\]"
