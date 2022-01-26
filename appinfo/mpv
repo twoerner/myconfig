@@ -1,0 +1,9 @@
+	Failed to initialize a decoder for codec 'h264'
+
+i installed a bunch of stuff before it started working
+but it's possible the only thing i needed was the last thing i installed
+
+	# zypper install gstreamer-plugins-libav gstreamer-plugins-ugly
+
+it then asked if i wanted to switch a whole bunch of packages
+from openSUSE to packman, i accepted, the mpv worked
