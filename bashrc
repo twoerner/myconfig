@@ -151,19 +151,22 @@ elif [ $(tput colors) -eq 8 ]; then
 #	_magenta="$(tput setaf 5 2> /dev/null)"
 fi
 
+# this function checks to see how long the prompt+cmd is
+# in order to figure out if it needs to go up a couple lines
+# i.e. if your command spans multiple lines, it tries to go
+# up the correct number before printing the date/time stamp
+# *NOTE* this function requires perl
+# from https://superuser.com/questions/1497179/how-to-get-the-length-of-a-prompt
 move_cursor_to_start_of_ps1() {
-	local _rows=$(history 1 | wc -l) _vmvmt _cmd _cmdlen _plen _tlen _lines
-	if [ "$_rows" -gt 1 ]; then
-		_vmvmt=$_rows+1
-	else
-		_cmd=$(history 1 | sed 's/^\s*[0-9]*\s*//')
-		_cmdlen=${#_cmd}
-		_plen=${#PS1}
-		_tlen=$_cmdlen+$_plen
-		_lines=$_tlen/${COLUMNS}+1
-		_vmvmt=$_lines+1
-	fi
-	tput cuu $_vmvmt
+        local _cmd _cmdlen _ps _plen _tlen _lines
+        _cmd=$(history 1 | sed 's/^\s*[0-9]*\s*//')
+        _cmdlen=${#_cmd}
+        _ps="$(perl -pe 's|\\\[.*?\\\]||g' <<<"${PS1}")"
+        _plen=$(wc -m <<<"${_ps@P}")
+        _plen=$(expr $_plen - 1)
+        _tlen=$(expr $_cmdlen + $_plen)
+        _lines=$(expr $_tlen / ${COLUMNS} + 1)
+        tput cuu $_lines
 }
 _move_curpos="\$(move_cursor_to_start_of_ps1)"
 _save_curpos="\e[s"
