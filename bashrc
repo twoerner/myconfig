@@ -169,8 +169,10 @@ move_cursor_to_start_of_ps1() {
         tput cuu $_lines
 }
 _move_curpos="\$(move_cursor_to_start_of_ps1)"
+
 _save_curpos="\e[s"
 _restore_curpos="\e[u"
+
 PS0_ELEMENTS=(
 	"$_title"
 	"$_save_curpos"
