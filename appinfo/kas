@@ -1,0 +1,122 @@
+NOTE: do not use real tabs in *yml file
+      → set expandtab
+      → highlight area then: retab
+
+- procedure
+	$ cd /z/build-master
+	$ mkdir kas-qemux86
+	$ cd kas-qemux86
+	$ python3 -m venv venv
+	$ source venv/bin/activate
+	(venv)$ pip3 install kas
+	- create kas yml file (kas-qemux86.yml)
+	(venv)$ kas build kas-qemux86.yml
+
+	- for container -
+	NOTE: virtual env not required
+	git clone https://github.com/siemens/kas.git
+	$ DL_DIR=/opt/Downloads kas/kas-container build kas-qemux86.yml
+
+	NOTE2: if both podman and docker are installed docker is always used
+	       to force the use of podman:
+	$ KAS_CONTAINER_ENGINE=podman DL_DIR=/opt/Downloads kas/kas-container build kas-qemux86.yml
+
+	- runqemu -
+	$ DL_DIR=/opt/Downloads kas/kas-container shell kas-qemux86.yml
+	trevor@df4167f65199:/build$ runqemu slirp nographic serial
+	- NOTE: use "Ctrl-a x" to get out of qemu and back to the kas build container
+	- NOTE NOTE: if you're using "screen" use "Ctrl-a a" to send a "Ctrl-a" to the
+	             inside program (and not screen itself). therefore to terminte QEMU
+	             you need to type: "Ctrl-a a x"
+
+	- combine config files -
+	(kasdemo)$ kas build kas-beaglebone.yml:kas-local.yml
+
+- initial container setup:
+	# zypper install podman
+	# vi /etc/subuid
+		trevor:100000:123456
+	# cp /etc/subuid /etc/subgid
+	$ pushd /opt/oe/layers/master
+		$ git clone https://github.com/siemens/kas.git
+		$ popd
+
+	- NOTE: i believe the next 2 lines are not needed if you start a new shell
+	(kasdemo)$ podman system migrate
+	(kasdemo)$ podman unshare cat /proc/self/uid_map
+
+============================================================================
+- to do a nodistro build:
+- and to do a build where the layers are prepopulated and in their own "layers" dir
+  NOTE: use of "path" rather than "url"
+- NOTE: having the "layers" be a symlink to a "layers" dir in /opt works for "kas"
+        but not kas-container. for kas-container "layers" has to be a real dir
+
+	header:
+		version: 11
+	machine: qemux86
+	distro: nodistro
+	target:
+		- core-image-base
+	repos:
+		bitbake:
+			path: layers/bitbake
+			layers:
+				conf: disabled
+		openembedded-core:
+			path: layers/openembedded-core
+			layers:
+				meta:
+
+- NOTE: although the above is the minimum, conf/local.conf and conf/bblayers.conf
+        should probably get more things added to make them "complete"
+
+	header:
+		version: 11
+	machine: qemux86
+	distro: nodistro
+	target:
+		- core-image-base
+	repos:
+		bitbake:
+			path: layers/bitbake
+			layers:
+				conf: disabled
+		openembedded-core:
+			path: layers/openembedded-core
+			layers:
+				meta:
+
+	bblayers_conf_header:
+		standard: |
+			LCONF_VERSION = "7"
+	local_conf_header:
+		standard: |
+			OE_TERMINAL = "screen"
+			IMAGE_FEATURES += "splash"
+			PACKAGECONFIG:pn-sysvinit = "psplash-text-updates"
+			WARN_QA:append = " version-going-backwards"
+			ERROR_QA:remove = "version-going-backwards"
+			BB_DANGLINGAPPENDS_WARNONLY = "yes"
+			INHERIT += "buildhistory image-buildinfo buildstats-summary"
+			BUILDHISTORY_COMMIT = "1"
+			SDKMACHINE = "x86_64"
+			PACKAGECONFIG:append:pn-gdb = " tui"
+			PACKAGECONFIG:append:pn-gdb-cross-canadian-arm = " tui"
+			RDEPENDS:packagegroup-core-tools-profile:remove:pn-packagegroup-core-tools-profile = "lttng-tools"
+			PACKAGE_CLASSES ?= "package_ipk"
+			EXTRA_IMAGE_FEATURES ?= "debug-tweaks"
+			USER_CLASSES = "buildstats image-prelink"
+			PATCHRESOLVE = "noop"
+			BB_DISKMON_DIRS = "\
+				STOPTASKS,${TMPDIR},1G,100K \
+				STOPTASKS,${DL_DIR},1G,100K \
+				STOPTASKS,${SSTATE_DIR},1G,100K \
+				STOPTASKS,/tmp,100M,100K \
+				ABORT,${TMPDIR},100M,1K \
+				ABORT,${DL_DIR},100M,1K \
+				ABORT,${SSTATE_DIR},100M,1K \
+				ABORT,/tmp,10M,1K"
+			PACKAGECONFIG:append:pn-qemu-system-native = " sdl"
+			PACKAGECONFIG:append:pn-nativesdk-qemu = " sdl"
+			CONF_VERSION = "2"
