@@ -19,8 +19,13 @@
 	diff = diff-highlight | less
 
 [core]
+	abbrev = 12
 	pager = less -RU -x8
 	#gitproxy = $HOME/local/bin/gitproxy
+
+[pretty]
+	# use with: $ git log -1 --pretty=fixes <sha>
+	fixes = Fixes: %h (\"%s\")
 
 [credential]
 	# uncomment the following to avoid having to enter
