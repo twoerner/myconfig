@@ -32,6 +32,10 @@ screen tips
 4. to scroll back
 	Ctrl-a [
 	(then use vi keys to move around)
+	you can start a copy by hitting ENTER
+	use vi keys to move around and highlight text
+	hit enter again to cut the highlighted text
+	use Ctrl-a ] to paste at the current cursor position
 
 5. to create a new window, with a shell, and switch to it:
 	Ctrl-a Ctrl-c
