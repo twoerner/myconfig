@@ -2,7 +2,8 @@ dnl AC_PREREQ(2.57)
 AC_INIT([Project Name], version, email, tarballname)
 AC_CONFIG_SRCDIR(src/main.c)
 AC_CONFIG_AUX_DIR(cfg)
-AM_INIT_AUTOMAKE([foreign no-dist-gzip dist-bzip2 1.9])
+AC_CONFIG_MACRO_DIRS([m4])
+AM_INIT_AUTOMAKE([foreign no-dist-gzip dist-xz])
 AM_CONFIG_HEADER(cfg/config.h)
 
 SUBDIRS="lib src doc"
