@@ -45,3 +45,8 @@ screen tips
 6. to rename a screen
 	switch to it
 	Ctrl-a A    (this is case sensitive!)
+
+7. to pass Ctrl-a to the process
+	(e.g. when running qemu and you want to sent qemu a "Ctrl-a x")
+	Ctrl-a a passes a Ctrl-a to the process, therefore use
+	Ctrl-a a x
