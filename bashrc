@@ -180,8 +180,8 @@ PS0_ELEMENTS=(
 	"\[$_delim\]["
 	"\[$_machine\]"
 	"\D{%b%d %I:%M:%S %P} "
-	"$_restore_curpos"
 	"\[$_noattr\]"
+	"$_restore_curpos"
 )
 export PS0=$(IFS=; echo "${PS0_ELEMENTS[*]}")
 
