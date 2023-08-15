@@ -54,7 +54,7 @@ set formatprg=Par\ w78
 
 set nobackup
 set viminfo=""
-set tags=tags,./tags,../tags,../../tags,../../../tags,../../../../tags,../../../../../tags
+set tags=./tags,tags;
 
 " use ":set list" and ":set nolist" to display or remove
 set lcs=tab:>-,trail:#,eol:$
