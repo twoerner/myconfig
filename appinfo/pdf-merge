@@ -1,0 +1,4 @@
+to merge a set of separate pdfs into 1:
+(uses ghostscript)
+
+	$ gs -dNOPAUSE -sDEVICE=pdfwrite -sOUTPUTFILE=merged.pdf -dBATCH pdf1.pdf pdf2.pdf
