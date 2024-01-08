@@ -1,0 +1,22 @@
+create/format SDcard so mac will read it:
+
+# fdisk /dev/sdk
+	> g [make gpt table]
+	> n <enter> <enter> <enter> [create new partition, remove signature]
+	> t 11 [set partition 1 to type 11 (Microsoft basic data)]
+	> w [write and quit]
+# mkfs.msdos /dev/sdk1
+
+
+remount drive rw on mac
+insert into mac
+
+$ mount
+...
+/dev/disk8s1 /Volumes/NO NAME
+
+$ diskutil umount /dev/disk8s1
+$ sudo mkdir /Volumes/sdcard
+$ sudo mount -w -t msdos /dev/disk8s1 /Volumes/sdcard
+...
+$ diskutil umount /dev/disk8s1
