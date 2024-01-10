@@ -1,0 +1,17 @@
+when flashing an image via yocto→bmaptool, to use optimal settings
+add the following contents to /etc/udev/rules.d/61-bmaptool-optimizations.rules:
+
+	SUBSYSTEM!="block", GOTO="bmaptool_optimizations_end"
+	ACTION!="add|change", GOTO="bmaptool_optimizations_end"
+
+	ACTION=="add", SUBSYSTEMS=="usb", ATTRS{idVendor}=="0bda", ATTRS{idProduct}=="0109", TAG+="uaccess"
+	SUBSYSTEMS=="usb", ENV{DEVTYPE}!="partition", ATTRS{idVendor}=="0bda", ATTRS{idProduct}=="0109", ATTR{bdi/min_ratio}="0", ATTR{bdi/max_ratio}="1", ATTR{queue/scheduler}="none"
+
+	LABEL="bmaptool_optimizations_end"
+
+
+!!!NOTE!!!
+- this won't work if you use the suggested filename of
+  60-bmaptool-optimizations.rules because opensuse has a 60-* rule tweaking
+  queue/scheduler that will override the change we're trying to make here
+  (/usr/lib/udev/rules.d/60-io-scheduler.rules)
