@@ -15,3 +15,5 @@ add the following contents to /etc/udev/rules.d/61-bmaptool-optimizations.rules:
   60-bmaptool-optimizations.rules because opensuse has a 60-* rule tweaking
   queue/scheduler that will override the change we're trying to make here
   (/usr/lib/udev/rules.d/60-io-scheduler.rules)
+- after adding the above file, run:
+	# udevadm control --reload-rules && udevadm trigger
