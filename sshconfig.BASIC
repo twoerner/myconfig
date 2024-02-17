@@ -1,3 +1,9 @@
+# the following are necessary to avoid the dreaded
+# $ ssh somehost
+# Received disconnect from 111.222.33.44: 2: Too many authentication failures for username
+IdentitiesOnly yes
+IdentityAgent none
+
 # use the following if behind a restrictive (corporate) proxying firewall
 Host github.com
 	ProxyCommand /home/trevor/local/bin/gitproxy %h %p
