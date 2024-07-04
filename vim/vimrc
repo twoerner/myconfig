@@ -115,6 +115,7 @@ if has("autocmd")
 	autocmd BufNewFile getgcov.sh call NewGetGcov()
 	autocmd BufNewFile,BufRead *.stp call STap()
 	autocmd BufRead,BufNew,BufNewFile ~/.mutt/tmp/mutt* source ~/.mutt/configlets/vim.compose-email
+	autocmd BufNewFile,BufRead *.v :set filetype=verilog
 	autocmd BufNewFile,BufRead * call SetLocalOptions(bufname("%"))
 
 	" autocmd BufEnter *.c,*.cpp,*.cc colo cdesert
