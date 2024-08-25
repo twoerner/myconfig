@@ -50,3 +50,8 @@ screen tips
 	(e.g. when running qemu and you want to sent qemu a "Ctrl-a x")
 	Ctrl-a a passes a Ctrl-a to the process, therefore use
 	Ctrl-a a x
+
+8. switch to the 10th (or higher) screen
+	as soon as you press the "1" in "Ctrl-A 10" it will switch to screen 1
+	to switch past, do:
+	Ctrl-a ' <enter number>
