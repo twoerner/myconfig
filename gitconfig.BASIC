@@ -91,3 +91,4 @@
 	firstcommit = !bash -c 'git rev-list ${2:-HEAD}...${1:-master} | tail -1' -
 	lastcommoncommit = !bash -c 'diff -u <(git rev-list --first-parent "${1:-master}") <(git rev-list --first-parent "${2:-HEAD}") | sed -ne \"s/^ //p\" | head -1' -
 	brancha = !bash -c 'git branch -a --sort=committerdate'
+	fixes = !bash -c 'git log -1 --pretty=fixes "${1}"' -
