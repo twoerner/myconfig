@@ -1,3 +1,7 @@
+# for really slow git trees use:
+#    $ export PS1="${PS1simple}"
+#    $ git <command> <args> --no-ahead-behind
+
 [user]
 	#name = <user>
 	#email = <email>
