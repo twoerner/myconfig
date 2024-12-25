@@ -1,0 +1,19 @@
+ise is an old app (2013)
+menu drop-downs don't seem to work correctly
+
+multi-monitor setup:
+
+                 +----------+
+                 |          |
+                 |    1     |
+                 |          |
+    +----------+ +----------+
+    |          | |          |
+    |    2     | |    3     |
+    |          | |          |
+    +----------+ +----------+
+
+if app is in monitor X menu:
+	X = 1, menus fine
+	X = 2, no menus
+	X = 3, menus show up in monitor 1
