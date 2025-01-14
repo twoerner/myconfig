@@ -17,11 +17,11 @@ if [ $? -ne 0 ]; then
 fi
 eval set -- "$CMDLINE"
 unset CMDLINE
-rotate=0
+CMDLINE_ROTATE=0
 while [ 1 ]; do
 	case "$1" in
 		-r|--rotate)
-			rotate=$2
+			CMDLINE_ROTATE=$2
 			shift 2
 			;;
 		--)
@@ -44,7 +44,8 @@ while [ $# -ge 1 ]; do
 	fi
 
 	echo -n "processing $1"
-	if [ $rotate -eq 0 ]; then
+	rotate=0
+	if [ $CMDLINE_ROTATE -eq 0 ]; then
 		orientation=`exiftool -Orientation -S -n $1 | cut -d' ' -f2`
 		if [ "$orientation"x = "6"x ]; then
 			rotate=90
@@ -52,7 +53,10 @@ while [ $# -ge 1 ]; do
 		if [ "$orientation"x = "8"x ]; then
 			rotate=270
 		fi
+	else
+		rotate=$CMDLINE_ROTATE
 	fi
+
 	if [ $rotate -eq 0 ]; then
 		echo "...rotate is zero, nothing to do"
 		shift
