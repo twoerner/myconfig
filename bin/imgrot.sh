@@ -37,6 +37,12 @@ done
 
 
 while [ $# -ge 1 ]; do
+	EXT=$(echo $1 | rev | cut -d'.' -f1 | rev | tr [:lower:] [:upper:])
+	if [ "$EXT"x != "JPG"x ]; then
+		shift
+		continue
+	fi
+
 	echo -n "processing $1"
 	if [ $rotate -eq 0 ]; then
 		orientation=`exiftool -Orientation -S -n $1 | cut -d' ' -f2`
