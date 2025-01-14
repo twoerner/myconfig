@@ -10,19 +10,24 @@ if [ ! -x $(which exiftool) ]; then
 fi
 
 
-CMDLINE=$(getopt --options=r: --longoptions=rotate: -n "$0" -- "$@")
+CMDLINE=$(getopt --options=nr: --longoptions=noupdate,rotate: -n "$0" -- "$@")
 if [ $? -ne 0 ]; then
 	echo "getopt(1) invocation error"
 	exit 1
 fi
 eval set -- "$CMDLINE"
 unset CMDLINE
+NO_UPDATE=0
 CMDLINE_ROTATE=0
 while [ 1 ]; do
 	case "$1" in
 		-r|--rotate)
 			CMDLINE_ROTATE=$2
 			shift 2
+			;;
+		-n|--noupdate)
+			NO_UPDATE=1
+			shift
 			;;
 		--)
 			shift
@@ -46,7 +51,7 @@ while [ $# -ge 1 ]; do
 	echo -n "processing $1"
 	rotate=0
 	if [ $CMDLINE_ROTATE -eq 0 ]; then
-		orientation=`exiftool -Orientation -S -n $1 | cut -d' ' -f2`
+		orientation=$(exiftool -Orientation -S -n $1 | cut -d' ' -f2)
 		if [ "$orientation"x = "6"x ]; then
 			rotate=90
 		fi
@@ -65,6 +70,10 @@ while [ $# -ge 1 ]; do
 
 	mogrify -compress lossless -rotate $rotate $1
 	chmod go+r "$1"
+	if [ $NO_UPDATE -eq 0 ]; then
+		exiftool -overwrite_original_in_place -Orientation=1 $1 > /dev/null 2>&1
+	fi
+
 	echo
 	shift
 done
