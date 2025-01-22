@@ -71,7 +71,7 @@ while [ $# -ge 1 ]; do
 	mogrify -compress lossless -rotate $rotate $1
 	chmod go+r "$1"
 	if [ $NO_UPDATE -eq 0 ]; then
-		exiftool -overwrite_original_in_place -Orientation=1 $1 > /dev/null 2>&1
+		exiftool -n -overwrite_original_in_place -Orientation=1 $1 > /dev/null 2>&1
 	fi
 
 	echo
