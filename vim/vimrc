@@ -48,7 +48,7 @@ let loaded_matchparen = 1
 nmap <silent> <Leader>s :set spell!<CR>
 
 " the following is good for regular text
-set formatprg=Par\ w78
+set formatprg=Par\ w75
 " the following is better for C-style, multi-line comments
 "set formatprg=Par\ r
 
