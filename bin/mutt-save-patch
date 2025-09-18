@@ -16,4 +16,5 @@ mkdir -p $HOME/.mutt/patches/$DIRNAME
 
 # NOTE: it's fine if both MESSAGEID and INREPLYTO are empty
 #       in that case the patch will simply go in $HOME/.mutt/patches
-mv $TMPFILE $HOME/.mutt/patches/$DIRNAME/$PATCHNAME
+formail -k -X From: -X Subject: -X Date: < $TMPFILE | formail > $HOME/.mutt/patches/$DIRNAME/$PATCHNAME
+rm -f $TMPFILE
