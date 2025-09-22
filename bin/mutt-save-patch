@@ -1,8 +1,16 @@
 #!/bin/bash
 
-# make sure ~/.mutt/tmp and ~/.mutt/patches exist before running this script
+# make sure the directories ~/.mutt/tmp and ~/.mutt/patches exist before
+# running this script
+
+# this script requires the following programs be installed/available on
+# the $PATH:
+#	- formail (part of procmail)
+#	- ripmime (https://github.com/inflex/ripMIME install by hand)
 
 TMPFILE=$(mktemp --tmpdir="$HOME/.mutt/tmp" patch.XXXXXX)
+TMPDIR=$(mktemp --tmpdir="$HOME/.mutt/tmp" --directory)
+
 cat > $TMPFILE
 MESSAGEID=$(cat $TMPFILE | formail -c -xMessage-ID: | sed -e 's/^[[:space:]]*//' | cut -d'<' -f2 | cut -d'@' -f1)
 INREPLYTO=$(cat $TMPFILE | formail -c -xIn-Reply-To: | head -n1 | sed -e 's/^[[:space:]]*//' | cut -d'<' -f2 | cut -d'@' -f1)
@@ -16,5 +24,15 @@ mkdir -p $HOME/.mutt/patches/$DIRNAME
 
 # NOTE: it's fine if both MESSAGEID and INREPLYTO are empty
 #       in that case the patch will simply go in $HOME/.mutt/patches
-formail -k -X From: -X Subject: -X Date: -X Message-ID: < $TMPFILE | formail > $HOME/.mutt/patches/$DIRNAME/$PATCHNAME
+formail -X From: -X Subject: -X Date: -X Message-ID: < $TMPFILE | formail > $HOME/.mutt/patches/$DIRNAME/$PATCHNAME
+ripmime -i $TMPFILE -d $TMPDIR
+for MIME in $(ls $TMPDIR); do
+	cat $TMPDIR/$MIME | grep "^diff" > /dev/null 2>&1
+	if [ $? -eq 0 ]; then
+		cat $TMPDIR/$MIME >> $HOME/.mutt/patches/$DIRNAME/$PATCHNAME
+	fi
+done
+
+# cleanup
 rm -f $TMPFILE
+rm -fr $TMPDIR
