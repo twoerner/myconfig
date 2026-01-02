@@ -6,15 +6,23 @@
 "
 " This sets up the syntax highlighting for BitBake files, like .bb, .bbclass and .inc
 
-if &compatible || version < 600
+if &compatible || version < 600 || exists("b:loaded_bitbake_plugin")
     finish
 endif
 
 " .bb, .bbappend and .bbclass
-au BufNewFile,BufRead *.{bb,bbappend,bbclass}	set filetype=bitbake
+au BufNewFile,BufRead *.{bb,bbappend,bbclass}  setfiletype bitbake
 
-" .inc
-au BufNewFile,BufRead *.inc		set filetype=bitbake
+" .inc -- meanwhile included upstream
+if !has("patch-9.1.1732")
+    au BufNewFile,BufRead *.inc                call s:BBIncDetect()
+    def s:BBIncDetect()
+        var lines = getline(1) .. getline(2) .. getline(3)
+        if lines =~# '\<\%(require\|inherit\)\>' || lines =~# '[A-Z][A-Za-z0-9_:${}/]*\s\+\%(??\|[?:+.]\)\?=.\? '
+            set filetype=bitbake
+        endif
+    enddef
+endif
 
 " .conf
 au BufNewFile,BufRead *.conf
